@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zgt.com.example.myzq.model.common.order.OrderDetaiilActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_height="32dp">
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="订单确认"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+        <ImageView
+            android:id="@+id/Iv_back"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+            app:srcCompat="@mipmap/left_return" />
+
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"></LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+
+            android:layout_height="match_parent">
+            <zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView
+                android:id="@+id/Iv_head"
+                android:layout_marginTop="18dp"
+                android:layout_marginBottom="17dp"
+                android:layout_marginLeft="15dp"
+                android:scaleType="fitXY"
+                android:layout_width="108dp"
+                android:layout_height="65dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/Tv_title_order"
+                android:layout_marginTop="17dp"
+                android:paddingLeft="10dp"
+                android:textColor="#333333"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/Tv_teacher"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="10dp"
+                android:textColor="#666666"
+                android:textSize="12sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/Tv_real_charge"
+                    android:paddingLeft="10dp"
+                    android:textColor="#E46866"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/Tv_charge"
+                    android:paddingLeft="8dp"
+                    android:textColor="#666666"
+                    android:textSize="13sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#F5F2ED"
+        android:layout_height="1dp"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:text="购买数量"
+            android:textSize="15sp"
+            android:textColor="#292621"
+            android:layout_marginLeft="14dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/Tv_day"
+            android:textSize="15sp"
+            android:textColor="#E46866"
+            android:gravity="end|center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="(30天) X"
+            android:layout_marginRight="8dp"
+            android:layout_height="match_parent" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="100dp"
+            android:dropDownWidth="180dp"
+            android:dropDownVerticalOffset="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="match_parent"></Spinner>
+
+        <!--<ImageView-->
+            <!--android:id="@+id/Iv_delete"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:src="@mipmap/btn_jian"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/Tv_num"-->
+            <!--android:text="1"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textColor="#292621"-->
+            <!--android:background="#F5F2ED"-->
+            <!--android:paddingLeft="14dp"-->
+            <!--android:paddingRight="14dp"-->
+            <!--android:layout_marginLeft="9dp"-->
+            <!--android:layout_marginRight="9dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="25dp" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/Iv_add"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:src="@mipmap/btn_jia"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#F5F2ED"
+        android:layout_height="14dp"></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="是否开取电子发票"
+            android:textSize="14sp"
+            android:textColor="#919191"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/Iv_choice"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="14dp"
+            android:src="@mipmap/ic_nochoice"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/Ll_choice"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="发票类型"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="增值税电子普通发票"
+                android:layout_marginRight="14dp"
+                android:textSize="13sp"
+                android:textColor="#333333"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="抬头类型"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="个人"
+                android:layout_marginRight="14dp"
+                android:textSize="13sp"
+                android:textColor="#333333"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="邮箱"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+            <EditText
+                android:id="@+id/Et_email"
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:hint="填写个人邮箱（选填）"
+                android:layout_marginRight="13dp"
+                android:textSize="13sp"
+                android:textColor="#333333"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="#F5F2ED"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+
+                android:id="@+id/Iv_agree"
+                android:src="@mipmap/btn_gouxuan1"
+                android:layout_marginLeft="30dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp" />
+
+            <TextView
+                android:textColor="#333333"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:text="我已阅读并同意牵牛星"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <ListView
+            android:layout_marginTop="5dp"
+            android:id="@+id/Lv_agreement"
+            android:layout_marginLeft="49dp"
+            android:divider="#00000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:id="@+id/Tv_price"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingLeft="10dp"
+            android:gravity="center_vertical"
+            android:background="#ffffff"
+            android:textSize="12sp"
+            android:textColor="#333333"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/Tv_commit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:background="#E46866"
+            android:text="提交订单"
+            android:textColor="#ffffff"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zgt.com.example.myzq.model.common.personal_center.RiskActivity">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+
+        <TextView
+            android:layout_marginTop="41dp"
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="风险测评"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/Iv_back"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+            app:srcCompat="@mipmap/left_return" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#919191"
+            android:layout_marginBottom="15dp"
+            android:text="尊敬的用户:为保障您的投资权益,提供更好的服务,按证监会130号令《证券期货投资者适当性管理办法》要求，购买产品或服务前，请提供真实身份信息和完成风险测评，请按以下步骤完成!"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="姓名"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="match_parent" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:background="@null"
+            android:paddingLeft="20dp"
+            android:hint="请输入正确的汉字名称"
+            android:textColorHint="#919191"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View style="@style/line_hor"
+        android:layout_marginLeft="14dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="身份证"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="match_parent" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:background="@null"
+            android:paddingLeft="20dp"
+            android:hint="请输入正确的身份证件号"
+            android:textColorHint="#919191"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View style="@style/line_hor"
+        android:layout_marginLeft="14dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="手机"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_height="match_parent" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:background="@null"
+            android:paddingLeft="20dp"
+            android:hint="请确定手机号"
+            android:textColorHint="#919191"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/Tv_save"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="确认"
+                android:textSize="14sp"
+                android:textColor="#ffffff"
+                android:layout_width="match_parent"
+                android:background="@drawable/bg_et"
+                android:layout_marginTop="32dp"
+                android:layout_height="48dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="74dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:textSize="12sp"
+                android:textColor="#919191"
+                android:gravity="center"
+                android:text="上海新兰德证券投资咨询顾问有限公司是证监会首批认证证券投资咨询机构，机构代码ZX0059"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

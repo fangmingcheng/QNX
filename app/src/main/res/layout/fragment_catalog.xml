@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zgt.com.example.myzq.model.common.home.fragment.CatalogFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="14dp"
+            android:text="选章节"
+            android:textSize="14sp"
+            android:textColor="#FF0107"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+        <View style="@style/line_my"
+            android:layout_marginTop="14dp"/>
+
+        <TextView
+            android:paddingLeft="14dp"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_marginTop="14dp"
+            android:text="章节目录"
+            android:textSize="14sp"
+            android:textColor="#919191"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <zgt.com.example.myzq.model.common.custom_view.MyGridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="20dp"
+            android:verticalSpacing="20dp"
+            android:columnWidth="60dp"
+            android:numColumns="5"
+            android:stretchMode="spacingWidthUniform">
+        </zgt.com.example.myzq.model.common.custom_view.MyGridView>
+    </LinearLayout>
+
+    <View style="@style/line_hor"/>
+    <LinearLayout
+        android:id="@+id/Ll_all_catalog"
+        android:gravity="bottom"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:id="@+id/Tv_money"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:text="全套课件：29999元"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/Tv_payment"
+            android:background="#FFAE00"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:textSize="14sp"
+            android:text="支付"
+            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    
+
+</LinearLayout>

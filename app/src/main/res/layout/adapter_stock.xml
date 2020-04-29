@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="108dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="57dp">
+
+        <zgt.com.example.myzq.model.common.custom_view.MyImageView
+            android:id="@+id/Iv_head"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            app:srcCompat="@drawable/bg_code" />
+
+        <TextView
+            android:id="@+id/Tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/Iv_head"
+            android:layout_marginStart="13dp"
+            android:layout_toEndOf="@+id/Iv_head"
+            android:text="某某投顾"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/Tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/Tv_name"
+            android:layout_alignBottom="@+id/Iv_head"
+            android:text="2019-5-28 15:49"
+            android:textColor="#919191"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/Tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/Tv_name"
+            android:layout_marginRight="14dp"
+            android:text="123"
+            android:textColor="#919191"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="3dp"
+            android:id="@+id/Iv_see"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_alignTop="@+id/Iv_head"
+            android:layout_toStartOf="@+id/Tv_status"
+            app:srcCompat="@mipmap/ic_ydl" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/Tv_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_width="match_parent"
+        android:textColor="#333333"
+        android:lineSpacingMultiplier="1.2"
+        android:text="4月8日傍晚，格力电器（000651，SZ）公告透露，格力集团拟通过公开征集受让方的方式..."
+        android:textSize="14sp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="158dp"
+    android:layout_marginEnd="15dp"
+    android:layout_height="161dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="158dp"
+        android:background="@mipmap/bg_zhanshi"
+        android:layout_height="146dp">
+        <zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView
+            android:id="@+id/Iv_background"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="115dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <zgt.com.example.myzq.model.common.custom_view.MyImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="9dp"
+                android:id="@+id/Iv_head" />
+
+            <TextView
+                android:id="@+id/Tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:layout_marginLeft="4dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/Iv_head"
+                android:text="某某投顾" />
+
+            <TextView
+                android:id="@+id/Tv_Member"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#FFAE00"
+                android:textSize="12sp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="9dp"
+                android:layout_centerVertical="true"
+                android:text="会员专享" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

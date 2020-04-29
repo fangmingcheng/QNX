@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="zgt.com.example.myzq.model.common.personal_center.Personal_centerActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="个人信息"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/Iv_customer"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+            app:srcCompat="@mipmap/left_return" />
+
+    </RelativeLayout>
+
+    <View style="@style/line_hor"
+        android:layout_marginLeft="14dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/Rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:text="头像"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <zgt.com.example.myzq.model.common.custom_view.MyImageView
+            android:id="@+id/Iv_head"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp" />
+    </RelativeLayout>
+
+    <View style="@style/line_hor"
+        android:layout_marginLeft="14dp"
+      />
+
+    <RelativeLayout
+        android:id="@+id/Rl_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="昵称"
+            android:textColor="#333333"
+            android:layout_marginLeft="14dp"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/Tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="26dp"
+            android:textColor="#919191"
+            android:text="维也纳的空城礼"
+            android:layout_alignParentEnd="true"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="13dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            app:srcCompat="@mipmap/right_"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <View style="@style/line_hor"
+        android:layout_marginLeft="14dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/Ll_gender"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="性别"
+            android:textColor="#333333"
+            android:layout_marginLeft="14dp"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/Tv_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="26dp"
+            android:textColor="#919191"
+            android:text="男"
+            android:layout_alignParentEnd="true"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="13dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            app:srcCompat="@mipmap/right_"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#f1f1f1"></LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/Rl_phone"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:text="手机号"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/Tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="26dp"
+            android:text="去绑定"
+            android:textColor="#919191"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="13dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="14dp"
+            app:srcCompat="@mipmap/right_" />
+    </RelativeLayout>
+
+    <View style="@style/line_hor"
+        android:layout_marginLeft="14dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#f1f1f1"></LinearLayout>
+
+    <TextView
+        android:id="@+id/Tv_quit"
+        android:gravity="center"
+        android:text="退出登陆"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <LinearLayout
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></LinearLayout>
+
+</LinearLayout>

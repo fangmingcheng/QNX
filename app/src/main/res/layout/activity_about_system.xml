@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    tools:context="zgt.com.example.myzq.model.common.personal_center.AboutSystemActivity">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+       >
+        <ImageView
+            android:id="@+id/Iv_back"
+            android:layout_width="20dp"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+
+            app:srcCompat="@mipmap/left_return"
+            android:layout_centerVertical="true"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/Tv_title_draft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="关于我们"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"></LinearLayout>
+
+    <ImageView
+        android:id="@+id/Iv_picture"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/qnx"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    <TextView
+        android:id="@+id/Tv_name"
+        android:layout_marginTop="20dp"
+        android:text="牵牛星"
+        android:layout_gravity="center_horizontal"
+        android:textSize="17sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/Tv_version"
+        android:layout_marginTop="10dp"
+        android:text="V 1.0.1"
+        android:layout_gravity="center_horizontal"
+        android:textSize="13sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="13sp"
+                android:text="联系我们"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="end"
+                android:textSize="13sp"
+                android:text=":"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="13sp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/image_shouji"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="end"
+                android:textSize="13sp"
+                android:text=":"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Tv_phoneNum"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+
+            android:text="0755-22671286"
+            android:layout_width="0dp"
+            android:textSize="13sp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="13sp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/image_youxiang"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="end"
+                android:textSize="13sp"
+                android:text=":"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:autoLink="email|phone|web"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:text="-暂无-"
+            android:layout_width="0dp"
+            android:textSize="13sp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="13sp"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@mipmap/ic_gongsi"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="end"
+                android:textSize="13sp"
+                android:text=":"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:text="深圳市中广资本管理有限公司"
+            android:layout_width="0dp"
+            android:textSize="13sp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></LinearLayout>
+    <LinearLayout
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <TextView
+            android:id="@+id/Tv_agreement"
+            android:text="服务协议"
+            android:textColor="#2975e6"
+            android:paddingRight="30dp"
+            android:gravity="center|end"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/Tv_privacy"
+            android:layout_width="0dp"
+            android:text="隐私政策"
+            android:textColor="#2975e6"
+            android:paddingLeft="30dp"
+            android:gravity="center|start"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

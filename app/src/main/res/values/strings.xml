@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">牵牛星</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_parse_exc">数据获取失败</string>
+
+
+    <!-- 个推-->
+    <string name="no_clientid">(none)</string>
+    <string name="start">已启动</string>
+    <string name="clientid">clientid&#160;=&#160;</string>
+    <string name="stop">已停止</string>
+    <string name="clear">清除日志</string>
+    <string name="enablelog">开启debug日志</string>
+    <string name="bindcell">绑定手机号</string>
+    <string name="pmsg">透传测试</string>
+    <string name="psmsg">通知栏测试</string>
+    <string name="transmit">透传内容</string>
+    <string name="begin">开始(h)</string>
+    <string name="end">结束</string>
+    <string name="duration">持续时间(h)</string>
+    <string name="set_heartbeat">心跳间隔(s)</string>
+    <string name="send_msg">发送消息</string>
+    <string name="bind_alias">绑定别名</string>
+    <string name="bind_alias_unknown_exception">绑定别名失败，未知异常</string>
+    <string name="bind_alias_success">绑定别名成功</string>
+    <string name="bind_alias_error_frequency">绑定别名失败，请求频次超限</string>
+    <string name="bind_alias_error_param_error">绑定别名失败，参数错误</string>
+    <string name="bind_alias_error_request_filter">绑定别名失败，请求被过滤</string>
+    <string name="bind_alias_error_cid_lost">绑定别名失败，未获取到cid</string>
+    <string name="bind_alias_error_connect_lost">绑定别名失败，网络错误</string>
+    <string name="bind_alias_error_alias_invalid">绑定别名失败，别名无效</string>
+    <string name="bind_alias_error_sn_invalid">绑定别名失败，sn无效</string>
+    <string name="unbind_alias">解绑别名</string>
+    <string name="unbind_alias_unknown_exception">取消绑定别名失败，未知异常</string>
+    <string name="unbind_alias_success">取消绑定别名成功</string>
+    <string name="unbind_alias_error_frequency">取消绑定别名失败，请求频次超限</string>
+    <string name="unbind_alias_error_param_error">取消绑定别名失败，参数错误</string>
+    <string name="unbind_alias_error_request_filter">取消绑定别名失败，请求被过滤</string>
+    <string name="unbind_alias_error_cid_lost">取消绑定别名失败，未获取到cid</string>
+    <string name="unbind_alias_error_connect_lost">取消绑定别名失败，网络错误</string>
+    <string name="unbind_alias_error_alias_invalid">取消绑定别名失败，别名无效</string>
+    <string name="unbind_alias_error_sn_invalid">取消绑定别名失败，sn无效</string>
+    <string name="add_tag">添加标签</string>
+    <string name="add_tag_unknown_exception">设置标签失败，未知异常</string>
+    <string name="add_tag_success">接口调用成功</string>
+    <string name="add_tag_error_count">接口调用失败, tag数量过大, 最大不能超过200个</string>
+    <string name="add_tag_error_frequency">设置标签失败，频率过快</string>
+    <string name="add_tag_error_null">接口调用失败, tag 为空</string>
+    <string name="add_tag_error_repeat">设置标签失败, 标签重复</string>
+    <string name="add_tag_error_unbind">设置标签失败, 服务未初始化成功</string>
+    <string name="add_tag_error_not_online">还未登陆成功</string>
+    <string name="add_tag_error_black_list">该应用已经在黑名单中,请联系售后支持!</string>
+    <string name="add_tag_error_exceed">已存 tag 超过限制</string>
+    <string name="version">版本号</string>
+    <string name="silentime">静默时间</string>
+    <string name="getclientid">获取cid</string>
+
+    <string name="exit">退出</string>
+    <string name="appid">appid&#160;=&#160;</string>
+    <string name="appkey">appkey&#160;=&#160;</string>
+    <string name="appsecret">appsecret&#160;=&#160;</string>
+    <string name="mastersecret">mastersecret&#160;=&#160;</string>
+    <string name="show_version">当前sdk版本&#160;=&#160;</string>
+    <string name="show_cid">当前应用的cid&#160;=&#160;</string>
+    <string name="set_silenttime">设置静默时间段</string>
+    <string name="push_notification_title">通知栏测试</string>
+    <string name="push_notification_msg_title">通知栏测试</string>
+    <string name="push_notification_msg_content">您收到一条测试消息，点击访问</string>
+    <string name="push_transmission_data">收到一条透传测试消息</string>
+    <string name="network_invalid">对不起，当前网络不可用!</string>
+
+    <string name="userAgreement_privacy_policy">尊敬的用户：在使用软件之前，为了您更好地了解我们是如何保护用户的个人信息，请您知悉阅读<a href="http://www.zgziben.com/index.php/Index/hyjj_privacy">《隐私政策》</a>和<a href="http://www.zgziben.com/index.php/Index/user_agreement">《用户协议》</a>。
+  \n重点内容如下：\n1.当您登录账号和使用服务时，根据监管需要与您的同意，获取账号信息、身份验证消息等。\n2.我们提供附加功能来提升用户体验，包括：消息设置、推送通知设置等。\n
+3.我们会使用Cookie与同类技术来确保服务正常运转。\n4.未成年提交个人信息需要在父母或监护人指导与同意下进行。\n5.您可以通过协议所列的途径访问\更正与删除个人信息、撤回同意等。\n
+6未经您许可，我们不会向第三方提供您的信息，除法律要求外。\n7.具体内容点击上方蓝色链接查看，并以它为准。</string>
+
+    <string name="userAgreement_and_privacy_policy">不同意<a href="http://www.zgziben.com/index.php/Index/hyjj_privacy">《隐私政策》</a>和<a href="http://www.zgziben.com/index.php/Index/user_agreement">《用户协议》</a>我们将无法为您提供服务</string>
+    <string name="title_activity_video_web_view">VideoWebViewActivity</string>
+
+
+</resources>

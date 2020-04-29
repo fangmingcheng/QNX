@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="zgt.com.example.myzq.model.common.personal_center.SuggestionActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="投诉建议"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="16sp" />
+        <ImageView
+            android:id="@+id/Iv_back"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+            app:srcCompat="@mipmap/left_return" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"></LinearLayout>
+    
+    <EditText
+        android:id="@+id/Et_content"
+        android:paddingTop="12dp"
+        android:paddingLeft="12dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="10dp"
+        android:hint="说说你的问题，可以输入200个字！"
+        android:background="@drawable/bg_et_suggest"
+        android:gravity="top"
+        android:textSize="12sp"
+
+        android:textColorHint="#D9D9D9"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="115dp" />
+
+    <EditText
+        android:id="@+id/Et_contacts"
+        android:paddingLeft="12dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="10dp"
+        android:hint="请留下您的（QQ/邮箱/手机号），方便我们给你反馈"
+        android:background="@drawable/bg_et_suggest"
+        android:gravity="start|center_vertical"
+        android:textColorHint="#D9D9D9"
+        android:textSize="12sp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="39dp" />
+
+    <Button
+        android:id="@+id/Bt_commit"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="确定"
+        android:textSize="14sp"
+        android:textColor="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="#009FE8"
+        android:layout_height="39dp" />
+
+    <TextView
+        android:layout_marginTop="24dp"
+        android:textColor="#919191"
+        android:text="遇到棘手问题？"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_marginTop="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <TextView
+                android:layout_toLeftOf="@id/Tv_phone"
+                android:id="@+id/text"
+                android:textColor="#919191"
+                android:text="请拨打投诉电话 "
+                android:gravity="center"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/Tv_phone"
+                android:textColor="#009FE8"
+                android:text="0755-22671286"
+                android:autoLink="phone"
+                android:linksClickable="true"
+                android:textColorLink="#009FE8"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_toRightOf="@id/Tv_phone"
+                android:textColor="#919191"
+                android:text="，有专人帮您解决"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

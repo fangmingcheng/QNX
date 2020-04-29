@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zgt.com.example.myzq.model.common.home.MembershipVersionActivity">
+
+    <RelativeLayout
+        android:background="@mipmap/bg_top"
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+        <TextView
+            android:layout_marginTop="40dp"
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="会员版本"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp" />
+        <ImageView
+            android:id="@+id/Iv_customer"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+
+            app:srcCompat="@mipmap/ic_fanhuibai" />
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/myviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

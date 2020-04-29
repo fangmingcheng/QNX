@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <zgt.com.example.myzq.model.common.custom_view.MyImageView
+            android:id="@+id/Iv_head"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="14dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="14dp"
+            app:srcCompat="@mipmap/bg_headbg" />
+
+        <TextView
+            android:id="@+id/Tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="9dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_toEndOf="@+id/Iv_head"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/Tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#919191"
+            android:textSize="12sp"
+            android:layout_alignStart="@+id/Tv_name"
+            android:layout_below="@+id/Tv_name"
+            android:text="TextView" />
+
+        <TextView
+            android:layout_marginLeft="14dp"
+            android:id="@+id/Tv_advisier"
+            android:textColor="#ffffff"
+            android:background="#FFAE00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/Tv_name"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/Ll_custom"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="52dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="14dp"
+        android:background="#F1F1F1"
+        android:layout_height="wrap_content">
+        <TextView
+            android:paddingBottom="2dp"
+            android:paddingLeft="2dp"
+            android:paddingTop="2dp"
+            android:id="@+id/Tv_custom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Tv_content"
+        android:layout_width="match_parent"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="12sp"
+        android:layout_marginBottom="12dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

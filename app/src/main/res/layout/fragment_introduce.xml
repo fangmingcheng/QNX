@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zgt.com.example.myzq.model.common.home.fragment.IntroduceFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:text="交互设计必学工具hdeiud从入门到精通"
+                android:id="@+id/Tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="24dp"
+                android:layout_marginLeft="14dp"
+                android:textColor="#4D4D4D"
+                android:textSize="14sp"
+                android:text="课程简介"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <WebView
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:text="11111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+                android:textColor="#919191"
+                android:textSize="12sp"
+                android:lineSpacingExtra="2dp"
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

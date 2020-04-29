@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zgt.com.example.myzq.model.common.login.LoginActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="236dp"
+        android:background="@mipmap/bg_welcome">
+        <TextView
+            android:layout_marginTop="32dp"
+            android:layout_width="match_parent"
+            android:text="账号登陆"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="77dp"
+        android:layout_marginTop="81dp"
+        android:background="@mipmap/bg_head_background"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="77dp" />
+
+    <ImageView
+        android:layout_width="61dp"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/qnx"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="61dp" />
+    
+    <LinearLayout
+        android:layout_marginTop="178dp"
+        android:layout_gravity="center|top"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:background="@mipmap/bg_undulating_background"
+        android:layout_height="wrap_content">
+        <EditText
+            android:paddingLeft="2dp"
+            android:drawableLeft="@mipmap/image_account"
+            android:id="@+id/Et_name"
+            android:hint="  输入账号或者手机号"
+            android:textColorHint="#cccccc"
+            android:textSize="14sp"
+            android:background="@drawable/et_underline_selected"
+            android:layout_marginTop="26dp"
+            android:singleLine="true"
+            android:layout_marginLeft="29dp"
+            android:layout_marginRight="29dp"
+            android:layout_width="match_parent"
+            android:layout_height="47dp" />
+        <EditText
+            android:paddingLeft="2dp"
+            android:drawableLeft="@mipmap/image_password"
+            android:id="@+id/Et_password"
+            android:hint="  输入密码"
+            android:textColorHint="#cccccc"
+            android:background="@drawable/et_underline_selected"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:inputType="textPassword"
+            android:layout_marginLeft="29dp"
+            android:layout_marginRight="29dp"
+            android:layout_width="match_parent"
+            android:layout_height="47dp" />
+        
+        <Button
+            android:id="@+id/Bt_login"
+            android:layout_marginTop="30dp"
+            android:text="登陆"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:layout_marginLeft="29dp"
+            android:layout_marginRight="29dp"
+            android:background="@drawable/bg_et"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="注册"
+                android:id="@+id/Tv_register"
+                android:textColor="#ffae00"
+                android:layout_marginLeft="40dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/Tv_password"
+                android:textColor="#666666"
+                android:text="忘记密码?"
+                android:layout_marginRight="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="47dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:text="——————    深圳中广欢迎您    ——————"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</FrameLayout>

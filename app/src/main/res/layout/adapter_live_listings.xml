@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="138dp"
+    android:background="@drawable/bg_live"
+    android:layout_height="86dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="37dp">
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="13dp"
+            android:id="@+id/Tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="某某投顾老师"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_toEndOf="@+id/Iv_head" />
+
+        <zgt.com.example.myzq.model.common.custom_view.MyImageView
+            android:layout_marginTop="8dp"
+            android:id="@+id/Iv_head"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginStart="8dp"
+            />
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/Tv_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="6dp"
+        android:textSize="11sp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:text="短线战法的最新套路怎么执行短线战法的最新套路怎么执行短线战法的最新套路怎么执行短线战法的最新套路怎么执行"
+        android:textColor="#FFAE00"
+        android:layout_width="match_parent"
+        android:layout_height="26dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:textSize="11dp"
+            android:id="@+id/Tv_time_live"
+            android:layout_marginLeft="8dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="5-28  11:14"
+            android:gravity="left|center_vertical"
+            android:layout_height="match_parent" />
+        <TextView
+            android:textSize="11dp"
+            android:gravity="center"
+            android:id="@+id/Tv_status"
+            android:text="正在直播"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="6dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,107 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_height="match_parent"
+    tools:context="zgt.com.example.myzq.model.common.course.fragment.CourseCatalogFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="14dp"
+                android:layout_width="wrap_content"
+                android:textColor="#333333"
+                android:textSize="12sp"
+                android:text="授课方式:"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="14dp"
+                android:src="@mipmap/ic_zhibo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/Tv_live"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:textColor="#919191"
+                android:textSize="12sp"
+                android:text="直播()"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="14dp"
+                android:src="@mipmap/ic_shipin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/Tv_video"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:textColor="#919191"
+                android:textSize="12sp"
+                android:text="视频()"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="14dp"
+                android:src="@mipmap/ic_kejian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/Tv_course"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:textColor="#919191"
+                android:textSize="12sp"
+                android:text="课件()"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="14dp"
+                android:src="@mipmap/ic_audio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_gravity="center_vertical"
+                android:id="@+id/Tv_video_1"
+                android:layout_marginLeft="4dp"
+                android:layout_width="wrap_content"
+                android:textColor="#919191"
+                android:textSize="12sp"
+                android:text="课件()"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#F1F1F1"
+        android:layout_height="10dp"></LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+
+</LinearLayout>

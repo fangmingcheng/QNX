@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp">
+
+        <ImageView
+            android:background="@mipmap/bannervip1"
+            android:layout_width="14dp"
+            android:layout_gravity="center"
+            android:layout_height="121dp" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@mipmap/banner_vip">
+
+            <TextView
+                android:id="@+id/Tv_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="32dp"
+                android:text="基础版"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/Tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/Tv_version"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="12dp"
+                android:text="价格：3800元/年"
+                android:textColor="#D9D9D9" />
+
+            <TextView
+                android:id="@+id/Tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/Tv_price"
+                android:layout_below="@+id/Tv_price"
+                android:layout_marginTop="9dp"
+                android:text="TextView"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/Tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Tv_status"
+                android:layout_alignStart="@+id/Tv_status"
+                android:layout_marginTop="8dp"
+                android:text="TextView"
+                android:textColor="#ffffff"
+                android:textSize="9sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:background="@mipmap/bannervip2"
+            android:layout_width="14dp"
+            android:layout_gravity="center"
+            android:layout_height="121dp" />
+
+</LinearLayout>

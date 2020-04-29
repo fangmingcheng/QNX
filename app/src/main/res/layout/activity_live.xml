@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zgt.com.example.myzq.model.common.Investment_adviser.LiveActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+            android:text="直播"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:id="@+id/Iv_customer"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+
+            app:srcCompat="@mipmap/left_return" />
+
+    </RelativeLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:overScrollMode="never"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/Ll_live"
+                android:layout_width="match_parent"
+                android:background="#f1f1f1"
+                android:layout_height="28dp">
+                <TextView
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:text="正在直播"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout_live"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlEnableLoadMoreWhenContentNotFull="true">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_live"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            <LinearLayout
+                android:id="@+id/Ll_notice"
+                android:layout_width="match_parent"
+                android:background="#f1f1f1"
+                android:layout_height="28dp">
+                <TextView
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:text="直播预告"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:srlEnableLoadMoreWhenContentNotFull="true">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+            <LinearLayout
+                android:id="@+id/Ll_review"
+                android:layout_width="match_parent"
+                android:background="#f1f1f1"
+                android:layout_height="28dp">
+                <TextView
+                    android:textColor="#333333"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:text="往期回顾"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refreshLayout_review"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srlEnableLoadMoreWhenContentNotFull="true">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+
+
+
+
+</LinearLayout>

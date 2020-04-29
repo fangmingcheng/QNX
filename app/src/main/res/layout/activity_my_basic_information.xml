@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context=".model.common.personal_center.basic.MyBasicInformationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_height="32dp">
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="基本信息"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+        <ImageView
+            android:id="@+id/Iv_back"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+            app:srcCompat="@mipmap/left_return" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"></LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:maxLines="1"
+                android:id="@+id/Et_name"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="12dp"
+                android:drawablePadding="20dp"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:drawableLeft="@mipmap/ic_xingm"
+                android:background="@drawable/bg_imput"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="8dp"
+                android:hint="请输入您的姓名"
+                android:layout_width="match_parent"
+                android:layout_height="43dp" />
+
+            <!--<EditText-->
+                <!--android:maxLines="1"-->
+                <!--android:id="@+id/Et_phone"-->
+                <!--android:layout_marginTop="6dp"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:drawablePadding="20dp"-->
+                <!--android:textSize="15sp"-->
+                <!--android:textColor="#333333"-->
+                <!--android:drawableLeft="@mipmap/ic_dianh"-->
+                <!--android:background="@drawable/bg_imput"-->
+                <!--android:layout_marginLeft="9dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:hint="请输入您的固定电话(可选填)"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="43dp" />-->
+
+            <TextView
+                android:id="@+id/Tv_type"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="12dp"
+                android:drawablePadding="20dp"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:gravity="center_vertical"
+                android:drawableLeft="@mipmap/ic_zjleixing"
+                android:drawableRight="@mipmap/right_"
+                android:paddingRight="20dp"
+                android:background="@drawable/bg_imput"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="8dp"
+                android:hint="请选择您的身份证件类型"
+                android:layout_width="match_parent"
+                android:layout_height="43dp" />
+
+            <EditText
+                android:maxLines="1"
+                android:id="@+id/Et_id_card"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="12dp"
+                android:drawablePadding="20dp"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:drawableLeft="@mipmap/ic_shengfz"
+                android:background="@drawable/bg_imput"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="8dp"
+                android:hint="请输入您的身份证号"
+                android:layout_width="match_parent"
+                android:layout_height="43dp" />
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="18dp"
+                android:textColor="#333333"
+                android:textSize="15sp"
+                android:text="上传身份证"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="114dp">
+                <LinearLayout
+                    android:id="@+id/Ll_front"
+                    android:orientation="vertical"
+                    android:background="#f1f1f1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="114dp"
+                    android:layout_height="match_parent">
+
+                    <zgt.com.example.myzq.model.common.custom_view.MyPicImageView
+
+                        android:layout_marginTop="22dp"
+                        android:visibility="gone"
+                        android:id="@+id/Iv_picture"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY"
+                        android:layout_width="95dp"
+                        android:layout_height="60dp" />
+
+
+                    <ImageView
+                        android:id="@+id/Iv_front"
+                        android:layout_marginTop="30dp"
+                        android:src="@mipmap/ic_tianjia"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/Tv_front"
+                        android:layout_marginTop="7dp"
+                        android:text="上传证件正面照片"
+                        android:textSize="13sp"
+                        android:textColor="#919191"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Ll_other_side"
+                    android:orientation="vertical"
+                    android:background="#f1f1f1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="114dp"
+                    android:layout_height="match_parent">
+
+                    <zgt.com.example.myzq.model.common.custom_view.MyPicImageView
+                        android:layout_marginTop="22dp"
+                        android:visibility="gone"
+                        android:id="@+id/Iv_picture_other"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY"
+                        android:layout_width="95dp"
+                        android:layout_height="60dp" />
+                    <ImageView
+                        android:id="@+id/Iv_other"
+                        android:layout_marginTop="30dp"
+                        android:src="@mipmap/ic_tianjia"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/Tv_other"
+                        android:layout_marginTop="7dp"
+                        android:text="上传证件反面照片"
+                        android:textSize="13sp"
+                        android:textColor="#919191"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/Tv_Occupation"
+                android:layout_marginTop="18dp"
+                android:paddingLeft="12dp"
+                android:drawablePadding="20dp"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:gravity="center_vertical"
+                android:drawableLeft="@mipmap/ic_zhiy"
+                android:drawableRight="@mipmap/right_"
+                android:paddingRight="20dp"
+                android:background="@drawable/bg_imput"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="8dp"
+                android:hint="请选择您的职业"
+                android:layout_width="match_parent"
+                android:layout_height="43dp" />
+            <!--<TextView-->
+                <!--android:id="@+id/Tv_Education"-->
+                <!--android:layout_marginTop="6dp"-->
+                <!--android:paddingLeft="12dp"-->
+                <!--android:drawablePadding="20dp"-->
+                <!--android:textSize="15sp"-->
+                <!--android:textColor="#333333"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:drawableLeft="@mipmap/ic_xuel"-->
+                <!--android:drawableRight="@mipmap/right_"-->
+                <!--android:paddingRight="20dp"-->
+                <!--android:background="@drawable/bg_imput"-->
+                <!--android:layout_marginLeft="9dp"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:hint="请选择您的学历"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="43dp" />-->
+
+            <TextView
+                android:id="@+id/Tv_record"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="12dp"
+                android:drawablePadding="20dp"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:gravity="center_vertical"
+                android:drawableLeft="@mipmap/ic_chengx"
+                android:drawableRight="@mipmap/right_"
+                android:paddingRight="20dp"
+                android:background="@drawable/bg_imput"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="8dp"
+                android:hint="请选择您的诚信记录"
+                android:layout_width="match_parent"
+                android:layout_height="43dp" />
+
+            <Button
+                android:id="@+id/Bt_save"
+                android:background="#FFAE00"
+                android:layout_marginBottom="20dp"
+                android:textColor="#ffffff"
+                android:text="保存"
+                android:textSize="15dp"
+                android:layout_marginTop="38dp"
+                android:layout_marginLeft="9dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="43dp" />
+
+        </LinearLayout>
+    </ScrollView>
+    
+
+
+</LinearLayout>

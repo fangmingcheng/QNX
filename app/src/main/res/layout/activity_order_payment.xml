@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    tools:context="zgt.com.example.myzq.model.common.order.OrderPaymentActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="支付订单"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+        <ImageView
+            android:id="@+id/Iv_back"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+            app:srcCompat="@mipmap/left_return" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/btn_queding"
+            android:layout_width="16dp"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:layout_marginLeft="4dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:text="现金支付"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/Tv_price"
+            android:textSize="12sp"
+            android:textColor="#919191"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"></LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp">-->
+        <!--<ImageView-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_marginLeft="14dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@mipmap/image_zhifubao"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <!--<TextView-->
+            <!--android:layout_marginLeft="12dp"-->
+            <!--android:textColor="#333333"-->
+            <!--android:textSize="14sp"-->
+            <!--android:text="支付宝支付"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<ImageView-->
+            <!--android:id="@+id/Iv_zfb_select"-->
+            <!--android:src="@mipmap/btn_quxiao"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp" />-->
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="#EAEAEA"-->
+        <!--android:layout_height="1dp"></LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/image_weixin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="12dp"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:text="微信支付"
+            android:layout_gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/Iv_wx_select"
+            android:src="@mipmap/btn_quxiao"
+            android:layout_marginRight="14dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"></LinearLayout>
+
+    <TextView
+        android:textColor="#919191"
+        android:text="注：请根据您的需要进行课程选择，购买一经确认并缴 费，恕不退还."
+        android:textSize="12sp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--<LinearLayout-->
+        <!--android:layout_marginTop="13dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<ImageView-->
+            <!--android:id="@+id/Iv_agree"-->
+            <!--android:src="@mipmap/btn_gouxuan1"-->
+            <!--android:layout_marginLeft="37dp"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:textSize="12sp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
+    
+    <Button
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:id="@+id/Bt_pay"
+        android:background="#23B7FD"
+        android:gravity="center"
+        android:text="确认支付"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+</LinearLayout>

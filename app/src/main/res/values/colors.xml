@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFAE00</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="textColor">#333333</color>
+    <color name="textcolor_yellow">#FFFF99</color>
+    <color name="balck">#000</color>
+    <color name="white">#fff</color>
+
+    <color name="theme">#fbfbfb</color>
+
+    <color name="hong">#FF0107</color>
+    <color name="hui">#919191</color>
+    <color name="lan">#39BAFC</color>
+
+    <color name="zb">#FF0000</color>
+    <color name="yg">#FFAE00</color>
+
+    <color name="grid">#F5F5F5</color>
+
+    <color name="textcolor_line">#D9D9D9</color>
+
+    <!--腾讯trtc-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <color name="trans_black">#66000000</color>
+    <color name="background">#007AFF</color>
+    <color name="white_50">#7fffffff</color>
+    <color name="divider">#C4C3C8</color>
+
+    <color name="colorComBg">#0B1829</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <!--<color name="white">#FFFFFF</color>-->
+    <color name="colorBtn">#016EFF</color>
+    <color name="hlfTransparent">#30000000</color>
+
+    <color name="line_btn">#BBBBBB</color>
+</resources>

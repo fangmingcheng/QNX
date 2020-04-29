@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="zgt.com.example.myzq.model.common.home.SecuritiesSchoolActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="证券学堂"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+        <ImageView
+            android:id="@+id/Iv_customer"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+            app:srcCompat="@mipmap/left_return" />
+    </RelativeLayout>
+    <View style="@style/line_hor"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <TextView
+            android:id="@+id/Tv_class"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="#333333"
+            android:gravity="bottom|center_horizontal"
+            android:textSize="14sp"
+            android:text="精品视频"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/Tv_education"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="#333333"
+            android:gravity="bottom|center_horizontal"
+            android:textSize="14sp"
+            android:text="精品课件"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="2dp"
+        android:id="@+id/sursor"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+
+        android:layout_height="2dp"
+        >
+        <!-- 指示标签 -->
+        <ImageView
+            android:id="@+id/Iv_live"
+            android:layout_width="0dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+        <ImageView
+            android:id="@+id/Iv_Stock"
+            android:layout_width="0dp"
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_marginTop="16dp"
+        android:id="@+id/myviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
+</LinearLayout>

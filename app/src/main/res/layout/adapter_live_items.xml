@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/Tv_week"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="#919191"
+            android:textSize="17sp"
+            android:gravity="center_vertical"
+            android:paddingLeft="14dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/Tv_date"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textColor="#919191"
+            android:textSize="17sp"
+            android:gravity="center_vertical|end"
+            android:paddingRight="13dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/Lv_live"
+        android:divider="#00000000"
+        android:numColumns="3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+    <!--<ListView-->
+        <!--android:id="@+id/Lv_live"-->
+        <!--android:divider="#00000000"-->
+        <!--android:numColumns="3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+    <!--</ListView>-->
+
+
+</LinearLayout>

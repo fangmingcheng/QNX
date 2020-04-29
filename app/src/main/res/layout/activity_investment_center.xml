@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="zgt.com.example.myzq.model.common.Investment_adviser.Investment_centerActivity">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="投顾中心"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+
+        <ImageView
+            android:id="@+id/Iv_customer"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_alignTop="@+id/Tv_title"
+            android:layout_marginStart="14dp"
+
+            app:srcCompat="@mipmap/left_return" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="33dp">
+        <TextView
+            android:id="@+id/Tv_all"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="全部"
+            android:textSize="14sp"
+            android:textColor="#FFAE00"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/Tv_Popularity"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="人气"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/Tv_new"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="最新"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/Tv_follow"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="已关注"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/sursor"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="2dp"
+        >
+        <!-- 指示标签 -->
+        <ImageView
+            android:id="@+id/cursor_all"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+        <ImageView
+            android:id="@+id/cursor_Popularity"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+        <ImageView
+            android:id="@+id/cursor_new"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+        <ImageView
+            android:id="@+id/cursor_follow"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/myviewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+    </android.support.v4.view.ViewPager>
+
+
+    <!--<com.scwang.smartrefresh.layout.SmartRefreshLayout-->
+        <!--android:id="@+id/refreshLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:srlEnableLoadMoreWhenContentNotFull="true">-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/recyclerview"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+
+    <!--</com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
+
+</LinearLayout>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/Ll_catalog"
+        android:layout_marginTop="11dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="14dp"
+            android:id="@+id/Iv_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/Tv_title"
+            android:paddingLeft="19dp"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:id="@+id/Tv_status"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <zgt.com.example.myzq.model.common.custom_view.MyListView
+        android:id="@+id/Lv_catalog"
+        android:divider="#00000000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></zgt.com.example.myzq.model.common.custom_view.MyListView>
+
+    <!--<LinearLayout-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:id="@+id/Ll_file"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<ImageView-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:id="@+id/Iv_image_file"-->
+                <!--android:layout_marginLeft="44dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:id="@+id/Tv_title_file"-->
+                <!--android:paddingLeft="7dp"-->
+                <!--android:textColor="#333333"-->
+                <!--android:textSize="14sp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</LinearLayout>-->
+
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:id="@+id/Ll_introduce"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<ImageView-->
+                <!--android:id="@+id/Iv_image_introduce"-->
+                <!--android:layout_marginLeft="44dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:id="@+id/Tv_title_introduce"-->
+                <!--android:paddingLeft="7dp"-->
+                <!--android:textColor="#333333"-->
+                <!--android:textSize="14sp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</LinearLayout>-->
+        <!--<TextView-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:paddingLeft="62dp"-->
+            <!--android:id="@+id/Tv_introduce_name"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:id="@+id/Ll_live"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<LinearLayout-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_height="wrap_content">-->
+            <!--<ImageView-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:id="@+id/Iv_image_live"-->
+                <!--android:layout_marginLeft="44dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:id="@+id/Tv_live_introduce"-->
+                <!--android:paddingLeft="7dp"-->
+                <!--android:textColor="#333333"-->
+                <!--android:textSize="14sp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<TextView-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:id="@+id/Tv_live_status"-->
+                <!--android:paddingLeft="5dp"-->
+                <!--android:textSize="12sp"-->
+                <!--android:textColor="#ffae00"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</LinearLayout>-->
+            <!--<TextView-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:paddingLeft="62dp"-->
+                <!--android:id="@+id/Tv_live_name"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
+
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="11dp"
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"></LinearLayout>
+
+</LinearLayout>

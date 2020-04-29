@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="86dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="86dp">
+
+        <zgt.com.example.myzq.model.common.custom_view.MyImageView
+            android:id="@+id/Iv_head"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            app:srcCompat="@drawable/bg_code" />
+
+        <TextView
+            android:id="@+id/Tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/Iv_head"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/Tv_num"
+            android:textSize="12sp"
+            android:textColor="#919191"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/Tv_name"
+            android:layout_marginEnd="15dp"
+            android:text="TextView" />
+
+        <ImageView
+            android:id="@+id/Iv_num"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_alignBottom="@+id/Tv_num"
+            android:layout_toStartOf="@+id/Tv_num"
+            app:srcCompat="@mipmap/ic_renshu" />
+
+        <TextView
+            android:id="@+id/Tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_below="@+id/Tv_name"
+            android:layout_alignStart="@+id/Tv_name"
+            android:text="22222222222222222222222222222222222222222222222222222" />
+    </RelativeLayout>
+
+</LinearLayout>

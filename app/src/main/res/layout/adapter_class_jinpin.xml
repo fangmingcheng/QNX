@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="102dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+
+        android:layout_height="match_parent">
+        <zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView
+            android:id="@+id/Iv_head"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="15dp"
+            android:scaleType="fitXY"
+            android:layout_width="108dp"
+            android:layout_height="65dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/Tv_title"
+            android:layout_marginTop="17dp"
+            android:paddingLeft="10dp"
+            android:textColor="#333333"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/Tv_teacher"
+            android:layout_marginTop="4dp"
+            android:paddingLeft="10dp"
+            android:textColor="#666666"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Tv_real_charge"
+                android:paddingLeft="10dp"
+                android:textColor="#E46866"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/Tv_charge"
+                android:paddingLeft="8dp"
+                android:textColor="#666666"
+                android:textSize="13sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
