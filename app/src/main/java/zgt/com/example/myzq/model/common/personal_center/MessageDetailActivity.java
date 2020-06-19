@@ -23,6 +23,7 @@ import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.bean.MessageList;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class MessageDetailActivity extends BaseActivity {
@@ -44,7 +45,7 @@ public class MessageDetailActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         uuid=getIntent().getStringExtra("uuid");
 //        messageList=(MessageList) getIntent().getSerializableExtra("messageList");
         WebSettings webSettings = webView.getSettings();

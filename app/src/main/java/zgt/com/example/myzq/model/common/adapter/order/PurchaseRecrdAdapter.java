@@ -29,7 +29,7 @@ public class PurchaseRecrdAdapter extends  RecyclerView.Adapter<PurchaseRecrdAda
 
     class ViewHolder extends RecyclerView.ViewHolder{
         private MyImageBackgroundView Iv_head;
-        private TextView Tv_billno,Tv_teacher,Tv_title,Tv_status,Tv_price,Tv_date,Tv_status_bill,Tv_num;
+        private TextView Tv_billno,Tv_teacher,Tv_title,Tv_status,Tv_price,Tv_date,Tv_status_bill;
         private Button Bt_delete,Bt_commit;
         private LinearLayout Ll_course;
         public ViewHolder(View view){
@@ -41,7 +41,7 @@ public class PurchaseRecrdAdapter extends  RecyclerView.Adapter<PurchaseRecrdAda
             Tv_status=(TextView) view.findViewById(R.id.Tv_status);
             Tv_price=(TextView) view.findViewById(R.id.Tv_price);
             Tv_date=(TextView) view.findViewById(R.id.Tv_date);
-            Tv_num=(TextView) view.findViewById(R.id.Tv_num);
+
             Tv_status_bill=(TextView) view.findViewById(R.id.Tv_status_bill);
             Ll_course=(LinearLayout) view.findViewById(R.id.Ll_course);
 
@@ -100,9 +100,19 @@ public class PurchaseRecrdAdapter extends  RecyclerView.Adapter<PurchaseRecrdAda
         holder.Bt_commit.setTag(position);
         holder.Ll_course.setTag(position);
         final PurchaseRecord live=list.get(position);
-        holder.Tv_num.setText("X"+live.getAmount());
+
         holder.Tv_title.setText(live.getTitle());
-        holder.Tv_teacher.setText("主讲老师："+live.getLecturer());
+        if(live.getProducttype()==1){
+            holder.Tv_teacher.setText("主讲老师："+live.getLecturer());
+        }else {
+            holder.Tv_teacher.setText(live.getLecturer());
+        }
+//        if(live.getIsnewversion()==0){
+//            holder.Tv_teacher.setText("主讲老师："+live.getLecturer());
+//        }else if(live.getPaytype() == 1){
+//            holder.Tv_teacher.setText(live.getLecturer());
+//        }
+
         if(live.getStatus()==0){
             holder.Tv_status.setText("待付款");
             holder.Bt_commit.setVisibility(View.VISIBLE);
@@ -156,7 +166,12 @@ public class PurchaseRecrdAdapter extends  RecyclerView.Adapter<PurchaseRecrdAda
 //        if(live.getOrdertime().length()>10) {
             holder.Tv_date.setText("下单日期：" + live.getOrdertime().substring(0, 10));
 //        }
-        holder.Tv_price.setText(live.getRealprice()+"元");
+        if(live.getPaytype()==3){
+            holder.Tv_price.setText(live.getAmount()*live.getIosrealprice()+"牵牛币");
+        }else {
+            holder.Tv_price.setText(live.getAmount()*live.getRealprice()+"元");
+        }
+
         if(!TextUtils.isEmpty(live.getPicpath())) {
             holder.Iv_head.setImageURL(live.getPicpath());
 //            holder.Iv_head.setImageURL(SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+live.getPicpath());

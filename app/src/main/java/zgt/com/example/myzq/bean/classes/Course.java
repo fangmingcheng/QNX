@@ -5,12 +5,39 @@ import java.io.Serializable;
 public class Course implements Serializable {
     private String title;//
     private String uuid;//课程主键
+    private String recommendpicpath;//推荐封面地址
     private String lecturer;//主讲老师
     private int ischarge;//0为免费，1为收费，2为收费会员
     private String picpath;//	图片路径
     private double price;//课程原价
     private double realprice;//课程实际价格
     private int click;//点击次数
+    private String intro;//课程简介
+    private String typestr;//课程类型;
+
+    public String getTypestr() {
+        return typestr;
+    }
+
+    public void setTypestr(String typestr) {
+        this.typestr = typestr;
+    }
+
+    public String getRecommendpicpath() {
+        return recommendpicpath;
+    }
+
+    public void setRecommendpicpath(String recommendpicpath) {
+        this.recommendpicpath = recommendpicpath;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
 
     public String getUuid() {
         return uuid;

@@ -93,13 +93,19 @@ public class MyCourseAdapter extends  RecyclerView.Adapter<MyCourseAdapter.ViewH
         holder.Tv_billno.setText("课程到期时间："+live.getExpiredate());
         holder.Tv_title.setText(live.getTitle());
         holder.Tv_teacher.setText("主讲老师："+live.getLecturer());
-        if(live.getStatus()==0){
-            holder.Tv_billno.setTextColor(Color.parseColor("#919191"));
-            holder.Tv_status.setText("续课");
-        }else {
+        if(live.getPricelimit()==0){
             holder.Tv_billno.setTextColor(Color.parseColor("#333333"));
             holder.Tv_status.setText("");
+        }else {
+            if(live.getStatus()==0){
+                holder.Tv_billno.setTextColor(Color.parseColor("#919191"));
+                holder.Tv_status.setText("续课");
+            }else {
+                holder.Tv_billno.setTextColor(Color.parseColor("#333333"));
+                holder.Tv_status.setText("");
+            }
         }
+
 //        if(live.getPricelimit()==0){
 //           holder.Tv_status.setText("");
 //        }else {

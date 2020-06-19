@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".model.common.fragment.HqzxFragment">
+
+    <RadioGroup
+        android:id="@+id/group"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="160dp"
+        android:layout_height="27dp">
+        <RadioButton
+            android:id="@+id/button_hq"
+            android:layout_width="0dp"
+            android:button="@null"
+            android:text="行情"
+            android:background="@drawable/btn_selector"
+            android:textSize="13sp"
+            android:checked="true"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            android:id="@+id/button_zx"
+            android:layout_width="0dp"
+            android:text="自选"
+            android:textSize="13sp"
+            android:background="@drawable/btn_selector"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:button="@null"
+            android:layout_height="match_parent" />
+
+    </RadioGroup>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       />
+
+</LinearLayout>

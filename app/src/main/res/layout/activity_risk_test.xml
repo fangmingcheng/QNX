@@ -34,26 +34,12 @@
         android:background="#EAEAEA"
         android:layout_height="1dp"></LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/Rl_progress"
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/pro"
+        android:max="100"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_centerInParent="true"
-            style="?android:attr/android:secondaryProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_below="@id/progress"
-            android:gravity="center"
-            android:textSize="15sp"
-            android:text="加载中……"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+        android:layout_height="2dp" />
 
     <WebView
         android:id="@+id/webView"

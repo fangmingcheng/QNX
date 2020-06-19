@@ -10,13 +10,14 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 
 public class PrivacyActivity extends BaseActivity {
     @BindView(R.id.webView)
     WebView webView;
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);

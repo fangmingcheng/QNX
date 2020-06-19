@@ -23,6 +23,7 @@ import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.bean.ZXDetailBean;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class InformationDetailActivity extends BaseActivity {
@@ -46,10 +47,15 @@ public class InformationDetailActivity extends BaseActivity {
     void onClick(View view) {
         switch (view.getId()){
             case R.id.Iv_customer:
-                onBackPressed();
+                if(web.canGoBack()){
+                    web.goBack();
+                }else {
+                    finish();
+                }
                 break;
         }
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_information_detail;
@@ -62,7 +68,7 @@ public class InformationDetailActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         uuid=getIntent().getStringExtra("uuid");
         getViewDetial();
     }
@@ -77,7 +83,7 @@ public class InformationDetailActivity extends BaseActivity {
         //替换img属性
         String varjs = "<script type='text/javascript'> \nwindow.onload = function()\n{var $img = document.getElementsByTagName('img');for(var p in  $img){$img[p].style.width = '100%'; $img[p].style.height ='auto'}}</script>";
         //点击查看
-        String jsimg = "function()\n { var imgs = document.getElementsByTagName(\"img\");for(var i = 0; i < imgs.length; i++){  imgs[i].onclick = function()\n{DetailActivity.startPhotoActivity(this.src);}}}";
+        String jsimg = "function()\n { var imgs = document.getElementsByTagName(\"img\");for(var i = 0; i < imgs.length; i++){  imgs[i].onclick = function()\n{InformationDetailActivity.startPhotoActivity(this.src);}}}";
         web.loadDataWithBaseURL("http://stock.bdcgw.cn", varjs+zxDetailBean.getContent(), "text/html", "utf-8", null);
         web.setWebViewClient(new WebViewClient() {
             @Override
@@ -197,4 +203,12 @@ public class InformationDetailActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if(web.canGoBack()){
+            web.goBack();
+        }else {
+            finish();
+        }
+    }
 }

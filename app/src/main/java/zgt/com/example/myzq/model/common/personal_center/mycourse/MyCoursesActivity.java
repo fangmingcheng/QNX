@@ -33,7 +33,7 @@ import zgt.com.example.myzq.bean.classes.Mycourse;
 import zgt.com.example.myzq.model.common.adapter.courseAdapter.MyCourseAdapter;
 import zgt.com.example.myzq.model.common.course.CourseDetailActivity;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
-import zgt.com.example.myzq.model.common.order.OrderDetaiilActivity;
+import zgt.com.example.myzq.model.common.order.ZBOrderDetailActivity;
 import zgt.com.example.myzq.model.common.personal_center.RiskTestActivity;
 import zgt.com.example.myzq.utils.SPUtil;
 import zgt.com.example.myzq.utils.StatusBarUtil;
@@ -304,13 +304,13 @@ public class MyCoursesActivity extends BaseActivity {
                 .setNegativeButton("重新评测", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent().setClass(MyCoursesActivity.this, RiskTestActivity.class).putExtra("status",3).putExtra("course",list.get(position)).putExtra("index",2));
+                        startActivity(new Intent().setClass(MyCoursesActivity.this, RiskTestActivity.class).putExtra("fileid",list.get(position).getTypeid()).putExtra("index",2).putExtra("type",1));
                         dialog.dismiss();
                     }
                 }).setPositiveButton("前往购买", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent().setClass(MyCoursesActivity.this, OrderDetaiilActivity.class).putExtra("course",list.get(position)).putExtra("status","2").putExtra("index",2));
+                startActivity(new Intent().setClass(MyCoursesActivity.this, ZBOrderDetailActivity.class).putExtra("fileid",list.get(position).getTypeid()).putExtra("index",2).putExtra("type",1));
                 dialog.dismiss();
             }
         }).show();
@@ -332,6 +332,10 @@ public class MyCoursesActivity extends BaseActivity {
 
                     }else if(a==5){
                         ToastUtil.showShortToast(MyCoursesActivity.this,"您已购买过该课程，无需重新购买");
+                    }else if(a==7){
+                        ToastUtil.showShortToast(MyCoursesActivity.this,"您有订单未确认，请联系客服");
+                    } else if(a==8){
+                        ToastUtil.showShortToast(MyCoursesActivity.this,"请勿重复下单");
                     }
 //                    else if(a==2){
 //                        commonDialog(2,"您的个人信息不完整请您完善","是否前往完善");

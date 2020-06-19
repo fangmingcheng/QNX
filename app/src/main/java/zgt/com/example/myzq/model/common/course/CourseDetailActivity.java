@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.jaeger.library.StatusBarUtil;
 import com.tencent.trtc.TRTCCloudDef;
 
 import org.json.JSONArray;
@@ -42,7 +43,7 @@ import zgt.com.example.myzq.model.common.course.fragment.CourseContentFragment;
 import zgt.com.example.myzq.model.common.course.fragment.CourseDetailFragment;
 import zgt.com.example.myzq.model.common.custom_view.MyJzvdStd;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
-import zgt.com.example.myzq.model.common.order.OrderDetaiilActivity;
+import zgt.com.example.myzq.model.common.order.ZBOrderDetailActivity;
 import zgt.com.example.myzq.model.common.personal_center.RiskTestActivity;
 import zgt.com.example.myzq.model.common.personal_center.basic.MyBasicInformationActivity;
 import zgt.com.example.myzq.model.common.trtc.TRTCMainActivity;
@@ -160,6 +161,7 @@ public class CourseDetailActivity extends BaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
 //        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.setLightMode(this);
 
         uuid=getIntent().getStringExtra("uuid");
         index=getIntent().getIntExtra("index",1);
@@ -500,6 +502,7 @@ public class CourseDetailActivity extends BaseActivity {
 
                 break;
             case R.id.Tv_detail:
+                index=1;
                 Tv_detail.setTextColor(Color.parseColor("#FFAE00"));
                 Tv_catalog.setTextColor(Color.parseColor("#333333"));
                 Tv_education.setTextColor(Color.parseColor("#333333"));
@@ -517,7 +520,7 @@ public class CourseDetailActivity extends BaseActivity {
 //                cursorAnim(1);
                 break;
             case R.id.Tv_catalog:
-
+                index=2;
                 Tv_detail.setTextColor(Color.parseColor("#333333"));
                 Tv_catalog.setTextColor(Color.parseColor("#FFAE00"));
                 Tv_education.setTextColor(Color.parseColor("#333333"));
@@ -533,6 +536,7 @@ public class CourseDetailActivity extends BaseActivity {
 //                cursorAnim(1);
                 break;
             case R.id.Tv_education:
+                index=3;
                 Tv_detail.setTextColor(Color.parseColor("#333333"));
                 Tv_catalog.setTextColor(Color.parseColor("#333333"));
                 Tv_education.setTextColor(Color.parseColor("#FFAE00"));
@@ -564,11 +568,11 @@ public class CourseDetailActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(status==2){
-                    startActivity(new Intent().setClass(CourseDetailActivity.this, MyBasicInformationActivity.class).putExtra("status",2).putExtra("course",courseDetail).putExtra("index",1));
+                    startActivity(new Intent().setClass(CourseDetailActivity.this, MyBasicInformationActivity.class).putExtra("fileid",courseDetail.getUuid()).putExtra("index",1).putExtra("type","1"));
                 }else if(status==3){
-                    startActivity(new Intent().setClass(CourseDetailActivity.this, RiskTestActivity.class).putExtra("status",2).putExtra("course",courseDetail).putExtra("index",1));
+                    startActivity(new Intent().setClass(CourseDetailActivity.this, RiskTestActivity.class).putExtra("fileid",courseDetail.getUuid()).putExtra("index",1).putExtra("type","1"));
                 }else if(status==4){
-                    startActivity(new Intent().setClass(CourseDetailActivity.this, RiskTestActivity.class).putExtra("status",2).putExtra("course",courseDetail).putExtra("index",1));
+                    startActivity(new Intent().setClass(CourseDetailActivity.this, RiskTestActivity.class).putExtra("fileid",courseDetail.getUuid()).putExtra("index",1).putExtra("type","1"));
                 }
                 dialog.dismiss();
             }
@@ -581,13 +585,13 @@ public class CourseDetailActivity extends BaseActivity {
                 .setNegativeButton("重新评测", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent().setClass(CourseDetailActivity.this, RiskTestActivity.class).putExtra("status",2).putExtra("course",courseDetail).putExtra("index",1));
+                        startActivity(new Intent().setClass(CourseDetailActivity.this, RiskTestActivity.class).putExtra("fileid",courseDetail.getUuid()).putExtra("index",1).putExtra("type","1"));
                         dialog.dismiss();
                     }
                 }).setPositiveButton("前往购买", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent().setClass(CourseDetailActivity.this, OrderDetaiilActivity.class).putExtra("course",courseDetail).putExtra("status","1").putExtra("index",1));
+                startActivity(new Intent().setClass(CourseDetailActivity.this, ZBOrderDetailActivity.class).putExtra("fileid",courseDetail.getUuid()).putExtra("index",1).putExtra("type","1"));
                 dialog.dismiss();
             }
         }).show();
@@ -680,6 +684,8 @@ public class CourseDetailActivity extends BaseActivity {
                     JSONObject jsonObject = new JSONObject(result);
                     int a=jsonObject.getInt("result");
                     if (a==1) {
+                        courseContents.clear();
+                        courseCatalogs.clear();
                         JSONObject json=jsonObject.getJSONObject("data");
                         courseDetail = new CourseDetail();
                         courseDetail.setUuid(uuid);

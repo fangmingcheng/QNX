@@ -33,6 +33,7 @@ import zgt.com.example.myzq.bean.classes.Course;
 import zgt.com.example.myzq.model.common.adapter.courseAdapter.CourseAdapter;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class BoutiqueActivity extends BaseActivity {
@@ -51,15 +52,7 @@ public class BoutiqueActivity extends BaseActivity {
     private List<Course> list = new ArrayList<>();
     @Override
     public void initToolBar() {
-//        StatusBarUtil.statusBarLightMode(this);
-        initRecyclerView();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                currentpage=1;
-                getData(refreshLayout,1);
-            }
-        }).start();
+
     }
 
     @Override
@@ -69,6 +62,15 @@ public class BoutiqueActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        StatusBarUtil.statusBarLightMode(this);
+        initRecyclerView();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                currentpage=1;
+                getData(refreshLayout,1);
+            }
+        }).start();
 
     }
     private void initRecyclerView(){

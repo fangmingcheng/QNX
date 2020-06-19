@@ -19,10 +19,8 @@ import org.xutils.x;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import zgt.com.example.myzq.MyApp;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
-import zgt.com.example.myzq.bean.HttpResult;
 import zgt.com.example.myzq.model.common.MainActivity;
 import zgt.com.example.myzq.utils.Log;
 import zgt.com.example.myzq.utils.SPUtil;
@@ -36,7 +34,11 @@ public class LoginActivity extends BaseActivity {
     EditText Et_password;
 
 
-    private HttpResult httpResult;
+
+
+//    private HttpResult httpResult;
+
+    private int status = 0;
 
 
     @Override
@@ -46,9 +48,10 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        httpResult=(HttpResult) getIntent().getSerializableExtra("result");
-        MyApp.httpResult=httpResult;
-        Log.e("LoginActivity",""+httpResult);
+//        httpResult=(HttpResult) getIntent().getSerializableExtra("result");
+        status = getIntent().getIntExtra("status",0);
+//        MyApp.httpResult=httpResult;
+//        Log.e("LoginActivity",""+httpResult);
         //得到当前界面的装饰视图
         if(Build.VERSION.SDK_INT >= 21) {
             View decorView = getWindow().getDecorView();
@@ -115,12 +118,14 @@ public class LoginActivity extends BaseActivity {
                     JSONObject json=jsonObject.getJSONObject("data");
                     if (a==1) {
                         saveLoginInfo(json);
-                        if(result==null) {
+                        if(status==0) {
                             startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("status",0));
-                        }else {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("result",httpResult).putExtra("status",0));
+                            finish();
+                        }else if(status == 1){
+                            setResult(1);
+                            finish();
                         }
-                        finish();
+
                     } else {
                     }
                     ToastUtil.showShortToast(LoginActivity.this, jsonObject.getString("message"));
@@ -154,7 +159,7 @@ public class LoginActivity extends BaseActivity {
                 .putString("memberid", jsonObject.getString("memberid"))
                 .putString("username", jsonObject.getString("username"))
                 .putString("nickname", jsonObject.getString("nickname"))
-//                .putString("email", jsonObject.getString("email"))
+                .putString("headimg", jsonObject.getString("headimg"))
                 .putString("getuistatus", jsonObject.getInt("getuistatus")+"")
 //                .putString("typename",jsonObject.getString("typename"))
 //                .putInt("type",jsonObject.getInt("type"))

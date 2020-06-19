@@ -8,7 +8,6 @@
     android:background="#ffffff"
     tools:context="zgt.com.example.myzq.model.common.course.FreeCourseActivity">
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="32dp">
         <TextView

@@ -20,6 +20,7 @@ import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.bean.MessageList;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 
@@ -47,6 +48,7 @@ public class My_msgActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        StatusBarUtil.statusBarLightMode(this);
         status = getIntent().getIntExtra("status",0);
         new Thread(new Runnable() {
             @Override

@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
 import com.umeng.socialize.weixin.view.WXCallbackActivity;
 
 
@@ -46,6 +47,9 @@ public class WXEntryActivity extends WXCallbackActivity {
                     Toast.makeText(this,"支付出错！",Toast.LENGTH_LONG).show();
                     break;
             }
+        } else if(resp.getType() == ConstantsAPI.COMMAND_LAUNCH_WX_MINIPROGRAM){
+            WXLaunchMiniProgram.Resp launchMiniProResp = (WXLaunchMiniProgram.Resp) resp;
+            String extraData =launchMiniProResp.extMsg; //对应小程序组件 <button open-type="launchApp"> 中的 app-parameter 属性
         } else {
             super.onResp(resp);//一定要加super，实现我们的方法，否则不能回调
         }

@@ -6,6 +6,8 @@
     <dimen name="margin_small">15dp</dimen>
     <dimen name="margin_pictures_separate">2dp</dimen>
 
+    <!--<dimen name="uiHeight"></dimen>-->
+
     <!-- Text Size -->
     <dimen name="text_size_small">15sp</dimen>
     <dimen name="text_size">20sp</dimen>

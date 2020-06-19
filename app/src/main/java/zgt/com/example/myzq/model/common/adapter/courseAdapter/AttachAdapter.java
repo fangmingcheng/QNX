@@ -238,7 +238,11 @@ public class AttachAdapter extends MyBaseAdapter<CourseContent> {
                     JSONObject jsonObject = new JSONObject(result);
                     int a=jsonObject.getInt("result");
                     String msg=jsonObject.getString("message");
-//                    Toast.makeText(CourseDetailActivity.this, msg, Toast.LENGTH_SHORT);
+//                    if(TextUtils.isEmpty(msg)){
+//
+//                    }else {
+//                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+//                    }
                     if (a==1) {
                         JSONObject json=jsonObject.getJSONObject("data");
                         int type= json.getInt("type");
@@ -281,8 +285,12 @@ public class AttachAdapter extends MyBaseAdapter<CourseContent> {
                         context.startActivity(new Intent().setClass(context, LoginActivity.class));
 
 
-                    }else if(a==2){
-                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                    }else if(a>1){
+                        if(TextUtils.isEmpty(msg)){
+
+                        }else {
+                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 } catch (JSONException e) {

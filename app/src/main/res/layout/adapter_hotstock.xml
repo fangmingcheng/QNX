@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/bg_gupiao"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/Ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/Tv_name"
+                android:paddingTop="10dp"
+                android:paddingLeft="13dp"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:paddingTop="8dp"
+                android:id="@+id/Tv_describe"
+                android:paddingBottom="10dp"
+                android:textSize="12sp"
+                android:paddingLeft="13dp"
+                android:textColor="#9E9E9E"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Tv_up_down"
+            android:layout_width="0dp"
+            android:textSize="17sp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Ll_content_type"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="ttxt"
+                android:id="@+id/Tv_name_1"
+                android:paddingLeft="13dp"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:text="ttxt"
+                android:id="@+id/Tv_up_down_1"
+                android:textSize="12sp"
+                android:textColor="#ff4444"
+                android:layout_marginRight="13dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:paddingTop="8dp"
+            android:text="ttxt"
+            android:layout_marginLeft="13dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/Tv_describe_1"
+            android:layout_width="match_parent"
+            android:textColor="#9e9e9e"
+            android:textSize="12sp"
+            android:layout_height="match_parent">
+        </TextView>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

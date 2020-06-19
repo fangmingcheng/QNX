@@ -1,16 +1,21 @@
 package zgt.com.example.myzq.model.common.order;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -37,6 +42,7 @@ import zgt.com.example.myzq.model.common.adapter.courseAdapter.AgreementAdapter;
 import zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class OrderDetaiilActivity extends BaseActivity {
@@ -83,8 +89,11 @@ public class OrderDetaiilActivity extends BaseActivity {
     @BindView(R.id.Iv_agree)
     ImageView Iv_agree;
 
-    @BindView(R.id.Lv_agreement)
-    ListView Lv_agreement;
+    @BindView(R.id.Tv_agreement)
+    TextView Tv_agreement;
+
+//    @BindView(R.id.Lv_agreement)
+//    ListView Lv_agreement;
 
     private CourseDetail course = null;
     private Mycourse mycourse = null;
@@ -93,7 +102,7 @@ public class OrderDetaiilActivity extends BaseActivity {
     double num;
     String fileId;
 
-    private String[] nums ={"1期","3期","6期"};
+    private String[] nums ={"1","3","6"};
     private int coursenum = 1;
 
     private Agreement agreement;
@@ -103,6 +112,7 @@ public class OrderDetaiilActivity extends BaseActivity {
     private Boolean isAgree = false;
     private Boolean isChoice = false;
     private int iseinvoice = 0;
+    int index1;
 
 //    private
 
@@ -119,7 +129,7 @@ public class OrderDetaiilActivity extends BaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
 
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         status=getIntent().getStringExtra("status");
         Et_email.setText(SPUtil.getEmail());
         index = getIntent().getIntExtra("index",0);
@@ -131,7 +141,9 @@ public class OrderDetaiilActivity extends BaseActivity {
             Iv_head.setType(1);
             if(course.getPricelimit()==0){
                 Tv_day.setText("永久 X");
+                spinner.setEnabled(false);
             }else {
+                spinner.setEnabled(true);
                 Tv_day.setText(course.getPricelimit()+"天 X");
             }
             num= course.getPrice()-course.getRealprice();
@@ -254,53 +266,71 @@ public class OrderDetaiilActivity extends BaseActivity {
                     ToastUtil.showShortToast(OrderDetaiilActivity.this,"请先同意这些协议");
                 }
                 break;
-//            case R.id.Iv_add:
-//                int a= Integer.parseInt(Tv_num.getText().toString());
-//                a = a+1;
-//                Tv_num.setText(a+"");
-//                if("1".equals(status)){
-//                    if(num>0){
-//                        Tv_price.setText(Html.fromHtml("<font color='#333333'>需支付：</font><font color='#E46866'><big>￥"+(course.getRealprice()*a)+"</big></font><font color='#333333'>   已优惠"+(num*a)+"元</font>"));
-//                    }else {
-//                        Tv_price.setText(Html.fromHtml("<font color='#333333'>需支付：</font><font color='#E46866'><big>￥"+course.getRealprice()*a+"</big></font>"));
-//                    }
-//
-//                }else if("2".equals(status)) {
-//                    if(num>0){
-//                        Tv_price.setText(Html.fromHtml("<font color='#333333'>需支付：</font><font color='#E46866'><big>￥"+(mycourse.getRealprice()*a)+"</big></font><font color='#333333'>   已优惠"+(num*a)+"元</font>"));
-//                    }else {
-//                        Tv_price.setText(Html.fromHtml("<font color='#333333'>需支付：</font><font color='#E46866'><big>￥"+mycourse.getRealprice()*a+"</big></font>"));
-//                    }
-//                }
-//                break;
-//            case R.id.Iv_delete:
-//                int b= Integer.parseInt(Tv_num.getText().toString());
-//                if(b>1){
-//                    b = b-1;
-//                    Tv_num.setText(b+"");
-//                    if("1".equals(status)){
-//                        if(num>0){
-//                            Tv_price.setText(Html.fromHtml("<font color='#333333'>需支付：</font><font color='#E46866'><big>￥"+(course.getRealprice()*b)+"</big></font><font color='#333333'>   已优惠"+(num*b)+"元</font>"));
-//                        }else {
-//                            Tv_price.setText(Html.fromHtml("<font color='#333333'>需支付：</font><font color='#E46866'><big>￥"+course.getRealprice()*b+"</big></font>"));
-//                        }
-//                    }else if("2".equals(status)) {
-//                        if(num>0){
-//                            Tv_price.setText(Html.fromHtml("<font color='#333333'>需支付：</font><font color='#E46866'><big>￥"+(mycourse.getRealprice()*b)+"</big></font><font color='#333333'>   已优惠"+(num*b)+"元</font>"));
-//                        }else {
-//                            Tv_price.setText(Html.fromHtml("<font color='#333333'>需支付：</font><font color='#E46866'><big>￥"+mycourse.getRealprice()*b+"</big></font>"));
-//                        }
-//                    }
-//                }else {
-//                    ToastUtil.showShortToast(OrderDetaiilActivity.this,"购买数量不能小于1");
-//                }
 
-//                break;
             case R.id.Iv_back:
                 finish();
                 break;
         }
     }
+
+    private void setAgreement(){
+        StringBuilder sbBuilder = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            sbBuilder.append("《"+list.get(i).getFilename() + "》、");
+        }
+
+        String likeUsers = sbBuilder.substring(0, sbBuilder.lastIndexOf("、")).toString();
+        Tv_agreement.setMovementMethod(LinkMovementMethod.getInstance());
+        Tv_agreement.setText(addClickablePart(likeUsers), TextView.BufferType.SPANNABLE);
+    }
+
+    private int getIndex(String name){
+
+        for(int i=0;i<list.size();i++){
+            if(name.contains(list.get(i).getFilename())){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    private SpannableStringBuilder addClickablePart(String str) {
+        // 第一个赞图标
+//        ImageSpan span = new ImageSpan(OrderDetaiilActivity.this, R.drawable.umeng_comm_like);
+        SpannableString spanStr = new SpannableString("我已阅读并同意牵牛星");
+//        spanStr.setSpan(span, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+
+        SpannableStringBuilder ssb = new SpannableStringBuilder(spanStr);
+        ssb.append(str) ;
+
+        String[] likeUsers = str.split("、");
+        if (likeUsers.length > 0) {
+            // 最后一个
+            for (int i = 0; i < likeUsers.length; i++) {
+                final String name = likeUsers[i];
+                final int start = str.indexOf(name) + spanStr.length();
+                ssb.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(View widget) {
+//                        Toast.makeText(OrderDetaiilActivity.this, name, Toast.LENGTH_SHORT).show();
+                        index1 = getIndex(name);
+                        startActivity(new Intent().setClass(OrderDetaiilActivity.this, WebViewActivity.class).putExtra("url",list.get(index1).getFilepath()));
+                    }
+
+                    @Override
+                    public void updateDrawState(TextPaint ds) {
+                        super.updateDrawState(ds);
+                         ds.setColor(Color.parseColor("#39BAFC")); // 设置文本颜色
+                        // 去掉下划线
+                        ds.setUnderlineText(false);
+                    }
+
+                }, start, start + name.length(), 0);
+            }
+        }
+        return ssb.append("");
+    } //
+
 
     //邮箱正则表达式
     private boolean isEmailNum(String mobiles) {
@@ -309,17 +339,12 @@ public class OrderDetaiilActivity extends BaseActivity {
         return m.matches();
     }
 
-    private void setAgreement(List<Agreement> list){
-        adapter = new AgreementAdapter(OrderDetaiilActivity.this);
-        adapter.addAll(list);
-        Lv_agreement.setAdapter(adapter);
-//        String text ="" ;
-//        for(int i= 0;i<list.size();i++){
-//            String s = "《<font><a href='"+SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+list.get(i).getFilepath()+"'>"+list.get(i).getFilename()+"</a></font>》 ";
-//            text += s;
-//        }
-//        Tv_agreement.setText(Html.fromHtml(text));
-    }
+//    private void setAgreement(List<Agreement> list){
+//        setAgreement();
+//        adapter = new AgreementAdapter(OrderDetaiilActivity.this);
+//        adapter.addAll(list);
+//        Lv_agreement.setAdapter(adapter);
+//    }
 
     private void getBuyProto(String  fileid){
         RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"getBuyProtocol.do");
@@ -347,7 +372,7 @@ public class OrderDetaiilActivity extends BaseActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                setAgreement(list);
+                                setAgreement();
                             }
                         });
 

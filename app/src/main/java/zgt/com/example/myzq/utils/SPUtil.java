@@ -20,14 +20,18 @@ public class SPUtil {
     public static boolean isRead_1(){
         return getConfigSharedPreferences().getBoolean("isRead_1", false);
     }
-//
+
     public static String getToken() {
         return getLoginSharedPreferences().getString("token", "");
     }
-      //http://stock.zgziben.com/app/     192.168.91.102:8080/zgstock/   http://118.190.105.66:12588/app/
-    //https://api.zgziben.com/app/
+      // http://192.168.0.109:8080/zgstock/app/   http://118.190.105.66:12588/app/
+    //https://api.zgziben.com/app/     http://test.zgziben.com/app/
     public static String getServerAddress() {
-        return getLoginSharedPreferences().getString("address", "https://api.zgziben.com/app/");
+        return getLoginSharedPreferences().getString("address", "http://test.zgziben.com/app/");
+    }
+
+    public static String getAccess_Token() {
+        return getLoginSharedPreferences().getString("access_token", "C9EDCE796E074088A19D6F21FE83BBEE2020060315200522C521F0");
     }
 
     public static String getHTMLAddress() {
@@ -82,6 +86,11 @@ public class SPUtil {
     //服务结束时间
     public static String getEnddate() {
         return getLoginSharedPreferences().getString("enddate", "");
+    }
+
+    //服务结束时间
+    public static String getHeadimg() {
+        return getLoginSharedPreferences().getString("headimg", "");
     }
 
 

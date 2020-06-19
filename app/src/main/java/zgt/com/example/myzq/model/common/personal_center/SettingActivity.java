@@ -11,6 +11,7 @@ import butterknife.OnClick;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.utils.CleanDataUtils;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 
 import static org.litepal.LitePalApplication.getContext;
 
@@ -34,7 +35,7 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         try {
             String totalCacheSize = CleanDataUtils.getTotalCacheSize(getContext());
             Tv_cache.setText(totalCacheSize);

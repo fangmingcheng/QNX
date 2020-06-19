@@ -19,6 +19,7 @@ import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 
@@ -43,7 +44,7 @@ public class Change_PasswordActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
     }
 
     @OnClick({R.id.Iv_back,R.id.Tv_save})

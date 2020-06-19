@@ -37,6 +37,7 @@ import zgt.com.example.myzq.model.common.adapter.MessageAdapter;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
 import zgt.com.example.myzq.utils.SpaceItemDecoration;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 
@@ -61,7 +62,7 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         initRecyclerView();
         new Thread(new Runnable() {
             @Override

@@ -6,7 +6,8 @@ public class OrderDetail implements Serializable {
     private String uuid;//	订单id
     private String orderno;//	订单编号
     private String typeid;//	课程id
-    private int producttype;//	1为课程
+    private int producttype;//	1为课程3为套餐
+
     private double price;//	课程原价
     private double realprice;//实际价格（元）
     private double iosrealprice;//ios成交价格（元）(牵牛币)
@@ -24,10 +25,22 @@ public class OrderDetail implements Serializable {
     private int paytype;//支付方式
     private String paytime;//	订单支付时间
     private String payid;//第三方支付订单号
+    private int applyStatus;//	-1无申请退款记录，0为未审核，1为审核通过，2审核不通过, 3已退款’,
 
     private String picpath;//	课程图片路径
     private String title;//	课程标题
     private String lecturer;//	讲师
+    private int priceunit;//	售价单位 0按天，1按月，2季度，3半年，4按年
+    private int pricenum;//	售价数量
+    private int isnewversion;//是否新版本订单，0老订单，1新订单
+
+    public int getApplyStatus() {
+        return applyStatus;
+    }
+
+    public void setApplyStatus(int applyStatus) {
+        this.applyStatus = applyStatus;
+    }
 
     public double getIosrealmoney() {
         return iosrealmoney;
@@ -203,5 +216,29 @@ public class OrderDetail implements Serializable {
 
     public void setPayid(String payid) {
         this.payid = payid;
+    }
+
+    public int getPriceunit() {
+        return priceunit;
+    }
+
+    public void setPriceunit(int priceunit) {
+        this.priceunit = priceunit;
+    }
+
+    public int getPricenum() {
+        return pricenum;
+    }
+
+    public void setPricenum(int pricenum) {
+        this.pricenum = pricenum;
+    }
+
+    public int getIsnewversion() {
+        return isnewversion;
+    }
+
+    public void setIsnewversion(int isnewversion) {
+        this.isnewversion = isnewversion;
     }
 }

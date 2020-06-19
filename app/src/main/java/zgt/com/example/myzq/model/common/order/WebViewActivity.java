@@ -2,22 +2,28 @@ package zgt.com.example.myzq.model.common.order;
 
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 
 public class WebViewActivity extends BaseActivity {
 
     @BindView(R.id.webview)
     WebView webview;
-    @BindView(R.id.Rl_progress)
-    RelativeLayout Rl_progress;
+    @BindView(R.id.Tv_title)
+    TextView Tv_title;
+    @BindView(R.id.pro)
+    ProgressBar pro;
 //    Dialog mDialog;
 //
 //    @BindView(R.id.pro)
@@ -36,7 +42,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
 //        mDialog = CustomProgressDialog.createLoadingDialog(this, "正在加载中...");
 //        mDialog.setCancelable(true);//允许返回
 
@@ -94,7 +100,7 @@ public class WebViewActivity extends BaseActivity {
                     // TODO Auto-generated method stub
 //                    pro.setVisibility(View.GONE);
 //                    mDialog.dismiss();
-                    Rl_progress.setVisibility(View.GONE);
+
                     super.onPageFinished(view, url);
 
                 }
@@ -114,7 +120,7 @@ public class WebViewActivity extends BaseActivity {
                     // TODO Auto-generated method stub
 //                    pro.setVisibility(View.GONE);
                     super.onPageFinished(view, url);
-                    Rl_progress.setVisibility(View.GONE);
+
 //                    mDialog.dismiss();
 
                 }
@@ -134,7 +140,6 @@ public class WebViewActivity extends BaseActivity {
                     // TODO Auto-generated method stub
 //                    pro.setVisibility(View.GONE);
                     super.onPageFinished(view, url);
-                    Rl_progress.setVisibility(View.GONE);
 //                    mDialog.dismiss();
 
                 }
@@ -156,7 +161,6 @@ public class WebViewActivity extends BaseActivity {
                     // TODO Auto-generated method stub
 //                    pro.setVisibility(View.GONE);
                     super.onPageFinished(view, url);
-                    Rl_progress.setVisibility(View.GONE);
 //                    mDialog.dismiss();
 
                 }
@@ -176,7 +180,40 @@ public class WebViewActivity extends BaseActivity {
 //                }
 //            });
         }
+        webview.setWebChromeClient(new WebChromeClient() {
 
+
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    // 网页加载完成  
+                    if(pro!=null){
+                        pro.setVisibility(View.GONE);
+                    }
+                } else {
+                    // 网页加载中  
+                    if(pro!=null){
+                        pro.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                        pro.setProgress(newProgress);//设置进度值
+                    }
+
+                }
+            }
+        });
+
+    }
+    @OnClick({R.id.Iv_back})
+    void onClick(View view) {
+        switch (view.getId()){
+            case R.id.Iv_back:
+                if (webview != null) {
+                    webview.stopLoading();
+                    webview.clearCache(true);
+                    webview.loadUrl("about:blank");
+                }
+                finish();
+                break;
+        }
     }
 
 
@@ -186,12 +223,8 @@ public class WebViewActivity extends BaseActivity {
         super.onBackPressed();
         if (webview != null) {
             webview.stopLoading();
-//            webView.setWebViewListener(null);
-//            webView.clearHistory();
             webview.clearCache(true);
             webview.loadUrl("about:blank");
-//            webView.pauseTimers();
-//            webView = null;
         }
     }
 

@@ -211,6 +211,7 @@ public class TTFragment extends Base_Fragment {
                             zbBean.setSummary(NoHTML(jsonArray.getJSONObject(i).getString("summary")));
                             zbBean.setPicpath(jsonArray.getJSONObject(i).getString("picpath"));
                             zbBean.setAuthor(jsonArray.getJSONObject(i).getString("author"));
+                            zbBean.setSource(jsonArray.getJSONObject(i).getString("source"));
                             zbBean.setCreatetime(jsonArray.getJSONObject(i).getString("createtime"));
                             zbBean.setContent(NoHTML(jsonArray.getJSONObject(i).getString("content")));
                             zbBean.setVideopath(jsonArray.getJSONObject(i).getString("videopath"));
@@ -218,6 +219,8 @@ public class TTFragment extends Base_Fragment {
                             zbBean.setIstop(jsonArray.getJSONObject(i).getInt("istop"));
                             zbBean.setClick(jsonArray.getJSONObject(i).getInt("click"));
                             zbBean.setType(jsonArray.getJSONObject(i).getInt("type"));
+                            zbBean.setIsbigpicture(jsonArray.getJSONObject(i).getInt("isbigpicture"));
+
                             list.add(zbBean);
                         }
                         if(getActivity()==null){

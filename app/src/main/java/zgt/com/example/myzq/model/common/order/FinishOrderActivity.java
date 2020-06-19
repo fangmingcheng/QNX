@@ -28,6 +28,7 @@ import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.bean.order.Agreement;
 import zgt.com.example.myzq.bean.order.OrderDetail;
+import zgt.com.example.myzq.model.common.MainActivity;
 import zgt.com.example.myzq.model.common.adapter.courseAdapter.AgreementAdapter;
 import zgt.com.example.myzq.model.common.course.CourseDetailActivity;
 import zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView;
@@ -38,6 +39,7 @@ import zgt.com.example.myzq.model.common.refund.RefundCommitActivity;
 import zgt.com.example.myzq.model.common.refund.RefundDetailActivity;
 import zgt.com.example.myzq.utils.MyListView;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class FinishOrderActivity extends BaseActivity {
@@ -50,14 +52,17 @@ public class FinishOrderActivity extends BaseActivity {
     @BindView(R.id.Tv_teacher)
     TextView Tv_teacher;
 
-    @BindView(R.id.Tv_real_charge)
-    TextView Tv_real_charge;
+    @BindView(R.id.Tv_charge)
+    TextView Tv_charge;
 
-    @BindView(R.id.Tv_num)
-    TextView Tv_num;
+//    @BindView(R.id.Tv_num)
+//    TextView Tv_num;
 
     @BindView(R.id.Tv_orderNo)
     TextView Tv_orderNo;
+
+    @BindView(R.id.Tv_time)
+    TextView Tv_time;
 
     @BindView(R.id.Tv_order_time)
     TextView Tv_order_time;
@@ -99,7 +104,7 @@ public class FinishOrderActivity extends BaseActivity {
    private String orderId;
 
    private int status;
-   private int index;
+   private int index;//判断从哪个入口购买，1正常购买，2.我的课程中续费 3.我的订单中购买。
    private int purchase_status;
 
 
@@ -114,6 +119,8 @@ public class FinishOrderActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        StatusBarUtil.statusBarLightMode(this);
+
         orderId=getIntent().getStringExtra("orderId");
         purchase_status=getIntent().getIntExtra("purchase_status",1);
         status = getIntent().getIntExtra("status",0);
@@ -168,14 +175,67 @@ public class FinishOrderActivity extends BaseActivity {
             Iv_head.setImageURL(orderDetail.getPicpath());
             Iv_head.setType(1);
             Tv_title_order.setText(orderDetail.getTitle());
-            Tv_teacher.setText("主讲老师:"+orderDetail.getLecturer());
-            if(orderDetail.getPricelimit()==0) {
-                Tv_real_charge.setText(orderDetail.getRealprice()+"(永久)");
+            if(orderDetail.getProducttype()==1){
+                Tv_teacher.setText("主讲老师:"+orderDetail.getLecturer());
             }else {
-                Tv_real_charge.setText(orderDetail.getRealprice()+"元（"+orderDetail.getPricelimit()+"天)");
+                Tv_teacher.setText(orderDetail.getLecturer());
             }
-            Tv_price.setText(orderDetail.getRealmoney()+"元");
-            Tv_num.setText("X"+orderDetail.getAmount());
+
+
+            if(orderDetail.getIsnewversion()==0){
+                if(orderDetail.getPaytype() == 3){
+                    Tv_charge.setText(orderDetail.getAmount()*orderDetail.getIosrealprice()+"牵牛币");
+                    Tv_price.setText(orderDetail.getIosrealmoney()+"牵牛币");
+                }else {
+                    Tv_charge.setText(orderDetail.getAmount()*orderDetail.getRealprice()+"元" );
+                    Tv_price.setText(orderDetail.getRealmoney()+"元");
+                }
+
+                if(orderDetail.getPricelimit()==0){
+                    Tv_time.setText("永久");
+                }else {
+                    Tv_time.setText(orderDetail.getAmount()*orderDetail.getPricelimit()+"天");
+//                    if(orderDetail.getPriceunit()==0){
+//                        Tv_time.setText(orderDetail.getPricelimit()+"天");
+//                    }else if(orderDetail.getPriceunit()==1){
+//                        Tv_time.setText("永久");
+//                    }
+                }
+            }else if(orderDetail.getIsnewversion()==1){
+                if(orderDetail.getPricelimit()==0){
+                    Tv_time.setText("永久");
+                }else {
+                    if(orderDetail.getPriceunit()==0){
+                        Tv_time.setText(orderDetail.getPricenum()+"天");
+                    }else if(orderDetail.getPriceunit()==1){
+                        Tv_time.setText(orderDetail.getPricenum()+"个月");
+                    }else if(orderDetail.getPriceunit()==2){
+                        Tv_time.setText(orderDetail.getPricenum()+"季度");
+                    }else if(orderDetail.getPriceunit()==3){
+                        Tv_time.setText("半年");
+                    }else if(orderDetail.getPriceunit()==4){
+                        Tv_time.setText(orderDetail.getPricenum()+"年");
+                    }
+                }
+
+                if(orderDetail.getPaytype() == 3){
+                    Tv_charge.setText(orderDetail.getIosrealprice()+"牵牛币");
+//                Tv_real_charge.setText(orderDetail.getIosrealprice()+"牵牛币（"+orderDetail.getPricelimit()+"天)");
+                    Tv_price.setText(orderDetail.getIosrealmoney()+"牵牛币");
+                }else {
+                    Tv_charge.setText(orderDetail.getRealprice()+"元");
+                    Tv_price.setText(orderDetail.getRealmoney()+"元");
+                }
+
+            }
+//            Tv_time.setText();
+//            if(orderDetail.getPricelimit()==0) {
+//                Tv_real_charge.setText(orderDetail.getRealprice()+"(永久)");
+//            }else {
+//                Tv_real_charge.setText(orderDetail.getRealprice()+"元（"+orderDetail.getPricelimit()+"天)");
+//            }
+
+//            Tv_num.setText("X"+orderDetail.getAmount());
             Tv_orderNo.setText(orderDetail.getOrderno());
             Tv_order_time.setText(orderDetail.getOrdertime());
             Tv_pay_time.setText(orderDetail.getPaytime());
@@ -189,12 +249,9 @@ public class FinishOrderActivity extends BaseActivity {
                 Tv_pay_type.setText("微信");
             }else if(orderDetail.getPaytype() == 3){
                 Tv_pay_type.setText("ios虚拟币");
-                Tv_real_charge.setText(orderDetail.getIosrealprice()+"牵牛币（"+orderDetail.getPricelimit()+"天)");
-                Tv_price.setText(orderDetail.getIosrealmoney()+"牵牛币");
             }else if(orderDetail.getPaytype() == 4){
                 Tv_pay_type.setText("线下");
             }
-
         }
         if(agreementList.size()>0){
             adapter.clear();
@@ -224,12 +281,15 @@ public class FinishOrderActivity extends BaseActivity {
                 break;
             case R.id.Bt_commit:
                 if(orderDetail!=null) {
-                    if(status == 1){
-                        startActivity(new Intent().setClass(FinishOrderActivity.this, CourseDetailActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("uuid", orderDetail.getTypeid()));
+                    if(orderDetail.getProducttype()==1){
+                        if(status == 1){
+                            startActivity(new Intent().setClass(FinishOrderActivity.this, CourseDetailActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("uuid", orderDetail.getTypeid()));
 //                        FinishOrderActivity.this.finish();
-                    }else {
-                        startActivity(new Intent().setClass(FinishOrderActivity.this, CourseDetailActivity.class).putExtra("uuid", orderDetail.getTypeid()));
+                        }else {
+                            startActivity(new Intent().setClass(FinishOrderActivity.this, CourseDetailActivity.class).putExtra("uuid", orderDetail.getTypeid()));
+                        }
                     }
+
 
                 }
             case R.id.Bt_reload:
@@ -239,15 +299,17 @@ public class FinishOrderActivity extends BaseActivity {
                 getData();
                 break;
             case R.id.Tv_refund:
-                if(orderDetail.getPaytype() == 3){
-                    ToastUtil.showShortToast(FinishOrderActivity.this,"该订单系虚拟币支付，请于苹果手机中申请退款");
-                }else {
-                    if(orderDetail.getStatus() == 1||orderDetail.getStatus() == 2){
-                        startActivity(new Intent().setClass(FinishOrderActivity.this, RefundCommitActivity.class).putExtra("orderDetail",orderDetail));
+                if(orderDetail!=null){
+                    if(orderDetail.getPaytype() == 3){
+                        ToastUtil.showShortToast(FinishOrderActivity.this,"该订单系虚拟币支付，请于苹果手机中申请退款");
                     }else {
-                        startActivity(new Intent().setClass(FinishOrderActivity.this, RefundDetailActivity.class).putExtra("orderDetail",orderDetail));
-                    }
+                        if(orderDetail.getApplyStatus() == -1){
+                            startActivity(new Intent().setClass(FinishOrderActivity.this, RefundCommitActivity.class).putExtra("orderDetail",orderDetail.getUuid()));
+                        }else {
+                            startActivity(new Intent().setClass(FinishOrderActivity.this, RefundDetailActivity.class).putExtra("orderDetail",orderDetail.getUuid()));
+                        }
 
+                    }
                 }
                 break;
         }
@@ -274,6 +336,7 @@ public class FinishOrderActivity extends BaseActivity {
                         orderDetail.setPrice(json.getDouble("price"));
                         orderDetail.setRealprice(json.getDouble("realprice"));
                         orderDetail.setAmount(json.getInt("amount"));
+                        orderDetail.setApplyStatus(json.getInt("applyStatus"));
                         orderDetail.setRealmoney(json.getDouble("realmoney"));
                         orderDetail.setIosrealmoney(json.getDouble("iosrealmoney"));
                         orderDetail.setPricelimit(json.getInt("pricelimit"));
@@ -289,6 +352,9 @@ public class FinishOrderActivity extends BaseActivity {
                         orderDetail.setPicpath(json.getString("picpath"));
                         orderDetail.setTitle(json.getString("title"));
                         orderDetail.setLecturer(json.getString("lecturer"));
+                        orderDetail.setPriceunit(json.getInt("priceunit"));
+                        orderDetail.setPricenum(json.getInt("pricenum"));
+                        orderDetail.setIsnewversion(json.getInt("isnewversion"));
                         JSONArray array= json.getJSONArray("agreementList");
                         list=new ArrayList<>();
                         for(int i=0;i<array.length();i++){
@@ -349,8 +415,12 @@ public class FinishOrderActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        scrollView.setVisibility(View.GONE);
-                        Rl_reload.setVisibility(View.VISIBLE);
+                        if(scrollView!=null){
+                            scrollView.setVisibility(View.GONE);
+                        }
+                        if(Rl_reload!=null){
+                            Rl_reload.setVisibility(View.VISIBLE);
+                        }
                         ToastUtil.showShortToast(FinishOrderActivity.this, "网络连接异常,请点击刷新 按钮");
                     }
                 });
@@ -379,8 +449,9 @@ public class FinishOrderActivity extends BaseActivity {
             }else if(index == 3){
                 startActivity(new Intent().setClass(FinishOrderActivity.this, Purchase_recordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).putExtra("uuid", orderDetail.getTypeid()));
                 FinishOrderActivity.this.finish();
-            }else {
-                finish();
+            }else if(index == 4){
+                startActivity(new Intent().setClass(FinishOrderActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                FinishOrderActivity.this.finish();
             }
         }
 

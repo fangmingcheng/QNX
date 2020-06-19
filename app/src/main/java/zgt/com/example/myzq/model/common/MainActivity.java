@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,10 +18,10 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,13 +49,12 @@ import java.util.List;
 import butterknife.BindView;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
-import zgt.com.example.myzq.bean.HttpResult;
 import zgt.com.example.myzq.bean.Review;
+import zgt.com.example.myzq.model.common.fragment.ChooseStockFragment;
 import zgt.com.example.myzq.model.common.fragment.ClassListFragment;
 import zgt.com.example.myzq.model.common.fragment.HomeFragment;
+import zgt.com.example.myzq.model.common.fragment.HqzxFragment;
 import zgt.com.example.myzq.model.common.fragment.InformationFragment;
-import zgt.com.example.myzq.model.common.fragment.MyFragment;
-import zgt.com.example.myzq.model.common.fragment.QuotationFragment;
 import zgt.com.example.myzq.model.common.home.ReviewDetailActivity;
 import zgt.com.example.myzq.utils.CommonUtil;
 import zgt.com.example.myzq.utils.SPUtil;
@@ -70,23 +70,27 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     FrameLayout mFrameLayout;
 
     HomeFragment homeFragment;
-    MyFragment myFragment;
-    QuotationFragment quotationFragment;
+    ChooseStockFragment chooseStockFragment;
+    HqzxFragment hqzxFragment;
     InformationFragment informationFragment;
     ClassListFragment classListFragment;
+//    HqFragment hqFragment;
 
-    private static HttpResult result;
+//    private static HttpResult result;
     private long exitTime;
     private int index=0;
     private int currentIndex;
 
     private static final String HOMEPAGE_FRAGMENT_KEY = "homepageFragment";
-    private static final String QUOTATION_FRAGMENT_KEY = "quotationFragment";
+    private static final String HQZX_FRAGMENT_KEY = "hqzxFragment";
+//    private static final String HQ_FRAGMENT_KEY = "hqFragment";
     private static final String INFORMATION_FRAGMENT_KEY = "informationFragment";
     private static final String CLASSROOM_FRAGMENT_KEY = "classListFragment";
-    private static final String MY_FRAGMENT_KEY = "myFragment";
+    private static final String CHOOSESTOCK_FRAGMENT_KEY = "chooseStockFragment";
 
     private List<Review> list = new ArrayList<>();
+
+    private WebView webView;
 
     int status = 0;
 
@@ -104,6 +108,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @Override
     protected void onResume() {
+//        gettokenData();
         refreshToken();
         clientReview();
         super.onResume();
@@ -112,26 +117,27 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public void initViews(Bundle savedInstanceState) {
         //得到当前界面的装饰视图
-//        if(Build.VERSION.SDK_INT >= 21) {
-//            View decorView = getWindow().getDecorView();
-//            //设置让应用主题内容占据状态栏和导航栏
-//            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-//            decorView.setSystemUiVisibility(option);
-//            //设置状态栏和导航栏颜色为透明
-//            getWindow().setStatusBarColor(Color.TRANSPARENT);
-////            getWindow().setNavigationBarColor(Color.TRANSPARENT);
-//        }
+        if(Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+//            设置让应用主题内容占据状态栏和导航栏
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+//            设置状态栏和导航栏颜色为透明
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+//            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+        }
+//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if(savedInstanceState != null){
             homeFragment = (HomeFragment) getSupportFragmentManager().getFragment(savedInstanceState, HOMEPAGE_FRAGMENT_KEY);
             informationFragment = (InformationFragment) getSupportFragmentManager().getFragment(savedInstanceState, INFORMATION_FRAGMENT_KEY);
-            myFragment = (MyFragment) getSupportFragmentManager().getFragment(savedInstanceState, MY_FRAGMENT_KEY);
+            chooseStockFragment = (ChooseStockFragment) getSupportFragmentManager().getFragment(savedInstanceState, CHOOSESTOCK_FRAGMENT_KEY);
             classListFragment = (ClassListFragment) getSupportFragmentManager().getFragment(savedInstanceState, CLASSROOM_FRAGMENT_KEY);
-            quotationFragment=(QuotationFragment) getSupportFragmentManager().getFragment(savedInstanceState, QUOTATION_FRAGMENT_KEY);
+            hqzxFragment=(HqzxFragment) getSupportFragmentManager().getFragment(savedInstanceState, HQZX_FRAGMENT_KEY);
+//            hqFragment=(HqFragment) getSupportFragmentManager().getFragment(savedInstanceState, HQ_FRAGMENT_KEY);
 //            savedInstanceState.remove("android:support:fragments");
 //            savedInstanceState.remove("android:fragments");
         }
         status = getIntent().getIntExtra("status",0);
-//        StatusBarUtil.statusBarLightMode(this);
         setDefaultFragment();
         InitNavigationBar();
         checkUpdate();
@@ -182,8 +188,8 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
         lp.height=WindowManager.LayoutParams.WRAP_CONTENT;
         Log.e("TAG",lp.height+"");
-        lp.width = (int)(display.getWidth()*0.9); //设置宽度
-        lp.height =  (int)(display.getHeight()*0.6);
+        lp.width = (int)(display.getWidth()*0.8); //设置宽度
+        lp.height =  (int)(display.getHeight()*0.5);
         Log.e("TAG",lp.height+"");
         Log.e("TAG",display.getHeight()+"");
         dialog.getWindow().setAttributes(lp);
@@ -372,15 +378,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         if (informationFragment != null) {
             getSupportFragmentManager().putFragment(outState, INFORMATION_FRAGMENT_KEY, informationFragment);
         }
-        if (myFragment != null) {
-            getSupportFragmentManager().putFragment(outState, MY_FRAGMENT_KEY, myFragment);
+        if (chooseStockFragment != null) {
+            getSupportFragmentManager().putFragment(outState, CHOOSESTOCK_FRAGMENT_KEY, chooseStockFragment);
         }
         if (classListFragment != null) {
             getSupportFragmentManager().putFragment(outState, CLASSROOM_FRAGMENT_KEY, classListFragment);
         }
-        if (quotationFragment != null) {
-            getSupportFragmentManager().putFragment(outState, QUOTATION_FRAGMENT_KEY, quotationFragment);
+        if (hqzxFragment != null) {
+            getSupportFragmentManager().putFragment(outState, HQZX_FRAGMENT_KEY, hqzxFragment);
         }
+
+//        if (hqFragment != null) {
+//            getSupportFragmentManager().putFragment(outState, HQ_FRAGMENT_KEY, hqFragment);
+//        }
 
     }
 
@@ -396,11 +406,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         mBottomNavigationBar.setMode(BottomNavigationBar.MODE_FIXED);
         mBottomNavigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         mBottomNavigationBar
-                .addItem(new BottomNavigationItem(R.mipmap.nav_home, "首页").setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.btn_zx, "资讯").setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.btn_kt, "课堂").setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.btn_hq, "行情").setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.btn_wd, "我的").setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.tab_shouye1, "首页").setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.tab_zixun1, "资讯").setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.tab_ketang1, "课堂").setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.tab_hangqing1, "行情").setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.tab_xuangu1, "选股").setActiveColorResource(R.color.colorPrimary))
                 .setFirstSelectedPosition(index)
                 .initialise();
         setBottomNavigationItem(6,21);
@@ -475,21 +485,27 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
                 break;
             case 3:
                 currentIndex=3;
-                if (quotationFragment == null) {
-                    quotationFragment = new QuotationFragment();
-                    transaction.add(R.id.fragment_container,quotationFragment);
+                if (hqzxFragment == null) {
+                    hqzxFragment = new HqzxFragment();
+                    transaction.add(R.id.fragment_container,hqzxFragment);
                 }
                 hideFragment(transaction);
-                transaction.show(quotationFragment);
+                transaction.show(hqzxFragment);
+//                if (hqFragment == null) {
+//                    hqFragment = new HqFragment();
+//                    transaction.add(R.id.fragment_container,hqFragment);
+//                }
+//                hideFragment(transaction);
+//                transaction.show(hqFragment);
                 break;
             case 4:
                 currentIndex=4;
-                if (myFragment == null) {
-                    myFragment = new MyFragment();
-                    transaction.add(R.id.fragment_container,myFragment);
+                if (chooseStockFragment == null) {
+                    chooseStockFragment = new ChooseStockFragment();
+                    transaction.add(R.id.fragment_container,chooseStockFragment);
                 }
                 hideFragment(transaction);
-                transaction.show(myFragment);
+                transaction.show(chooseStockFragment);
                 break;
             default:
                 break;
@@ -508,11 +524,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         if (classListFragment != null) {
             transaction.hide(classListFragment);
         }
-        if (quotationFragment != null) {
-            transaction.hide(quotationFragment);
+//        if (hqFragment != null) {
+//            transaction.hide(hqFragment);
+//        }
+        if (hqzxFragment != null) {
+            transaction.hide(hqzxFragment);
         }
-        if (myFragment != null) {
-            transaction.hide(myFragment);
+        if (chooseStockFragment != null) {
+            transaction.hide(chooseStockFragment);
         }
     }
 
@@ -529,6 +548,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public void onBackPressed() {
         exitApp();
+
     }
 
     /**
@@ -610,6 +630,40 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         });
     }
 
+//    private void gettokenData(){
+//        RequestParams requestParams = new RequestParams("https://open.hscloud.cn/oauth2/oauth2/token");
+//        requestParams.setConnectTimeout(30 * 1000);//key:22c521f0-0464-4d42-a48f-6e7e5b561220  secret:05969bf6-4ef9-4215-8e2a-379ccbef65c6
+//        requestParams.addHeader("Authorization","Basic MjJjNTIxZjAtMDQ2NC00ZDQyLWE0OGYtNmU3ZTViNTYxMjIwOjA1OTY5YmY2LTRlZjktNDIxNS04ZTJhLTM3OWNjYmVmNjVjNg==");
+//        requestParams.addHeader("Content-Typ","application/x-www-form-urlencoded");
+//        requestParams.addBodyParameter("grant_type","client_credentials");
+//
+//        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(result);
+//                    SPUtil.getLoginSharedPreferences().edit().putString("access_token", jsonObject.getString("access_token")).commit();
+//                } catch (JSONException e) {
+//                    ToastUtil.showShortToast(MainActivity.this, "解析异常");
+//                } finally {
+//                }
+//            }
+//            @Override
+//            public void onError(Throwable ex, boolean isOnCallback) {
+//                ToastUtil.showShortToast(MainActivity.this, "网络连接异常");
+//            }
+//
+//            @Override
+//            public void onCancelled(CancelledException cex) {
+//
+//            }
+//            @Override
+//            public void onFinished() {
+//
+//            }
+//        });
+//    }
+
     private void refreshToken(){
         RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"refreshToken.do");
         requestParams.setConnectTimeout(30 * 1000);
@@ -662,7 +716,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private void setDefaultFragment() {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        if(result==null) {
+//        if(result==null) {
 
             if(status == 0){
                 if (homeFragment == null) {
@@ -700,34 +754,38 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //            transaction.commit();
 
 
-        }else {
-//            quotationFragment = new QuotationFragment();
-//            transaction.replace(R.id.fragment_container, quotationFragment);
-//            transaction.commit();
-            if (quotationFragment == null) {
-                quotationFragment = new QuotationFragment();
-                transaction.add(R.id.fragment_container,quotationFragment);
-            }
-            hideFragment(transaction);
-            transaction.show(quotationFragment).commit();
-            index=3;
-            currentIndex=3;
-        }
+//        }else {
+//
+//            if (hqzxFragment == null) {
+//                hqzxFragment = new HqzxFragment();
+//                transaction.add(R.id.fragment_container,hqzxFragment);
+//            }
+////            if (hqFragment == null) {
+////                hqFragment = new HqFragment();
+////                transaction.add(R.id.fragment_container,hqFragment);
+////            }
+//            hideFragment(transaction);
+//            transaction.show(hqzxFragment).commit();
+//            index=3;
+//            currentIndex=3;
+//        }
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(currentIndex==3){
-            quotationFragment.clickBack(keyCode, event);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if(currentIndex==3){
+//            if(chooseStockFragment!=null){
+//                chooseStockFragment.clickBack(keyCode, event);
+//            }
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 
-    public HttpResult getUrl(){
-        return result;
-    }
-    public void setResult(){
-         result=null;
-    }
+//    public HttpResult getUrl(){
+//        return result;
+//    }
+//    public void setResult(){
+//         result=null;
+//    }
 }

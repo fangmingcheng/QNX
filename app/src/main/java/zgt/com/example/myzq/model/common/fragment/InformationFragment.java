@@ -1,11 +1,15 @@
 package zgt.com.example.myzq.model.common.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.widget.LinearLayout;
+
+import com.jaeger.library.StatusBarUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,6 +18,7 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +26,7 @@ import butterknife.BindView;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseFragment;
 import zgt.com.example.myzq.bean.ZXItemBean;
+import zgt.com.example.myzq.model.common.MainActivity;
 import zgt.com.example.myzq.model.common.adapter.Myfragment_ViewpageAdapter;
 import zgt.com.example.myzq.model.common.information.fragment.TTFragment;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
@@ -46,6 +52,8 @@ public class InformationFragment extends BaseFragment implements ViewPager.OnPag
     private ArrayList<Fragment> list;
     // viewpage适配器
     private Myfragment_ViewpageAdapter adapter;
+
+    private MainActivity mainActivity;
 //    FragmentManager fm = getChildFragmentManager();
 
 
@@ -62,8 +70,51 @@ public class InformationFragment extends BaseFragment implements ViewPager.OnPag
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden){
+        }else {
+            StatusBarUtil.setLightMode(getActivity());//黑色
+        }
+
+    }
+
+    /**
+     * 获取通知栏高度
+     * @param context 上下文
+     * @return 通知栏高度
+     */
+    private int getStatusBarHeight(Context context){
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, statusBarHeight = 0;
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return statusBarHeight;
+    }
+
+    @Override
     public void initViews(Bundle savedInstanceState) {
+//        StatusBarUtil.setLightMode(getActivity());//黑色
+
+        LinearLayout.LayoutParams  params = (LinearLayout.LayoutParams) tab_layout.getLayoutParams();
+        params.topMargin=getStatusBarHeight(getActivity());
+        tab_layout.setLayoutParams(params);
        getData();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private void setData(List<ZXItemBean> zxlist){

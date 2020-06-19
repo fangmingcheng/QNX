@@ -48,10 +48,9 @@ import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.bean.basic.BasicInformation;
 import zgt.com.example.myzq.bean.basic.Occupation;
-import zgt.com.example.myzq.bean.classes.CourseDetail;
 import zgt.com.example.myzq.model.common.custom_view.MyPicImageView;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
-import zgt.com.example.myzq.model.common.order.OrderDetaiilActivity;
+import zgt.com.example.myzq.model.common.order.ZBOrderDetailActivity;
 import zgt.com.example.myzq.model.common.permission.PermissionUtils;
 import zgt.com.example.myzq.model.common.permission.request.IRequestPermissions;
 import zgt.com.example.myzq.model.common.permission.request.RequestPermissions;
@@ -61,6 +60,7 @@ import zgt.com.example.myzq.model.common.personal_center.RiskTestActivity;
 import zgt.com.example.myzq.utils.BitmapUtil;
 import zgt.com.example.myzq.utils.FileUtil;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class MyBasicInformationActivity extends BaseActivity {
@@ -109,7 +109,7 @@ public class MyBasicInformationActivity extends BaseActivity {
     LinearLayout Ll_other_side;//
 
     private int status;
-    private CourseDetail courseDetail;
+//    private CourseDetail courseDetail;
 
 
     private List<Occupation> occupationList = new ArrayList<>();//职业
@@ -139,6 +139,7 @@ public class MyBasicInformationActivity extends BaseActivity {
 
 
     private int index;
+    private String type,fileid;
 
     boolean isSave=false;
 
@@ -155,19 +156,19 @@ public class MyBasicInformationActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         status = getIntent().getIntExtra("status",0);
-        if(status == 2){
-            courseDetail = (CourseDetail) getIntent().getSerializableExtra("course");
-            index = getIntent().getIntExtra("index",0);
-        }
+        fileid = getIntent().getStringExtra("fileid");
+        type = getIntent().getStringExtra("type");
+        index = getIntent().getIntExtra("index",0);
+//        status = getIntent().getIntExtra("status",0);
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 getData();
             }
         }).start();
-
     }
 
     private void initData(BasicInformation basicInformation){
@@ -184,7 +185,6 @@ public class MyBasicInformationActivity extends BaseActivity {
             if(TextUtils.isEmpty(basicInformation.getIdcardfrontpath())){
 
             }else {
-
                 Iv_picture.setVisibility(View.VISIBLE);
                 Iv_front.setVisibility(View.GONE);
                 Tv_front.setVisibility(View.GONE);
@@ -213,10 +213,7 @@ public class MyBasicInformationActivity extends BaseActivity {
                 Bt_save.setText("编辑");
                 isSave = true;
             }
-
-
         }
-
     }
 
     @OnClick({R.id.Bt_save,R.id.Iv_back,R.id.Ll_front,R.id.Ll_other_side,R.id.Tv_type,R.id.Tv_Occupation,R.id.Tv_record})
@@ -436,12 +433,12 @@ public class MyBasicInformationActivity extends BaseActivity {
         }
 
         File photoFile ;
-        if(status == 1){
+//        if(status == 1){
             photoFile = new File(fileDir, "photo.jpeg");
 
-        }else {
-            photoFile = new File(fileDir, "photo1.jpeg");
-        }
+//        }else {
+//            photoFile = new File(fileDir, "photo1.jpeg");
+//        }
         String path1 =photoFile.getAbsolutePath();
 //        switch (requestCode) {
             switch (requestCode) {
@@ -614,10 +611,10 @@ public class MyBasicInformationActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                  if(status==3){
-                    startActivity(new Intent().setClass(MyBasicInformationActivity.this, RiskTestActivity.class).putExtra("status",2).putExtra("course",courseDetail).putExtra("index",index));
+                    startActivity(new Intent().setClass(MyBasicInformationActivity.this, RiskTestActivity.class).putExtra("type",type).putExtra("fileid",fileid).putExtra("index",index));
                      MyBasicInformationActivity.this.finish();
                 }else if(status==4){
-                    startActivity(new Intent().setClass(MyBasicInformationActivity.this, RiskTestActivity.class).putExtra("status",2).putExtra("course",courseDetail).putExtra("index",index));
+                    startActivity(new Intent().setClass(MyBasicInformationActivity.this, RiskTestActivity.class).putExtra("type",type).putExtra("fileid",fileid).putExtra("index",index));
                      MyBasicInformationActivity.this.finish();
                 }
                 dialog.dismiss();
@@ -632,14 +629,14 @@ public class MyBasicInformationActivity extends BaseActivity {
                 .setNegativeButton("重新评测", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent().setClass(MyBasicInformationActivity.this, RiskTestActivity.class).putExtra("status",2).putExtra("course",courseDetail).putExtra("index",index));
+                        startActivity(new Intent().setClass(MyBasicInformationActivity.this, RiskTestActivity.class).putExtra("fileid",fileid).putExtra("index",index).putExtra("type",type));
                         MyBasicInformationActivity.this.finish();
                         dialog.dismiss();
                     }
                 }).setPositiveButton("前往购买", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent().setClass(MyBasicInformationActivity.this, OrderDetaiilActivity.class).putExtra("course",courseDetail).putExtra("status","1").putExtra("index",index));
+                startActivity(new Intent().setClass(MyBasicInformationActivity.this, ZBOrderDetailActivity.class).putExtra("fileid",fileid).putExtra("index",index).putExtra("type",type));
                 MyBasicInformationActivity.this.finish();
                 dialog.dismiss();
             }
@@ -651,7 +648,7 @@ public class MyBasicInformationActivity extends BaseActivity {
         RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"checkMemberInformation.do");
         requestParams.setConnectTimeout(30 * 1000);
         requestParams.addParameter("token", SPUtil.getToken());
-        requestParams.addParameter("fileid", courseDetail.getUuid());
+        requestParams.addParameter("fileid", fileid);
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -894,7 +891,7 @@ public class MyBasicInformationActivity extends BaseActivity {
                         ToastUtil.showShortToast(MyBasicInformationActivity.this, "提交成功！");
                         if(status == 1){
                             finish();
-                        }else if(status == 2){
+                        }else {
                             intoOrder();
                         }
                     }  else if(a==-1){
@@ -980,7 +977,7 @@ public class MyBasicInformationActivity extends BaseActivity {
                         ToastUtil.showShortToast(MyBasicInformationActivity.this, "提交成功！");
                         if(status == 1){
                             finish();
-                        }else if(status == 2){
+                        }else{
                             intoOrder();
                         }
                     }  else if(a==-1){

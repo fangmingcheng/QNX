@@ -35,6 +35,28 @@
         android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="180dp" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textColor="#666666"
+        android:textSize="13sp"
+        android:layout_marginLeft="14dp"
+        android:scrollHorizontally="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_marginRight="14dp"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:text="风险提示：投资建议仅供参考，单一不代表全面，过往不代表将来。"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:background="#EAEAEA"
+        android:layout_height="1dp"/>
+   
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"

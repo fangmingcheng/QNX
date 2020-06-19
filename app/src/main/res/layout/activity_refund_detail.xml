@@ -88,6 +88,8 @@
                 android:id="@+id/Tv_course_title"
                 android:layout_marginTop="15dp"
                 android:paddingLeft="10dp"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:textColor="#333333"
                 android:textSize="14sp"
                 android:paddingRight="10dp"
@@ -96,6 +98,8 @@
             <TextView
                 android:id="@+id/Tv_teacher"
                 android:layout_marginTop="4dp"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:paddingLeft="10dp"
                 android:textColor="#666666"
                 android:textSize="12sp"

@@ -68,7 +68,9 @@ public class LiveItemActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+//        StatusBarUtil.setLightMode(this);//黑色
+        zgt.com.example.myzq.utils.StatusBarUtil.statusBarLightMode(this);
+
         setPullRefresher();
         new Thread(new Runnable() {
             @Override

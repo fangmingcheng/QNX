@@ -32,7 +32,6 @@ import zgt.com.example.myzq.model.common.service.DemoIntentService;
 import zgt.com.example.myzq.model.common.service.DemoPushService;
 import zgt.com.example.myzq.utils.Log;
 import zgt.com.example.myzq.utils.SPUtil;
-import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -62,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initViews(savedInstanceState);
         //初始化ToolBar
         initToolBar();
-        StatusBarUtil.statusBarLightMode(this);
+//        StatusBarUtil.setLightMode(this);//黑色
 
         context = this;
         isServiceRunning = true;

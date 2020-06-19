@@ -15,6 +15,7 @@ import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.bean.Review;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 
 public class ReviewDetailActivity extends BaseActivity {
     @BindView(R.id.webview)
@@ -31,6 +32,7 @@ public class ReviewDetailActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        StatusBarUtil.statusBarLightMode(this);
         WebSettings webSettings = webview.getSettings();
         webSettings.setUseWideViewPort(true);
 //        webSettings.setLoadWithOverviewMode(true);
@@ -62,7 +64,9 @@ public class ReviewDetailActivity extends BaseActivity {
                 public void onPageFinished(WebView view, String url) {
                     // TODO Auto-generated method stub
 //                    pro.setVisibility(View.GONE);
-                    Rl_progress.setVisibility(View.GONE);
+                    if(Rl_progress!=null){
+                        Rl_progress.setVisibility(View.GONE);
+                    }
 //                    view.loadUrl(url);
                     super.onPageFinished(view, url);
 
@@ -100,18 +104,8 @@ public class ReviewDetailActivity extends BaseActivity {
     class APPInterface{
         @JavascriptInterface
         public void ConfirmReturnVisit(){
-//            if(list.size()>(status+1)){
                 finish();
-//                status+=1;
-//                startActivity(new Intent().setClass(ReviewDetailActivity.this, ReviewDetailActivity.class).putExtra("list",(Serializable) list).putExtra("status",status));
-//               finish();
-////                webview.stopLoading();
-////                webview.clearCache(true);
-//                webview.loadUrl(SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+list.get(status).getUrl());
-//                webview.reload();
-//            }else {
-//                finish();
-//            }
+
         }
     }
 }

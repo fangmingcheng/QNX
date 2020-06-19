@@ -9,7 +9,6 @@
     tools:context="zgt.com.example.myzq.model.common.personal_center.ChangeNameActivity">
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="32dp">
 

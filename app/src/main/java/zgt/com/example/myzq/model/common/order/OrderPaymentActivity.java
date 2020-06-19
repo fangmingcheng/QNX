@@ -34,6 +34,7 @@ import zgt.com.example.myzq.bean.pay.PayResult;
 import zgt.com.example.myzq.bean.pay.WXPayInfo;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class OrderPaymentActivity extends BaseActivity {
@@ -56,7 +57,7 @@ public class OrderPaymentActivity extends BaseActivity {
 //    private Boolean isAgree = false;
 //    private Course course;
     private String orderid;
-    private Double price;
+    private int price;
 
     private int index;
 
@@ -127,7 +128,7 @@ public class OrderPaymentActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
 //        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         instance=this;
         index = getIntent().getIntExtra("index",0);
@@ -135,7 +136,7 @@ public class OrderPaymentActivity extends BaseActivity {
         orderid = getIntent().getStringExtra("uuid");
         MyApp.orderId = orderid;
         MyApp.index = index;
-        price = getIntent().getDoubleExtra("price",0);
+        price = getIntent().getIntExtra("price",0);
         Tv_price.setText(Html.fromHtml("还需要支付<font color='#E46866'><big>￥"+price+"</big></font>, 请选择支付方式"));
         api = WXAPIFactory.createWXAPI(this, null);
         api.registerApp("wx72ef58b1e2b5e1b6");

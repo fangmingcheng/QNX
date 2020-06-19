@@ -9,6 +9,7 @@
     tools:context=".model.common.home.VideoWebViewActivity">
 
     <RelativeLayout
+        android:layout_marginTop="24dp"
         android:layout_width="match_parent"
         android:layout_height="32dp">
         <TextView

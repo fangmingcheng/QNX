@@ -37,6 +37,7 @@ import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.model.common.order.FinishOrderActivity;
 import zgt.com.example.myzq.model.common.order.OrderPaymentActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class Purchase_recordActivity extends BaseActivity {
@@ -66,15 +67,22 @@ public class Purchase_recordActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         initRecyclerView();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                currentpage=1;
-                getData(refreshLayout,1);
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                currentpage=1;
+//                getData(refreshLayout,1);
+//            }
+//        }).start();
+    }
+
+    @Override
+    protected void onResume() {
+        currentpage=1;
+        getData(refreshLayout,1);
+        super.onResume();
     }
 
     @OnClick({R.id.Iv_back})
@@ -389,12 +397,16 @@ public class Purchase_recordActivity extends BaseActivity {
                             purchaseRecord.setLecturer(jsonArray.getJSONObject(i).getString("lecturer"));
                             purchaseRecord.setPrice(jsonArray.getJSONObject(i).getDouble("price"));
                             purchaseRecord.setRealprice(jsonArray.getJSONObject(i).getDouble("realprice"));
+                            purchaseRecord.setIosprice(jsonArray.getJSONObject(i).getDouble("iosprice"));
+                            purchaseRecord.setIosrealprice(jsonArray.getJSONObject(i).getDouble("iosrealprice"));
                             purchaseRecord.setPicpath(jsonArray.getJSONObject(i).getString("picpath"));
                             purchaseRecord.setOrderno(jsonArray.getJSONObject(i).getString("orderno"));
                             purchaseRecord.setOrdertime(jsonArray.getJSONObject(i).getString("ordertime"));
                             purchaseRecord.setProducttype(jsonArray.getJSONObject(i).getInt("producttype"));
                             purchaseRecord.setStatus(jsonArray.getJSONObject(i).getInt("status"));
                             purchaseRecord.setAmount(jsonArray.getJSONObject(i).getInt("amount"));
+                            purchaseRecord.setPaytype(jsonArray.getJSONObject(i).getInt("paytype"));
+                            purchaseRecord.setIsnewversion(jsonArray.getJSONObject(i).getInt("isnewversion"));
 //                            if(purchaseRecord.getStatus()==-1){
 //                                continue;
 //                            }

@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.NotificationCompat;
+import android.view.WindowManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +52,11 @@ public class MyApp extends Application {
     public static String orderId = "";
 
     public static  int index = 0;
+
+    private WindowManager.LayoutParams wmParams=new WindowManager.LayoutParams();
+    public WindowManager.LayoutParams getMywmParams(){
+        return wmParams;
+    }
 
     /**
      * 应用未启动, 个推 service已经被唤醒,保存在该时间段内离线消息(此时 GetuiSdkDemoActivity.tLogView == null)
@@ -146,7 +152,7 @@ public class MyApp extends Application {
         }
 
         Notification notification = new NotificationCompat.Builder(this, "default")
-                .setSmallIcon(R.mipmap.icon)
+                .setSmallIcon(R.mipmap.logo)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

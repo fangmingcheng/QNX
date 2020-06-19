@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import butterknife.BindView;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 
 public class WebView_AgreemetActivity extends BaseActivity {
 
@@ -38,7 +39,7 @@ public class WebView_AgreemetActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
 
 
         WebSettings webSettings = webview.getSettings();

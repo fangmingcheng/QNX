@@ -40,7 +40,7 @@
         android:id="@+id/tab_layout"
         app:tabTextColor="#333333"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="#FFAE00"
+        app:tabSelectedTextColor="#FF4444"
         app:tabIndicatorColor="#ffffff"
         app:tabTextAppearance="@style/TabLayoutStyle"
         android:layout_width="match_parent"

@@ -78,8 +78,11 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
+        android:overScrollMode="never"
         android:layout_height="match_parent">
         <LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:background="#ffffff"
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -88,7 +91,7 @@
                 android:background="#ffffff"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="100dp">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -98,6 +101,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="15dp"
                         android:scaleType="fitXY"
+                        android:layout_marginBottom="12dp"
                         android:layout_width="108dp"
                         android:layout_height="65dp" />
                 </LinearLayout>
@@ -120,37 +124,38 @@
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/Tv_teacher"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="10dp"
                         android:paddingLeft="10dp"
                         android:textColor="#666666"
                         android:textSize="12sp"
+                        android:layout_marginBottom="12dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <LinearLayout
-                        android:layout_marginTop="6dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/Tv_real_charge"
-                            android:paddingLeft="10dp"
-                            android:textColor="#E46866"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content" />
+                    <!--<LinearLayout-->
+                        <!--android:layout_marginTop="6dp"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content">-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/Tv_real_charge"-->
+                            <!--android:paddingLeft="10dp"-->
+                            <!--android:textColor="#E46866"-->
+                            <!--android:textSize="13sp"-->
+                            <!--android:textStyle="bold"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_height="wrap_content" />-->
 
-                        <TextView
-                            android:id="@+id/Tv_num"
-                            android:layout_marginRight="15dp"
-                            android:textColor="#666666"
-                            android:textSize="13sp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <!--<TextView-->
+                            <!--android:id="@+id/Tv_num"-->
+                            <!--android:layout_marginRight="15dp"-->
+                            <!--android:textColor="#666666"-->
+                            <!--android:textSize="13sp"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content" />-->
 
 
-                    </LinearLayout>
+                    <!--</LinearLayout>-->
 
                 </LinearLayout>
 
@@ -182,6 +187,47 @@
 
                 <TextView
                     android:id="@+id/Tv_orderNo"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="14dp"
+                    android:textColor="#333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="购买价格:"
+                    android:textSize="15sp"
+                    android:textColor="#333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/Tv_charge"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="14dp"
+                    android:textColor="#333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="购买时间:"
+                    android:textSize="15sp"
+                    android:textColor="#333333"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/Tv_time"
                     android:textSize="15sp"
                     android:layout_marginLeft="14dp"
                     android:textColor="#333333"

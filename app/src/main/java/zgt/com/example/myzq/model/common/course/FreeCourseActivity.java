@@ -35,6 +35,7 @@ import zgt.com.example.myzq.bean.classes.Course;
 import zgt.com.example.myzq.model.common.adapter.courseAdapter.CourseAdapter;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class FreeCourseActivity extends BaseActivity {
@@ -64,7 +65,7 @@ public class FreeCourseActivity extends BaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
         initRecyclerView();
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         new Thread(new Runnable() {
             @Override
             public void run() {

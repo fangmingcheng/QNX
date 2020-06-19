@@ -15,6 +15,7 @@ import java.util.List;
 
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.bean.ZXBean;
+import zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView;
 import zgt.com.example.myzq.model.common.custom_view.MyPicImageView;
 
 public class ZXAdapter extends  RecyclerView.Adapter<ZXAdapter.ViewHolder>{
@@ -27,28 +28,36 @@ public class ZXAdapter extends  RecyclerView.Adapter<ZXAdapter.ViewHolder>{
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private LinearLayout Ll_text,Ll_picture_text;
-        private TextView Tv_title_text,Tv_content_text,Tv_time_text;
-        private TextView Tv_title,Tv_content,Tv_time,Tv_title_picture;
+        private LinearLayout Ll_text,Ll_picture_text,Ll_text_picture_big;
+        private TextView Tv_title_text,Tv_time_text,Tv_source_text;
+        private TextView Tv_title_picture_big,Tv_source_picture_big,Tv_time_picture_big;
+        private TextView Tv_title,Tv_time,Tv_title_picture,Tv_source;
         private FrameLayout fl_picture;
-        private MyPicImageView Iv_pic,Iv_picture;
+        private MyPicImageView Iv_pic;
+        private MyImageBackgroundView Iv_picture,Iv_big;
         public ViewHolder(View view){
             super(view);
             Ll_text=(LinearLayout) view.findViewById(R.id.Ll_text);
             Ll_picture_text=(LinearLayout) view.findViewById(R.id.Ll_picture_text);
-
+            Tv_source_text=(TextView) view.findViewById(R.id.Tv_source_text);
             Tv_title=(TextView) view.findViewById(R.id.Tv_title);
-            Tv_content=(TextView) view.findViewById(R.id.Tv_content);
+            Tv_source=(TextView) view.findViewById(R.id.Tv_source);
             Tv_time=(TextView) view.findViewById(R.id.Tv_time);
 
             Tv_title_text=(TextView) view.findViewById(R.id.Tv_title_text);
-            Tv_content_text=(TextView) view.findViewById(R.id.Tv_content_text);
             Tv_time_text=(TextView) view.findViewById(R.id.Tv_time_text);
+
+            Ll_text_picture_big=(LinearLayout) view.findViewById(R.id.Ll_text_picture_big);
+            Tv_title_picture_big=(TextView) view.findViewById(R.id.Tv_title_picture_big);
+            Tv_source_picture_big=(TextView) view.findViewById(R.id.Tv_source_picture_big);
+            Tv_time_picture_big=(TextView) view.findViewById(R.id.Tv_time_picture_big);
+
 
             Tv_title_picture=(TextView) view.findViewById(R.id.Tv_title_picture);
             fl_picture=(FrameLayout) view.findViewById(R.id.fl_picture);
             Iv_pic=(MyPicImageView) view.findViewById(R.id.Iv_pic);
-            Iv_picture=(MyPicImageView) view.findViewById(R.id.Iv_picture);
+            Iv_big=(MyImageBackgroundView) view.findViewById(R.id.Iv_big);
+            Iv_picture=(MyImageBackgroundView) view.findViewById(R.id.Iv_picture);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,6 +86,7 @@ public class ZXAdapter extends  RecyclerView.Adapter<ZXAdapter.ViewHolder>{
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final ZXBean live=list.get(position);
         if(live.getIstop()==1){
+            holder.Ll_text_picture_big.setVisibility(View.GONE);
             holder.Ll_text.setVisibility(View.GONE);
             holder.Ll_picture_text.setVisibility(View.GONE);
             holder.fl_picture.setVisibility(View.VISIBLE);
@@ -89,13 +99,15 @@ public class ZXAdapter extends  RecyclerView.Adapter<ZXAdapter.ViewHolder>{
             holder.Tv_title_picture.setText(live.getTitle());
         }else {
             if(live.getType()==0){
+                holder.Ll_text_picture_big.setVisibility(View.GONE);
                 holder.Ll_text.setVisibility(View.VISIBLE);
                 holder.Ll_picture_text.setVisibility(View.GONE);
                 holder.fl_picture.setVisibility(View.GONE);
                 holder.Tv_title_text.setText(live.getTitle());
-                holder.Tv_content_text.setText(live.getSummary());
-                holder.Tv_time_text.setText(live.getCreatetime().substring(5));
+                holder.Tv_time_text.setText(live.getCreatetime().substring(5,16));
+                holder.Tv_source_text.setText(live.getSource());
             }else if(live.getType()==1){
+                holder.Ll_text_picture_big.setVisibility(View.GONE);
                 holder.Ll_text.setVisibility(View.GONE);
                 holder.Ll_picture_text.setVisibility(View.GONE);
                 holder.fl_picture.setVisibility(View.VISIBLE);
@@ -108,17 +120,34 @@ public class ZXAdapter extends  RecyclerView.Adapter<ZXAdapter.ViewHolder>{
                 holder.Tv_title_picture.setText(live.getTitle());
 
             }else if(live.getType()==2){
-                holder.Ll_text.setVisibility(View.GONE);
-                holder.Ll_picture_text.setVisibility(View.VISIBLE);
-                holder.fl_picture.setVisibility(View.GONE);
-                holder.Tv_title.setText(live.getTitle());
-                holder.Tv_content.setText(live.getSummary());
-                holder.Tv_time.setText(live.getCreatetime().substring(5));
-                if(!TextUtils.isEmpty(live.getPicpath())) {
-                    holder.Iv_picture.setImageURL(live.getPicpath());
+                if(live.getIsbigpicture()==0){
+                    holder.Ll_text.setVisibility(View.GONE);
+                    holder.Ll_text_picture_big.setVisibility(View.GONE);
+                    holder.Ll_picture_text.setVisibility(View.VISIBLE);
+                    holder.fl_picture.setVisibility(View.GONE);
+                    holder.Tv_title.setText(live.getTitle());
+                    holder.Tv_source.setText(live.getSource());
+                    holder.Tv_time.setText(live.getCreatetime().substring(5,16));
+                    holder.Iv_picture.setRoundRadius(3);
+                    holder.Iv_picture.setType(1);
+                    if(!TextUtils.isEmpty(live.getPicpath())) {
+                        holder.Iv_picture.setImageURL(live.getPicpath());
+                    }else {
+                        holder.Iv_picture.setImageResource(R.mipmap.timg1);
+                    }
                 }else {
-                    holder.Iv_picture.setImageResource(R.mipmap.timg1);
+                    holder.Ll_text.setVisibility(View.GONE);
+                    holder.Ll_text_picture_big.setVisibility(View.VISIBLE);
+                    holder.Ll_picture_text.setVisibility(View.GONE);
+                    holder.fl_picture.setVisibility(View.GONE);
+                    holder.Tv_title_picture_big.setText(live.getTitle());
+                    holder.Tv_source_picture_big.setText(live.getSource());
+                    holder.Tv_time_picture_big.setText(live.getCreatetime().substring(5,16));
+                    holder.Iv_big.setRoundRadius(3);
+                    holder.Iv_big.setType(1);
+                    holder.Iv_big.setImageURL(live.getPicpath());
                 }
+
             }
 
         }

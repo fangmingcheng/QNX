@@ -18,6 +18,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.jaeger.library.StatusBarUtil;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,7 +70,7 @@ public class QuotationFragment extends BaseFragment {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
+//        StatusBarUtil.setLightMode(getActivity());//黑色
 //        webView=mViewRoot.findViewById(R.id.webView);
 //        webView.clearCache(true);
 //        removeCookie(getActivity());
@@ -238,7 +240,7 @@ public class QuotationFragment extends BaseFragment {
         @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        result=((MainActivity)activity).getUrl();
+//        result=((MainActivity)activity).getUrl();
 
     }
 
@@ -279,9 +281,6 @@ public class QuotationFragment extends BaseFragment {
             } else {
                 return false;
             }
-
-
-
 //            back true;
         }
 
@@ -369,6 +368,7 @@ public class QuotationFragment extends BaseFragment {
             if(webView!=null){
                webView.reload();
             }
+            StatusBarUtil.setLightMode(getActivity());//黑色
         }
         Log.e("fmc",hidden+"");
     }

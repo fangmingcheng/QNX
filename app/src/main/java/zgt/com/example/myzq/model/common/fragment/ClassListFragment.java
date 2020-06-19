@@ -1,6 +1,7 @@
 package zgt.com.example.myzq.model.common.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,7 +10,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
+import com.jaeger.library.StatusBarUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
@@ -24,6 +28,7 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -33,6 +38,7 @@ import butterknife.BindView;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseFragment;
 import zgt.com.example.myzq.bean.classes.Course;
+import zgt.com.example.myzq.model.common.MainActivity;
 import zgt.com.example.myzq.model.common.adapter.courseAdapter.CourseAdapter;
 import zgt.com.example.myzq.model.common.course.CourseDetailActivity;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
@@ -49,6 +55,9 @@ public class ClassListFragment extends BaseFragment {
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
 
+    @BindView(R.id.Rl_title)
+    RelativeLayout Rl_title;
+
     private LinearLayoutManager mLayoutManager;
     private int currentpage=1,totalcount=0;
     private CourseAdapter adapter;
@@ -56,6 +65,7 @@ public class ClassListFragment extends BaseFragment {
     private Course course;
 
     private List<Course> list = new ArrayList<>();
+    private MainActivity mainActivity;
 
     @Override
     public void initToolBar() {
@@ -63,7 +73,25 @@ public class ClassListFragment extends BaseFragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden){
+        }else {
+            StatusBarUtil.setLightMode(getActivity());//黑色
+        }
+
+    }
+
+    @Override
     public void initViews(Bundle savedInstanceState) {
+
+
+//        StatusBarUtil.setLightMode(getActivity());//黑色
+        LinearLayout.LayoutParams params=(LinearLayout.LayoutParams) Rl_title.getLayoutParams();
+        params.topMargin=getStatusBarHeight(getActivity());
+
+        Rl_title.setLayoutParams(params);
+
         initRecyclerView();
         new Thread(new Runnable() {
             @Override
@@ -72,6 +100,35 @@ public class ClassListFragment extends BaseFragment {
                 getData(refreshLayout,1);
             }
         }).start();
+
+    }
+
+    /**
+     * 获取通知栏高度
+     * @param context 上下文
+     * @return 通知栏高度
+     */
+    private int getStatusBarHeight(Context context){
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, statusBarHeight = 0;
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return statusBarHeight;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     @Override
@@ -103,6 +160,9 @@ public class ClassListFragment extends BaseFragment {
         });
 
     }
+
+
+
 
     private void setPullRefresher(){
         //设置 Header 为 Material风格

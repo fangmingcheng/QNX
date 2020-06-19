@@ -2,7 +2,6 @@ package zgt.com.example.myzq.model.common.adapter.homeAdapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.bean.classes.Course;
-import zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView;
 
 public class RecommendAdapter extends  RecyclerView.Adapter<RecommendAdapter.ViewHolder>{
 
@@ -26,12 +24,13 @@ public class RecommendAdapter extends  RecyclerView.Adapter<RecommendAdapter.Vie
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        private MyImageBackgroundView Iv_head;
-        private TextView Tv_name;
+
+        private TextView Tv_teacher,Tv_content,Tv_price;
         public ViewHolder(View view){
             super(view);
-            Iv_head=(MyImageBackgroundView) view.findViewById(R.id.Iv_head);
-
+            Tv_teacher=view.findViewById(R.id.Tv_teacher);
+            Tv_content=view.findViewById(R.id.Tv_content);
+            Tv_price=view.findViewById(R.id.Tv_price);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,16 +57,16 @@ public class RecommendAdapter extends  RecyclerView.Adapter<RecommendAdapter.Vie
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Course live=list.get(position);
-
-        holder.Iv_head.setType(1);
-        holder.Iv_head.setRoundRadius(15);
-
-        if(!TextUtils.isEmpty(live.getPicpath())) {
-            holder.Iv_head.setImageURL(live.getPicpath());
-//            holder.Iv_head.setImageURL(SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+live.getPicpath());
+        holder.Tv_teacher.setText("主讲："+live.getLecturer());
+        if(live.getIscharge()==0){
+            holder.Tv_price.setText("免费");
         }else {
-//            holder.Iv_head.setImageResource(R.drawable.replace);
+            holder.Tv_price.setText(live.getPrice()+"元");
         }
+
+        holder.Tv_content.setText(live.getIntro());
+//            holder.Iv_head.setImageURL(SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+live.getPicpath());
+
     }
 
     public interface OnItemClickListener {

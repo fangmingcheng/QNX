@@ -43,6 +43,7 @@ import zgt.com.example.myzq.model.common.permission.requestresult.IRequestPermis
 import zgt.com.example.myzq.model.common.permission.requestresult.RequestPermissionsResultSetApp;
 import zgt.com.example.myzq.utils.FileProviderUtils;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.SystemProgramUtils;
 import zgt.com.example.myzq.utils.ToastUtil;
 
@@ -85,7 +86,7 @@ public class Personal_centerActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //        new Thread(new Runnable() {
 //            @Override
@@ -397,15 +398,9 @@ public class Personal_centerActivity extends BaseActivity {
                                         .putString("memberid", "")
                                         .putString("username", "")
                                         .putString("nickname", "")
-                                        .putString("modulecode", "")
-                                        .putString("modulename","")
-                                        .putString("typename","")
-                                        .putInt("type",0)
-                                        .putString("startdate","")
-                                        .putString("teacherid","")
-                                        .putString("enddate","")
-                                        .putInt("membertype",0)
-                                        .putInt("tsort",0)
+                                        .putString("headimg", "")
+                                        .putString("getuistatus","")
+
                                         .commit();
                                 MyApp.httpResult=null;
                                 finishAll();

@@ -37,6 +37,7 @@ import zgt.com.example.myzq.model.common.home.GoldInvestmentActivity;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
 import zgt.com.example.myzq.utils.SpaceItemDecoration;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class MyOrderActivity extends BaseActivity {
@@ -64,6 +65,7 @@ public class MyOrderActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        StatusBarUtil.statusBarLightMode(this);
         initRecyclerView();
         new Thread(new Runnable() {
             @Override

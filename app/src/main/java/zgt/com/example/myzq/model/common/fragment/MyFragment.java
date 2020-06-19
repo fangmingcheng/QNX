@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jaeger.library.StatusBarUtil;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xutils.common.Callback;
@@ -76,71 +78,13 @@ public class MyFragment extends BaseFragment {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
+        StatusBarUtil.setLightMode(getActivity());//黑色
         try {
             String totalCacheSize = CleanDataUtils.getTotalCacheSize(getContext());
             Tv_size.setText(totalCacheSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//            @Override
-//
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(switch_system.isChecked()){
-//                    if(isChecked){
-//                        setStatus(0);
-//                    }else {
-//                        setStatus(2);
-//                    }
-//                }else {
-//                    if(isChecked){
-//                        setStatus(1);
-//                    }else {
-//                        setStatus(3);
-//                    }
-//                }
-//
-////                if(!buttonView.isPressed()){ // 每次 setChecked 时会触发onCheckedChanged 监听回调，而有时我们在设置setChecked后不想去自动触发 onCheckedChanged 里的具体操作, 即想屏蔽掉onCheckedChanged;加上此判断
-////
-////                    back;
-////
-////                }
-//
-//            }
-//
-//        });
-//
-//        switch_system.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//
-//            @Override
-//
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//
-//                if(switch2.isChecked()){
-//                    if(isChecked){
-//                        setStatus(0);
-//                    }else {
-//                        setStatus(1);
-//                    }
-//                }else {
-//                    if(isChecked){
-//                        setStatus(2);
-//                    }else {
-//                        setStatus(3);
-//                    }
-//                }
-////                if(!buttonView.isPressed()){ // 每次 setChecked 时会触发onCheckedChanged 监听回调，而有时我们在设置setChecked后不想去自动触发 onCheckedChanged 里的具体操作, 即想屏蔽掉onCheckedChanged;加上此判断
-////
-////                    back;
-////
-////                }
-//
-//            }
-//
-//        });
     }
 
     @Override

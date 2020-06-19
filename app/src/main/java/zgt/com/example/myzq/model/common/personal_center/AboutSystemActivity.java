@@ -16,6 +16,7 @@ import zgt.com.example.myzq.model.common.permission.PermissionUtils;
 import zgt.com.example.myzq.model.common.permission.request.IRequestPermissions;
 import zgt.com.example.myzq.model.common.permission.request.RequestPermissions;
 import zgt.com.example.myzq.utils.CommonUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class AboutSystemActivity extends BaseActivity {
@@ -40,7 +41,7 @@ public class AboutSystemActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         Tv_version.setText("v"+CommonUtil.getVersionName());
         String str_2 = "0755-22671286";
         Tv_phoneNum.setText(Html.fromHtml( "<font color='#00d4b4'>" + "<u>" + str_2 + "</u>" + "</font>"));

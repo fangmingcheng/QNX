@@ -26,10 +26,12 @@ import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.bean.order.Agreement;
 import zgt.com.example.myzq.bean.order.OrderDetail;
+import zgt.com.example.myzq.bean.refund.Refund;
 import zgt.com.example.myzq.model.common.adapter.courseAdapter.AgreementAdapter;
 import zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class RefundDetailActivity extends BaseActivity {
@@ -85,6 +87,9 @@ public class RefundDetailActivity extends BaseActivity {
     private double returnmoney;
     private String remark;
 
+    private Refund refund;
+    private String uuid;
+
     List<Agreement> list = new ArrayList<>();
     private AgreementAdapter adapter;
 
@@ -95,34 +100,58 @@ public class RefundDetailActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-
+        StatusBarUtil.statusBarLightMode(this);
         adapter =  new AgreementAdapter(RefundDetailActivity.this);
         adapter.addAll(list);
         Lv_agreement.setAdapter(adapter);
 
-        orderDetail=(OrderDetail) getIntent().getSerializableExtra("orderDetail");
-        if(orderDetail != null){
-            Iv_head.setImageURL(orderDetail.getPicpath());
-            Iv_head.setType(1);
-            Tv_course_title.setText(orderDetail.getTitle());
-            Tv_teacher.setText("主讲老师:"+orderDetail.getLecturer());
-            if(orderDetail.getPricelimit()==0) {
-                Tv_price.setText(orderDetail.getRealmoney()+"(永久)");
-            }else {
-                Tv_price.setText(orderDetail.getRealmoney()+"元（"+orderDetail.getPricelimit()+"天)");
-            }
-            Tv_num.setText("X"+orderDetail.getAmount());
-            Tv_status.setText(orderDetail.getOrderno());
-        }
+        uuid= getIntent().getStringExtra("orderDetail");
+//        if(orderDetail != null){
+//            Iv_head.setImageURL(orderDetail.getPicpath());
+//            Iv_head.setType(1);
+//            Tv_course_title.setText(orderDetail.getTitle());
+//            Tv_teacher.setText("主讲老师:"+orderDetail.getLecturer());
+//            if(orderDetail.getPricelimit()==0) {
+//                Tv_price.setText(orderDetail.getRealmoney()+"(永久)");
+//            }else {
+//                Tv_price.setText(orderDetail.getRealmoney()+"元（"+orderDetail.getPricelimit()+"天)");
+//            }
+//            Tv_num.setText("X"+orderDetail.getAmount());
+//            Tv_status.setText(orderDetail.getOrderno());
+//        }
         getData();
     }
 
     private void setData(){
+
+        if(refund!=null){
+            Iv_head.setType(1);
+            Iv_head.setImageURL(refund.getPicpath());
+            Tv_status.setText(refund.getOrderno());
+            Tv_course_title.setText(refund.getTitle());
+            if(refund.getProducttype()==1){
+                Tv_teacher.setText("主讲老师:"+refund.getLecturer());
+            }else if(refund.getProducttype()==3){
+                Tv_teacher.setText(refund.getLecturer());
+            }
+            Tv_price.setText(refund.getRealmoney()+"元");
+//            if(refund.getIsnewversion()==0){
+//                if(refund.getPricelimit()==0) {
+//                    Tv_price.setText(refund.getPrice()+"(永久)");
+//                    Tv_num.setText("");
+//                }else {
+//                    Tv_price.setText(refund.getPrice()+"元（"+refund.getPricelimit()+"天)");
+////                    Tv_num.setText("X"+refund.get());
+//                }
+//            }else {
+//                Tv_price.setText(refund.getPrice()+"元");
+//            }
+        }
+
         Tv_date.setText(applytime);
         Tv_refund_price.setText(returnmoney+"元");
         Tv_stop_date.setText(stoptime);
         if(status == 0){
-
         }else if(status == 1){
             Iv_examine.setImageResource(R.mipmap.ic_cg);
         }else if(status == 2){
@@ -155,7 +184,7 @@ public class RefundDetailActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.Tv_reapply:
-                startActivity(new Intent().setClass(RefundDetailActivity.this, RefundCommitActivity.class).putExtra("orderDetail", orderDetail));
+                startActivity(new Intent().setClass(RefundDetailActivity.this, RefundCommitActivity.class).putExtra("orderDetail", uuid));
 //                this.finish();
                 break;
 
@@ -163,10 +192,10 @@ public class RefundDetailActivity extends BaseActivity {
     }
 
     private void getData(){
-        RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"refundSchedule.do");
+        RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"refundSchedule0610.do");
         requestParams.setConnectTimeout(30 * 1000);
         requestParams.addParameter("token", SPUtil.getToken());
-        requestParams.addParameter("orderid", orderDetail.getUuid());
+        requestParams.addParameter("orderid", uuid);
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -180,6 +209,22 @@ public class RefundDetailActivity extends BaseActivity {
                         applytime=json.getString("applytime");
                         remark = json.getString("remark");
                         stoptime=json.getString("stopdate");
+                        refund = new Refund();
+
+//                        refund.setIosprice(json.getDouble("iosprice"));
+                        refund.setIsnewversion(json.getInt("isnewversion"));
+                        refund.setLecturer(json.getString("lecturer"));
+//                        refund.setOrderid(json.getString("orderid"));
+                        refund.setOrderno(json.getString("orderno"));
+                        refund.setPicpath(json.getString("picpath"));
+
+                        refund.setPrice(json.getDouble("price"));
+                        refund.setRealmoney(json.getDouble("realmoney"));
+                        refund.setPricelimit(json.getInt("pricelimit"));
+                        refund.setPricenum(json.getInt("pricenum"));
+                        refund.setPriceunit(json.getInt("priceunit"));
+                        refund.setProducttype(json.getInt("producttype"));
+                        refund.setTitle(json.getString("title"));
                         JSONArray jsonArray=json.getJSONArray("listp");
                         for (int i=0;i<jsonArray.length();i++){
                             Agreement agreement = new Agreement();

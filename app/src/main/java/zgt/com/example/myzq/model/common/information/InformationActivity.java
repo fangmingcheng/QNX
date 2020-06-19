@@ -27,6 +27,7 @@ import zgt.com.example.myzq.model.common.information.fragment.TTFragment;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.Log;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class InformationActivity extends BaseActivity implements ViewPager.OnPageChangeListener{
@@ -56,7 +57,7 @@ public class InformationActivity extends BaseActivity implements ViewPager.OnPag
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         getData();
 
     }

@@ -38,6 +38,7 @@ import zgt.com.example.myzq.model.common.course.CourseDetailActivity;
 import zgt.com.example.myzq.model.common.custom_view.MyImageView;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class LecturerActivity extends BaseActivity {
@@ -83,7 +84,7 @@ public class LecturerActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-//        StatusBarUtil.statusBarLightMode(this);
+        StatusBarUtil.statusBarLightMode(this);
         initRecyclerView();
         uuid=getIntent().getStringExtra("uuid");
         new Thread(new Runnable() {

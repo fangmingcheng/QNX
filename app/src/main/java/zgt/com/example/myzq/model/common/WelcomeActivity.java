@@ -20,6 +20,7 @@ import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.model.common.adapter.GuideViewAdapter;
 import zgt.com.example.myzq.utils.Log;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 
 public class WelcomeActivity extends BaseActivity {
 
@@ -68,8 +69,9 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        StatusBarUtil.statusBarLightMode(this);
         if(SPUtil.isRead()){
-            startActivity(new Intent().setClass(WelcomeActivity.this,MainActivity.class).putExtra("status",0));
+            startActivity(new Intent().setClass(WelcomeActivity.this,StartActivity.class));
             finish();
         }
         initoper();
@@ -83,7 +85,7 @@ public class WelcomeActivity extends BaseActivity {
             @Override
             public void onClick(View arg0) {
                 SPUtil.getConfigSharedPreferences().edit().putBoolean("isRead", true).commit();
-                startActivity(new Intent().setClass(WelcomeActivity.this,MainActivity.class));
+                startActivity(new Intent().setClass(WelcomeActivity.this,StartActivity.class));
                 finish();
             }
         });
@@ -92,7 +94,7 @@ public class WelcomeActivity extends BaseActivity {
             @Override
             public void onClick(View arg0) {
                 SPUtil.getConfigSharedPreferences().edit().putBoolean("isRead", true).commit();
-                startActivity(new Intent().setClass(WelcomeActivity.this,MainActivity.class));
+                startActivity(new Intent().setClass(WelcomeActivity.this,StartActivity.class));
                 finish();
             }
         });

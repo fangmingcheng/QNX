@@ -7,6 +7,7 @@ public class ZXBean {
     private String ftitle;//副标题
     private String summary;//摘要
     private String author;//作者
+    private String source;//来源
     private String picpath;//图片路径
     private int videoflag;//视频来源，0为本地上传，1为外部链接
     private String videopath;//视频路径
@@ -15,6 +16,23 @@ public class ZXBean {
     private int click;//浏览次数
     private int istop;//是否顶置 0 否，1是
     private int type;//0文字，1图片，2文图
+    private int isbigpicture;//是否为大图，0否，1是
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public int getIsbigpicture() {
+        return isbigpicture;
+    }
+
+    public void setIsbigpicture(int isbigpicture) {
+        this.isbigpicture = isbigpicture;
+    }
 
     public String getUuid() {
         return uuid;

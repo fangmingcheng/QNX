@@ -38,12 +38,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".model.common.home.ReviewDetailActivity"
+        <activity android:name=".model.common.StartActivity"></activity>
+        <activity
+            android:name=".model.common.order.ZBOrderDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".model.common.refund.RefundDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".model.common.chooseStock.ChooseH5Activity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".model.common.home.znxg.SelectStockActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".model.common.home.researchreport.ReseaRchreportDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".model.common.home.researchreport.ReseaRchreportListActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".model.common.home.h5.H5Activity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".model.common.home.my.MyActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".model.common.home.ReviewDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".model.common.refund.RefundDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".model.common.refund.RefundCommitActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

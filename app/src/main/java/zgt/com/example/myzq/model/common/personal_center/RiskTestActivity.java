@@ -4,10 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,24 +20,23 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
-import zgt.com.example.myzq.bean.classes.CourseDetail;
-import zgt.com.example.myzq.bean.classes.Mycourse;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
-import zgt.com.example.myzq.model.common.order.OrderDetaiilActivity;
+import zgt.com.example.myzq.model.common.order.ZBOrderDetailActivity;
 import zgt.com.example.myzq.utils.SPUtil;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class RiskTestActivity extends BaseActivity {
 
     @BindView(R.id.webView)
     WebView webView;
-    @BindView(R.id.Rl_progress)
-    RelativeLayout Rl_progress;
+    @BindView(R.id.pro)
+    ProgressBar pro;
 
     private int status,index;
-    private CourseDetail courseDetail = null;
 
-    private Mycourse mycourse= null;
+    String s,type,fileId;
+
 
 
     @Override
@@ -52,14 +52,11 @@ public class RiskTestActivity extends BaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
         status = getIntent().getIntExtra("status",0);
-        if(status == 2){
-            index=getIntent().getIntExtra("index",0);
-            courseDetail = (CourseDetail) getIntent().getSerializableExtra("course");
-        }else {if(status == 3)
-            mycourse = (Mycourse) getIntent().getSerializableExtra("course");
-            index = getIntent().getIntExtra("index",0);
-        }
-//        StatusBarUtil.statusBarLightMode(this);
+        index = getIntent().getIntExtra("index",0);
+        type = getIntent().getStringExtra("type");
+        fileId = getIntent().getStringExtra("fileid");
+
+        StatusBarUtil.statusBarLightMode(this);
 //        url=getIntent().getStringExtra("url");
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
@@ -72,7 +69,12 @@ public class RiskTestActivity extends BaseActivity {
         //设置支持缩放
         webSettings.setBuiltInZoomControls(true);
         //加载需要显示的网页
-        String s = SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+"/fxcp/score.do?token="+SPUtil.getToken();
+//        if(status==1){
+//            s = SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+"/fxcp/cpScore.do?token="+SPUtil.getToken();
+//        }else {
+        s = SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+"/fxcp/score.do?token="+SPUtil.getToken();
+//        }
+//        String s = SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+"/fxcp/score.do?token="+SPUtil.getToken();
         webView.loadUrl(s);
         //字体不随系统变化
         webView.getSettings().setTextZoom(100);
@@ -80,6 +82,30 @@ public class RiskTestActivity extends BaseActivity {
 //        webView.addJavascriptInterface(new APPQuitInterface(), "android");//增加js接口交互ext
         //设置Web视图
         webView.setWebViewClient(new webViewClient());
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+
+            }
+
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    // 网页加载完成  
+                    if(pro!=null){
+                        pro.setVisibility(View.GONE);
+                    }
+                } else {
+                    // 网页加载中  
+                    if(pro!=null){
+                        pro.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                        pro.setProgress(newProgress);//设置进度值
+                    }
+
+                }
+            }
+        });
     }
 
     private class webViewClient extends WebViewClient {
@@ -95,7 +121,6 @@ public class RiskTestActivity extends BaseActivity {
             // TODO Auto-generated method stub
 //                    pro.setVisibility(View.GONE);
 //                    mDialog.dismiss();
-            Rl_progress.setVisibility(View.GONE);
             super.onPageFinished(view, url);
         }
     }
@@ -126,12 +151,18 @@ public class RiskTestActivity extends BaseActivity {
 
         @JavascriptInterface
         public void quit(){
-            new Thread(new Runnable() {
+            runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     finish();
                 }
-            }).start();
+            });
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    finish();
+//                }
+//            }).start();
         }
     }
 
@@ -182,11 +213,8 @@ public class RiskTestActivity extends BaseActivity {
         RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"checkMemberInformation.do");
         requestParams.setConnectTimeout(30 * 1000);
         requestParams.addParameter("token", SPUtil.getToken());
-        if(status == 2) {
-            requestParams.addParameter("fileid", courseDetail.getUuid());
-        }else if(status == 3){
-            requestParams.addParameter("fileid", mycourse.getUuid());
-        }
+        requestParams.addParameter("fileid", fileId);
+
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -194,11 +222,7 @@ public class RiskTestActivity extends BaseActivity {
                     JSONObject jsonObject = new JSONObject(result);
                     int a=jsonObject.getInt("result");
                     if (a==1) {
-                        if(status == 2){
-                            startActivity(new Intent().setClass(RiskTestActivity.this, OrderDetaiilActivity.class).putExtra("course",courseDetail).putExtra("status","1").putExtra("index",index));
-                        }else if(status ==3){
-                            startActivity(new Intent().setClass(RiskTestActivity.this, OrderDetaiilActivity.class).putExtra("course",mycourse).putExtra("status","2").putExtra("index",index));
-                        }
+                        startActivity(new Intent().setClass(RiskTestActivity.this, ZBOrderDetailActivity.class).putExtra("fileid",fileId).putExtra("index",index).putExtra("type",type));
 
                         RiskTestActivity.this.finish();
                     }else if(a == 5){
