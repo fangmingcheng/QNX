@@ -38,7 +38,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".model.common.StartActivity"></activity>
+        <activity android:name=".model.common.StartActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".model.common.order.ZBOrderDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

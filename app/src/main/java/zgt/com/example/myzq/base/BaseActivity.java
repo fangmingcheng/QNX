@@ -3,7 +3,6 @@ package zgt.com.example.myzq.base;
 import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,12 +10,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.igexin.sdk.PushManager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,13 +19,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import zgt.com.example.myzq.MyApp;
-import zgt.com.example.myzq.R;
-import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.model.common.service.DemoIntentService;
 import zgt.com.example.myzq.model.common.service.DemoPushService;
 import zgt.com.example.myzq.utils.Log;
-import zgt.com.example.myzq.utils.SPUtil;
-import zgt.com.example.myzq.utils.ToastUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -165,7 +154,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onResume();
         if(!MyApp.isLive){
             //app 从后台唤醒，进入前台
-            addOrdelMemberOnline(1);
+//            addOrdelMemberOnline(1);
             MyApp.isLive=true;
             Log.d(this.getClass().getSimpleName() + "我上线了");
         }
@@ -184,7 +173,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onStop();
         if (!isAppOnForeground()) {
             //app 进入后台
-            addOrdelMemberOnline(2);
+//            addOrdelMemberOnline(2);
             //全局变量isActive = false 记录当前已经进入后台
             MyApp.isLive=false;
             Log.d(this.getClass().getSimpleName() + "我下线了");
@@ -229,83 +218,83 @@ public abstract class BaseActivity extends AppCompatActivity {
         return false;
     }
 
-    private void addOrdelMemberOnline(int type){
-        RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"addOrdelMemberOnline.do");
-        requestParams.setConnectTimeout(30 * 1000);
-        requestParams.addParameter("token", SPUtil.getToken());
-        requestParams.addParameter("type", type);
-        x.http().post(requestParams, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                try {
-                    JSONObject jsonObject = new JSONObject(result);
-                    int a=jsonObject.getInt("result");
-                    final String msg=jsonObject.getString("message");
-//                    ToastUtil.showShortToast(BaseActivity.this, msg);
-                    if (a==1) {
-                        JSONObject json=jsonObject.getJSONObject("data");
-                    } else if(a==-1){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                startActivity(new Intent().setClass(BaseActivity.this, LoginActivity.class));
-                                finish();
-//                                if(!TextUtils.isEmpty(SPUtil.getToken())) {
-//                                    new AlertDialog.Builder(BaseActivity.this).setTitle("提示").setMessage("token失效：请重新登陆").setCancelable(false).setNegativeButton("取消", null).
-//                                            setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                                @Override
-//                                                public void onClick(DialogInterface dialog, int which) {
-//                                                    startActivity(new Intent().setClass(BaseActivity.this, LoginActivity.class));
-//                                                    finish();
-//                                                    dialog.dismiss();
-//                                                }
-//                                            }).create().show();
-//                                }else {
-//                                    startActivity(new Intent().setClass(BaseActivity.this, LoginActivity.class));
-//                                    finish();
-//                                }
-                            }
-                        });
-
-                    }else {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ToastUtil.showShortToast(BaseActivity.this, msg);
-                            }
-                        });
-                    }
-                } catch (JSONException e) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ToastUtil.showShortToast(BaseActivity.this, getString(R.string.login_parse_exc));
-                        }
-                    });
-
-                } finally {
-                }
-            }
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        ToastUtil.showShortToast(BaseActivity.this, "网络连接异常");
+//    private void addOrdelMemberOnline(int type){
+//        RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"addOrdelMemberOnline.do");
+//        requestParams.setConnectTimeout(30 * 1000);
+//        requestParams.addParameter("token", SPUtil.getToken());
+//        requestParams.addParameter("type", type);
+//        x.http().post(requestParams, new Callback.CommonCallback<String>() {
+//            @Override
+//            public void onSuccess(String result) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(result);
+//                    int a=jsonObject.getInt("result");
+//                    final String msg=jsonObject.getString("message");
+////                    ToastUtil.showShortToast(BaseActivity.this, msg);
+//                    if (a==1) {
+//                        JSONObject json=jsonObject.getJSONObject("data");
+//                    } else if(a==-1){
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+////                                startActivity(new Intent().setClass(BaseActivity.this, LoginActivity.class));
+////                                finish();
+////                                if(!TextUtils.isEmpty(SPUtil.getToken())) {
+////                                    new AlertDialog.Builder(BaseActivity.this).setTitle("提示").setMessage("token失效：请重新登陆").setCancelable(false).setNegativeButton("取消", null).
+////                                            setPositiveButton("确定", new DialogInterface.OnClickListener() {
+////                                                @Override
+////                                                public void onClick(DialogInterface dialog, int which) {
+////                                                    startActivity(new Intent().setClass(BaseActivity.this, LoginActivity.class));
+////                                                    finish();
+////                                                    dialog.dismiss();
+////                                                }
+////                                            }).create().show();
+////                                }else {
+////                                    startActivity(new Intent().setClass(BaseActivity.this, LoginActivity.class));
+////                                    finish();
+////                                }
+//                            }
+//                        });
+//
+//                    }else {
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                ToastUtil.showShortToast(BaseActivity.this, msg);
+//                            }
+//                        });
 //                    }
-//                });
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-
-            }
-            @Override
-            public void onFinished() {
-
-            }
-        });
-    }
+//                } catch (JSONException e) {
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ToastUtil.showShortToast(BaseActivity.this, getString(R.string.login_parse_exc));
+//                        }
+//                    });
+//
+//                } finally {
+//                }
+//            }
+//            @Override
+//            public void onError(Throwable ex, boolean isOnCallback) {
+////                runOnUiThread(new Runnable() {
+////                    @Override
+////                    public void run() {
+////                        ToastUtil.showShortToast(BaseActivity.this, "网络连接异常");
+////                    }
+////                });
+//            }
+//
+//            @Override
+//            public void onCancelled(CancelledException cex) {
+//
+//            }
+//            @Override
+//            public void onFinished() {
+//
+//            }
+//        });
+//    }
 
 
 }

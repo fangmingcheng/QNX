@@ -82,14 +82,6 @@
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/Tv_content"
-        android:layout_gravity="center"
-        android:textColor="#333333"
-        android:textSize="15sp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
 </LinearLayout>

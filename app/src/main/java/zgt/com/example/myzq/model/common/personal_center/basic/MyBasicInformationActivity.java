@@ -645,10 +645,11 @@ public class MyBasicInformationActivity extends BaseActivity {
     }
 
     private void intoOrder(){
-        RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"checkMemberInformation.do");
+        RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"checkMemberInformation0518.do");
         requestParams.setConnectTimeout(30 * 1000);
         requestParams.addParameter("token", SPUtil.getToken());
         requestParams.addParameter("fileid", fileid);
+        requestParams.addParameter("producttype", type);
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {

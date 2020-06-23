@@ -19,7 +19,6 @@
             android:textStyle="bold"
             android:textColor="#333333"
             android:textSize="17sp" />
-
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -170,7 +169,7 @@
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
-            <com.stx.xhb.xbanner.XBanner
+            <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_gravity="center"
                 android:layout_width="331dp"

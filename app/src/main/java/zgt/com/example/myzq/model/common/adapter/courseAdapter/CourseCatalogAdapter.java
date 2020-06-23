@@ -79,14 +79,14 @@ public class CourseCatalogAdapter extends  RecyclerView.Adapter<CourseCatalogAda
         if(isbuy == 0){
             if(live.getIsfee()==0){
                 holder.Tv_status.setText("【免费】");
-                holder.Tv_status.setTextColor(Color.parseColor("#97e960"));
+                holder.Tv_status.setTextColor(Color.parseColor("#169433"));
             }else {
                 holder.Tv_status.setText("【VIP付费】");
                 holder.Tv_status.setTextColor(Color.parseColor("#e46866"));
             }
         }else {
             holder.Tv_status.setText("【可观看】");
-            holder.Tv_status.setTextColor(Color.parseColor("#97e960"));
+            holder.Tv_status.setTextColor(Color.parseColor("#169433"));
         }
 
         adapter.addAll(live.getList());

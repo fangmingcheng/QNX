@@ -183,6 +183,7 @@ public class RegisterActivity extends BaseActivity {
                         saveLoginInfo(json);
                         ToastUtil.showShortToast(RegisterActivity.this, jsonObject.getString("message"));
                         startActivity(new Intent(RegisterActivity.this, MainActivity.class).putExtra("status",0));
+
                     } else {
                         ToastUtil.showShortToast(RegisterActivity.this, jsonObject.getString("message"));
                     }

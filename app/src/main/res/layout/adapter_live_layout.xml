@@ -17,7 +17,8 @@
 
     <TextView
         android:id="@+id/Tv_title"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
+        android:maxLines="1"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/Tv_time"
         android:layout_marginLeft="15dp"

@@ -20,6 +20,7 @@ import butterknife.OnClick;
 import zgt.com.example.myzq.R;
 import zgt.com.example.myzq.base.BaseActivity;
 import zgt.com.example.myzq.bean.stock.ReseaRchreportk;
+import zgt.com.example.myzq.model.common.home.h5.H5Activity;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
 import zgt.com.example.myzq.utils.StatusBarUtil;
@@ -34,8 +35,6 @@ public class ReseaRchreportDetailActivity extends BaseActivity {
     @BindView(R.id.Tv_source)
     TextView Tv_source;
 
-    @BindView(R.id.Tv_content)
-    TextView Tv_content;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
 
@@ -63,7 +62,7 @@ public class ReseaRchreportDetailActivity extends BaseActivity {
         WebSettings webSettings = webView.getSettings();
         //设置WebView属性，能够执行Javascript脚本
         webSettings.setJavaScriptEnabled(true);
-
+        getData();
 //        webSettings.setDomStorageEnabled(true);
 //        //设置页面自适应手机
 //
@@ -80,7 +79,6 @@ public class ReseaRchreportDetailActivity extends BaseActivity {
 
     @Override
     protected void onResume() {
-        getData();
         super.onResume();
     }
 
@@ -95,12 +93,11 @@ public class ReseaRchreportDetailActivity extends BaseActivity {
 //                Iv_picture.setImageURL(SPUtil.getServerAddress().substring(0,SPUtil.getServerAddress().length()-5)+trainingDetail.getPicpath());
 //            }
             if(reseaRchreportk.getIsbuy()==0){
-                scrollView.setVisibility(View.GONE);
-                Tv_content.setVisibility(View.VISIBLE);
-                Tv_content.setText("您未购买该研报，请联系客服购买");
+                webView.setVisibility(View.GONE);
+                startActivity(new Intent().setClass(ReseaRchreportDetailActivity.this, H5Activity.class).putExtra("url",SPUtil.getServerAddress()+"yanbao.do?token="+SPUtil.getToken()+"&pid="+pid));
+                finish();
             }else {
-                scrollView.setVisibility(View.VISIBLE);
-                Tv_content.setVisibility(View.GONE);
+                webView.setVisibility(View.VISIBLE);
             }
 
             //设置页面自适应手机

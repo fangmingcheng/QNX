@@ -149,9 +149,11 @@ public class RefundDetailActivity extends BaseActivity {
         }
 
         Tv_date.setText(applytime);
+
         Tv_refund_price.setText(returnmoney+"元");
         Tv_stop_date.setText(stoptime);
         if(status == 0){
+            Tv_refund_price.setText("待定");
         }else if(status == 1){
             Iv_examine.setImageResource(R.mipmap.ic_cg);
         }else if(status == 2){

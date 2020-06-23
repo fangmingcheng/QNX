@@ -3,7 +3,9 @@ package zgt.com.example.myzq.model.common.home.h5;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,6 +19,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +49,8 @@ import zgt.com.example.myzq.utils.ToastUtil;
 
 public class H5Activity extends BaseActivity {
 
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
     @BindView(R.id.Tv_title)
     TextView Tv_title;
     @BindView(R.id.webView)
@@ -73,6 +85,13 @@ public class H5Activity extends BaseActivity {
 //        webSettings.setSavePassword(true);
 //        webSettings.setSupportZoom(true);
 //        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+
+
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
+        //H5 中http与https混合加载的问题
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
 
 
         //解决h5网页打开白页
@@ -157,6 +176,40 @@ public class H5Activity extends BaseActivity {
             }
         });
 
+        setPullRefresher();
+
+    }
+
+    private void setPullRefresher(){
+        //设置 Header 为 Material风格
+        refreshLayout.setPrimaryColors(Color.parseColor("#00000000"));
+        refreshLayout.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
+//        refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true));
+        //设置 Footer 为 球脉冲
+        refreshLayout.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                //在这里执行上拉刷新时的具体操作(网络请求、更新UI等)
+
+                if(webView!=null){
+                    webView.reload();
+                }
+//                adapter.refresh(newList);
+                refreshlayout.finishRefresh(/*,false*/);
+                //不传时间则立即停止刷新    传入false表示刷新失败
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore( RefreshLayout refreshLayout) {
+//                ToastUtil.showShortToast(getActivity(),"数据已加载完毕");
+                refreshLayout.finishLoadMore(/*,false*/);
+            }
+        });
+//
+//        refreshLayout.setEnableLoadmore(false);//屏蔽掉上拉加载的效果
     }
 
     @Override
@@ -190,9 +243,9 @@ public class H5Activity extends BaseActivity {
 
     class APPInterface {
         @JavascriptInterface
-        public void getOtherProduct(String pid,String uid,String type) {
-            Log.e("TAG","getOtherProduct");
-            intoOrder(pid,uid,type);
+        public void getOtherProduct(String pid,String type) {
+            Log.e("MSG","getOtherProduct");
+            intoOrder(pid,type);
 //            try {
 //                JSONObject jsonObject = new JSONObject(s);
 //                String pid = jsonObject.getString("pid");
@@ -579,11 +632,12 @@ public class H5Activity extends BaseActivity {
         });
     }
 
-    private void intoOrder(String fileid,String uid,String type){
-        RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"checkMemberInformation.do");
+    private void intoOrder(String fileid,String type){
+        RequestParams requestParams = new RequestParams(SPUtil.getServerAddress()+"checkMemberInformation0518.do");
         requestParams.setConnectTimeout(30 * 1000);
         requestParams.addParameter("token", SPUtil.getToken());
         requestParams.addParameter("fileid", fileid);
+        requestParams.addParameter("producttype", type);
         x.http().post(requestParams, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -656,8 +710,7 @@ public class H5Activity extends BaseActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                startActivity(new Intent().setClass(H5Activity.this, LoginActivity.class));
-                                finish();
+                                startActivityForResult(new Intent().setClass(H5Activity.this, LoginActivity.class).putExtra("status", 1), REQUESTCODE);
                             }
                         });
 

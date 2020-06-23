@@ -4,6 +4,7 @@ package zgt.com.example.myzq.model.common.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -15,6 +16,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.lang.reflect.Field;
 
@@ -36,6 +45,9 @@ public class HqFragment extends BaseFragment {
 
     @BindView(R.id.Ll_bottom)
     LinearLayout Ll_bottom;
+
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
     @BindView(R.id.pro)
     ProgressBar progressBar;
@@ -170,6 +182,40 @@ public class HqFragment extends BaseFragment {
             }
         });
 
+        setPullRefresher();
+
+    }
+
+    private void setPullRefresher(){
+        //设置 Header 为 Material风格
+        refreshLayout.setPrimaryColors(Color.parseColor("#00000000"));
+        refreshLayout.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+//        refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true));
+        //设置 Footer 为 球脉冲
+        refreshLayout.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                //在这里执行上拉刷新时的具体操作(网络请求、更新UI等)
+
+              if(webView!=null){
+                  webView.reload();
+              }
+//                adapter.refresh(newList);
+                refreshlayout.finishRefresh(/*,false*/);
+                //不传时间则立即停止刷新    传入false表示刷新失败
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore( RefreshLayout refreshLayout) {
+//                ToastUtil.showShortToast(getActivity(),"数据已加载完毕");
+                refreshLayout.finishLoadMore(/*,false*/);
+            }
+        });
+//
+//        refreshLayout.setEnableLoadmore(false);//屏蔽掉上拉加载的效果
     }
 
     @OnClick({R.id.Iv_zuo,R.id.Iv_you})

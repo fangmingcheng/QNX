@@ -7,11 +7,20 @@ public class Price {
     private int pricelimit;//价格期限，0为永久，其他为数字多少天
     private int pricenum;//售价数量
     private int pricesort;//排序
+    private String pricename;//价格名称
     private int pricestatus;//状态0为不启用，1为启用
     private int priceunit;//	售价单位，0按天，1按月，2季度，3半年，4按年
     private String productid;//产品id
     private int ptype;//类型，1为课程，2为软件，3为聚缘产品
     private int realprice;//通用实际价格
+
+    public String getPricename() {
+        return pricename;
+    }
+
+    public void setPricename(String pricename) {
+        this.pricename = pricename;
+    }
 
     public String getUuid() {
         return uuid;

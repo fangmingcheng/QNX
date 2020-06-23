@@ -102,8 +102,6 @@ public class ZxFragment extends BaseFragment {
 //    String[] strings ;
     String stocks = "";
 
-
-
     private int status = 0;//1为按最新价降序，2为最新价升序，3为涨幅降序，4为涨幅升序
 
 
@@ -121,12 +119,24 @@ public class ZxFragment extends BaseFragment {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(hidden){
-        }else {
-//            getZXStock();
-        }
-
+//        if(hidden){
+//            if(mTimer!=null){
+//                this.mTimer.cancel();
+//            }
+//        }else {
+//
+////            getZXStock();
+//        }
     }
+
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        Log.e("TAG", "setUserVisibleHint: "+isVisibleToUser );
+        super.setUserVisibleHint(isVisibleToUser);
+    }
+
 
     @Override
     public int getLayoutId() {
@@ -137,15 +147,23 @@ public class ZxFragment extends BaseFragment {
     public void initViews(Bundle savedInstanceState) {
         initRecyclerview();
         getToken();
-//        mTimer = new Timer();
-//        mTimer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                getData();
-//            }
-//        }, 3*1000, 3*1000);
+    }
 
 
+    @Override
+    public void onStop() {
+        Log.e("TAG", "onStop" );
+
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e("TAG", "onDestroy" );
+        if(mTimer!=null){
+            this.mTimer.cancel();
+        }
+        super.onDestroy();
     }
 
     private void initRecyclerview(){
@@ -374,13 +392,14 @@ public class ZxFragment extends BaseFragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                mTimer = new Timer();
-                                mTimer.schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        getData();
-                                    }
-                                }, 0, 5*1000);
+                                    mTimer = new Timer();
+                                    mTimer.schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            getData();
+                                        }
+                                    }, 0, 5*1000);
+
                             }
                         });
 

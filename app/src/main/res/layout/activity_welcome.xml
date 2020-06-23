@@ -40,13 +40,17 @@
         />
 
     <TextView
-        android:layout_marginTop="20dp"
-        android:id="@+id/Tv_into"
-        android:text="跳过>"
-        android:textColor="#333333"
-        android:textSize="14sp"
-        android:layout_marginRight="13dp"
         android:layout_alignParentEnd="true"
+        android:id="@+id/Tv_into"
+        android:text="跳过"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:background="@drawable/bg_tv_tg"
+        android:textColor="#ffffff"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

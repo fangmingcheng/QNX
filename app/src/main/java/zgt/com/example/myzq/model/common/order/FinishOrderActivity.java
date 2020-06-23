@@ -8,9 +8,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +49,10 @@ import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class FinishOrderActivity extends BaseActivity {
+
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
+
     @BindView(R.id.Iv_head)
     MyImageBackgroundView Iv_head;
 
@@ -54,9 +64,6 @@ public class FinishOrderActivity extends BaseActivity {
 
     @BindView(R.id.Tv_charge)
     TextView Tv_charge;
-
-//    @BindView(R.id.Tv_num)
-//    TextView Tv_num;
 
     @BindView(R.id.Tv_orderNo)
     TextView Tv_orderNo;
@@ -91,11 +98,7 @@ public class FinishOrderActivity extends BaseActivity {
     @BindView(R.id.Bt_commit)
     Button Bt_commit;
 
-    @BindView(R.id.scrollView)
-    ScrollView scrollView;
 
-    @BindView(R.id.Rl_reload)
-    RelativeLayout Rl_reload;
     private OrderDetail orderDetail;
 
    private List<Agreement> list = new ArrayList<>();
@@ -138,13 +141,46 @@ public class FinishOrderActivity extends BaseActivity {
         adapter = new AgreementAdapter(this);
         adapter.addAll(list);
         Lv_agreement.setAdapter(adapter);
-        getData();
+        getData(refreshLayout);
+        setPullRefresher();
+    }
+
+    private void setPullRefresher(){
+        //设置 Header 为 Material风格
+        refreshLayout.setPrimaryColors(Color.parseColor("#00000000"));
+        refreshLayout.setRefreshHeader(new MaterialHeader(FinishOrderActivity.this).setShowBezierWave(true));
+//        refreshLayout.setRefreshHeader(BezierRadarHeader(this).setEnableHorizontalDrag(true));
+        //设置 Footer 为 球脉冲
+        refreshLayout.setRefreshFooter(new BallPulseFooter(FinishOrderActivity.this).setSpinnerStyle(SpinnerStyle.Scale));
+
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                //在这里执行上拉刷新时的具体操作(网络请求、更新UI等)
+
+                getData(refreshlayout);
+//                adapter.refresh(newList);
+
+                //不传时间则立即停止刷新    传入false表示刷新失败
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore( RefreshLayout refreshLayout) {
+//                ToastUtil.showShortToast(getActivity(),"数据已加载完毕");
+                refreshLayout.finishLoadMore(/*,false*/);
+            }
+        });
+//
+//        refreshLayout.setEnableLoadmore(false);//屏蔽掉上拉加载的效果
     }
 
     @Override
     protected void onResume() {
         super.onResume();
     }
+
+
 
     public void setListViewHeightBasedOnChildren(ListView listView) {
         // 获取ListView对应的Adapter
@@ -178,7 +214,7 @@ public class FinishOrderActivity extends BaseActivity {
             if(orderDetail.getProducttype()==1){
                 Tv_teacher.setText("主讲老师:"+orderDetail.getLecturer());
             }else {
-                Tv_teacher.setText(orderDetail.getLecturer());
+                Tv_teacher.setText("简介:"+orderDetail.getLecturer());
             }
 
 
@@ -192,7 +228,7 @@ public class FinishOrderActivity extends BaseActivity {
                 }
 
                 if(orderDetail.getPricelimit()==0){
-                    Tv_time.setText("永久");
+                    Tv_time.setText("不限时");
                 }else {
                     Tv_time.setText(orderDetail.getAmount()*orderDetail.getPricelimit()+"天");
 //                    if(orderDetail.getPriceunit()==0){
@@ -203,7 +239,7 @@ public class FinishOrderActivity extends BaseActivity {
                 }
             }else if(orderDetail.getIsnewversion()==1){
                 if(orderDetail.getPricelimit()==0){
-                    Tv_time.setText("永久");
+                    Tv_time.setText("不限时");
                 }else {
                     if(orderDetail.getPriceunit()==0){
                         Tv_time.setText(orderDetail.getPricenum()+"天");
@@ -254,7 +290,6 @@ public class FinishOrderActivity extends BaseActivity {
             }
         }
         if(agreementList.size()>0){
-            adapter.clear();
             adapter.addAll(agreementList);
             setListViewHeightBasedOnChildren(Lv_agreement);
         }
@@ -269,7 +304,7 @@ public class FinishOrderActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.Iv_back,R.id.Bt_commit,R.id.Bt_reload,R.id.Tv_refund})
+    @OnClick({R.id.Iv_back,R.id.Bt_commit,R.id.Tv_refund})
     void onClick(View view) {
         switch (view.getId()){
             case R.id.Iv_back:
@@ -289,14 +324,7 @@ public class FinishOrderActivity extends BaseActivity {
                             startActivity(new Intent().setClass(FinishOrderActivity.this, CourseDetailActivity.class).putExtra("uuid", orderDetail.getTypeid()));
                         }
                     }
-
-
                 }
-            case R.id.Bt_reload:
-                scrollView.setVisibility(View.VISIBLE);
-                Rl_reload.setVisibility(View.GONE);
-                list=new ArrayList<>();
-                getData();
                 break;
             case R.id.Tv_refund:
                 if(orderDetail!=null){
@@ -315,7 +343,7 @@ public class FinishOrderActivity extends BaseActivity {
         }
     }
 
-    private void getData(){
+    private void getData(final RefreshLayout refreshLayout){
         RequestParams requestParams = new RequestParams(SPUtil.getServerAddress() + "getOrderDetailByOrderid.do");
         requestParams.addParameter("token", SPUtil.getToken());
         requestParams.addParameter("orderid", orderId);
@@ -356,7 +384,7 @@ public class FinishOrderActivity extends BaseActivity {
                         orderDetail.setPricenum(json.getInt("pricenum"));
                         orderDetail.setIsnewversion(json.getInt("isnewversion"));
                         JSONArray array= json.getJSONArray("agreementList");
-                        list=new ArrayList<>();
+                        list.clear();
                         for(int i=0;i<array.length();i++){
                             agreement =  new Agreement();
                             agreement.setUuid(array.getJSONObject(i).getString("uuid"));
@@ -406,7 +434,7 @@ public class FinishOrderActivity extends BaseActivity {
                     });
 
                 } finally {
-
+                    refreshLayout.finishRefresh();
                 }
             }
 
@@ -415,13 +443,7 @@ public class FinishOrderActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(scrollView!=null){
-                            scrollView.setVisibility(View.GONE);
-                        }
-                        if(Rl_reload!=null){
-                            Rl_reload.setVisibility(View.VISIBLE);
-                        }
-                        ToastUtil.showShortToast(FinishOrderActivity.this, "网络连接异常,请点击刷新 按钮");
+                        ToastUtil.showShortToast(FinishOrderActivity.this, "网络连接异常");
                     }
                 });
             }

@@ -11,30 +11,31 @@
         android:id="@+id/Tv_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="一个月"
         android:textColor="#333333"
         android:textSize="15sp" />
 
     <TextView
+        android:textStyle="bold"
         android:id="@+id/Tv_price_real"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="¥4000"
-        android:textSize="16sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/Tv_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:text=""
-        android:textColor="#9D9D9D"
+        android:textColor="#666666"
         android:textSize="12sp" />
 
 </LinearLayout>

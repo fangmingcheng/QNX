@@ -140,7 +140,8 @@ public class ReseaRchreportListActivity extends BaseActivity {
             @Override
             public void OnItemClick(View view) {
                 int position = recyclerview.getChildAdapterPosition(view);
-                startActivity(new Intent().setClass(ReseaRchreportListActivity.this, ReseaRchreportDetailActivity.class).putExtra("uuid",list.get(position).getUuid()).putExtra("pid",pid));
+                    startActivity(new Intent().setClass(ReseaRchreportListActivity.this, ReseaRchreportDetailActivity.class)
+                            .putExtra("uuid",list.get(position).getUuid()).putExtra("pid",pid));
             }
         });
 

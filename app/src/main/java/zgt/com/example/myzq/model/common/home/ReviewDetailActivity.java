@@ -3,10 +3,11 @@ package zgt.com.example.myzq.model.common.home;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class ReviewDetailActivity extends BaseActivity {
     @BindView(R.id.webview)
     WebView webview;
 
-    @BindView(R.id.Rl_progress)
-    RelativeLayout Rl_progress;
+    @BindView(R.id.pro)
+    ProgressBar progressBar;
 //
 //    @BindView(R.id.pro)
 //    ProgressBar pro;
@@ -64,14 +65,31 @@ public class ReviewDetailActivity extends BaseActivity {
                 public void onPageFinished(WebView view, String url) {
                     // TODO Auto-generated method stub
 //                    pro.setVisibility(View.GONE);
-                    if(Rl_progress!=null){
-                        Rl_progress.setVisibility(View.GONE);
-                    }
+
 //                    view.loadUrl(url);
                     super.onPageFinished(view, url);
 
                 }
             });
+        webview.setWebChromeClient(new WebChromeClient() {
+
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    // 网页加载完成  
+                    if(progressBar!=null){
+                        progressBar.setVisibility(View.GONE);
+                    }
+                } else {
+                    // 网页加载中  
+                    if(progressBar!=null){
+                        progressBar.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                        progressBar.setProgress(newProgress);//设置进度值
+                    }
+
+                }
+            }
+        });
         webview.addJavascriptInterface(new APPInterface(), "android");//增加js接口交互ext
     }
 

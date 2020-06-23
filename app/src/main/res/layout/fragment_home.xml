@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="188dp">
 
-                    <com.stx.xhb.xbanner.XBanner
+                    <com.youth.banner.Banner
                         android:id="@+id/banner"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -672,7 +672,7 @@
                                 android:layout_height="26dp" />
                         </LinearLayout>
                     </LinearLayout>
-                    <com.stx.xhb.xbanner.XBanner
+                    <com.youth.banner.Banner
                         android:layout_marginTop="18dp"
                         android:id="@+id/banner1"
                         android:layout_gravity="center"
@@ -1029,8 +1029,7 @@
 
     <zgt.com.example.myzq.model.common.custom_view.MyImageView
         android:id="@+id/imageView"
-        android:visibility="gone"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="2dp"
         android:layout_marginBottom="40dp"
         android:layout_gravity="end|bottom"
         android:layout_width="wrap_content"

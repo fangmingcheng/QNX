@@ -27,7 +27,7 @@ public class SPUtil {
       // http://192.168.0.109:8080/zgstock/app/   http://118.190.105.66:12588/app/
     //https://api.zgziben.com/app/     http://test.zgziben.com/app/
     public static String getServerAddress() {
-        return getLoginSharedPreferences().getString("address", "http://test.zgziben.com/app/");
+        return getLoginSharedPreferences().getString("address", "https://api.zgziben.com/app/");
     }
 
     public static String getAccess_Token() {

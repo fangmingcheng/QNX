@@ -8,8 +8,8 @@ android {
         applicationId "zgt.com.example.myzq"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 16
-        versionName "2.0.2"
+        versionCode 19
+        versionName "2.1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 
@@ -23,9 +23,7 @@ android {
             abiFilters "armeabi", "armeabi-v7a", "x86_64", "x86"
         }
 
-
 //        jackOptions.enabled=true
-
 //        jackOptions {
 //            enabled true
 //        }
@@ -76,6 +74,9 @@ dependencies {
     //如果少了这一行，@onclick将失效
     //    compile 'com.android.support:recyclerview-v7:24.2.1'
 //    compile project(':vitamio1')
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.youth.banner:banner:1.4.10'
+
     implementation 'com.android.support:appcompat-v7:26.+'
     implementation 'com.android.support:design:26.0.0-alpha1'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'

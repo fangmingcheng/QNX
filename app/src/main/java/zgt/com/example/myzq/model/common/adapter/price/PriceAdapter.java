@@ -3,6 +3,7 @@ package zgt.com.example.myzq.model.common.adapter.price;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -70,46 +71,41 @@ public class PriceAdapter extends  RecyclerView.Adapter<PriceAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Price live=list.get(position);
-        if(live.getPricelimit()==0){
-            holder.Tv_time.setText("永久购买");
-        }else {
-            if(live.getPriceunit()==0){
-                holder.Tv_time.setText(live.getPricenum()+"天");
-            }else if(live.getPriceunit()==1){
-                holder.Tv_time.setText(live.getPricenum()+"个月");
-            }else if(live.getPriceunit()==2){
-                holder.Tv_time.setText(live.getPricenum()+"季度");
-            }else if(live.getPriceunit()==3){
-                holder.Tv_time.setText("半年");
-            }else if(live.getPriceunit()==4){
-                holder.Tv_time.setText("一年");
-            }
-        }
-
-
-//        if(live.getIsdefault()==0){
-//            if(current == position){
-//                holder.Ll_background.setBackgroundResource(R.mipmap.bg_taocan4);
-//                holder.Tv_price_real.setText(live.getRealprice());
-//                holder.Tv_price.setText(live.getPrice());
-//            }else {
-//                holder.Ll_background.setBackgroundResource(R.mipmap.bg_taocan3);
-//                holder.Tv_price_real.setText(live.getRealprice());
-//                holder.Tv_price.setText(live.getPrice());
-//            }
+//        if(live.getPricelimit()==0){
+//            holder.Tv_time.setText("永久购买");
 //        }else {
+//            if(live.getPriceunit()==0){
+//                holder.Tv_time.setText(live.getPricenum()+"天");
+//            }else if(live.getPriceunit()==1){
+//                holder.Tv_time.setText(live.getPricenum()+"个月");
+//            }else if(live.getPriceunit()==2){
+//                holder.Tv_time.setText(live.getPricenum()+"季度");
+//            }else if(live.getPriceunit()==3){
+//                holder.Tv_time.setText("半年");
+//            }else if(live.getPriceunit()==4){
+//                holder.Tv_time.setText("一年");
+//            }
+//        }
+        holder.Tv_time.setText(live.getPricename());
+
             if(current == position){
                 holder.Ll_background.setBackgroundResource(R.mipmap.bg_taocan2);
-
-                holder.Tv_price_real.setText(Html.fromHtml("<font>¥</font><font><big>"+live.getRealprice()+"</big></font>"));
+                holder.Tv_price_real.setText(Html.fromHtml("<font><small><small>¥</small></small></font><font>"+live.getRealprice()+"</font>"));
                 holder.Tv_price_real.setTextColor(Color.parseColor("#FF4444"));
-                holder.Tv_price.setText("");
+                if(live.getPrice()!=live.getRealprice()){
+                    holder.Tv_price.setText("原价"+live.getPrice());
+
+                    holder.Tv_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG ); //中间横线（删除线）
+                }
+
             }else {
                 holder.Ll_background.setBackgroundResource(R.mipmap.bg_taocan1);
-
-                holder.Tv_price_real.setText(Html.fromHtml("<font>¥</font><font><big>"+live.getRealprice()+"</big></font>"));
+                holder.Tv_price_real.setText(Html.fromHtml("<font><small><small>¥</small></small></font><font>"+live.getRealprice()+"</font>"));
                 holder.Tv_price_real.setTextColor(Color.parseColor("#333333"));
-                holder.Tv_price.setText("");
+                if(live.getPrice()!=live.getRealprice()){
+                    holder.Tv_price.setText("原价"+live.getPrice());
+                    holder.Tv_price.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG ); //中间横线（删除线）
+                }
             }
 //        }
 

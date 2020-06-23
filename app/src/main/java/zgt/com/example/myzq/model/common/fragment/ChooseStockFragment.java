@@ -15,12 +15,10 @@ import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -28,8 +26,12 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.stx.xhb.xbanner.XBanner;
-import com.stx.xhb.xbanner.transformers.Transformer;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,9 +57,12 @@ import zgt.com.example.myzq.model.common.adapter.stock.StockChooseTitleAdapter;
 import zgt.com.example.myzq.model.common.home.BannerUrlActivity;
 import zgt.com.example.myzq.model.common.home.h5.H5Activity;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
+import zgt.com.example.myzq.utils.GlideImageLoader;
 import zgt.com.example.myzq.utils.SPUtil;
 import zgt.com.example.myzq.utils.SpaceItemDecoration;
 import zgt.com.example.myzq.utils.ToastUtil;
+
+//import com.stx.xhb.xbanner.XBanner;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -89,7 +94,7 @@ public class ChooseStockFragment extends BaseFragment {
     TextView Tv_intro;
 
     @BindView(R.id.banner)
-    XBanner banner;
+    Banner banner;
 
 
     private List<StockProduct> stockProductList = new ArrayList<>();
@@ -106,6 +111,7 @@ public class ChooseStockFragment extends BaseFragment {
 
     private List<Advert> advertList = new ArrayList<>();
     private Advert advert;
+    private List<String> list = new ArrayList<>();
 
 
     private String pid,name,intro;
@@ -216,16 +222,12 @@ public class ChooseStockFragment extends BaseFragment {
 
             }
         });
-
         initWebView();
         setPullRefresher();
-
         initRecyclerview_title();
         initRecyclerview();
 
     }
-
-
 
 
     private void  initWebView(){
@@ -369,13 +371,13 @@ public class ChooseStockFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        banner.startAutoPlay();
+//        banner.startAutoPlay();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        banner.stopAutoPlay();
+//        banner.stopAutoPlay();
     }
 
     @OnClick({R.id.Ll_zhengu,R.id.Ll_jinglin,R.id.Ll_xuangu,R.id.Ll_guanzhu,R.id.Ll_fupang,R.id.Bt_stock})
@@ -432,41 +434,79 @@ public class ChooseStockFragment extends BaseFragment {
     }
 
     private void setBanner(){
-        banner.removeAllViews();
-        banner.setData(advertList, null);
-        // XBanner适配数据
-        banner.setmAdapter(new XBanner.XBannerAdapter() {
+//        banner.removeAllViews();
+        list.clear();
+        for (int i=0;i<advertList.size();i++){
+            list.add(advertList.get(i).getPicpath());
+        }
+        banner.setImageLoader(new GlideImageLoader());
+        banner.setIndicatorGravity(BannerConfig.CENTER);//圆点的位置
+        banner.setImages(list).//加载的图片
+                setBannerStyle(BannerConfig.CIRCLE_INDICATOR).
+                setDelayTime(5000).start();//图片循环滑动的时间2秒
+        banner.setOnBannerListener(new OnBannerListener() {
             @Override
-            public void loadBanner(XBanner banner, View view, int position) {
-                Glide.with(getActivity()).load(advertList.get(position).getPicpath()).into((ImageView) view);
-            }
-        });
-//        banner.setPointsIsVisible(true);
-        // 设置XBanner的页面切换特效
-        banner.setPageTransformer(Transformer.Default);
-        // 设置XBanner页面切换的时间，即动画时长
-        banner.setPageChangeDuration(1000);
+            public void OnBannerClick(int position) {
+                if (advertList.get(position).getRedirecttype() == 1) {
+                    if(TextUtils.isEmpty(advertList.get(position).getUrl())){
 
-        // XBanner中某一项的点击事件
-        banner.setOnItemClickListener(new XBanner.OnItemClickListener() {
-            @Override
-            public void onItemClick(XBanner banner, int position) {
-                if(TextUtils.isEmpty(advertList.get(position).getUrl())){
-//                    String appId = "wx1b3c5979789ba911"; // 填应用AppId
-//                    IWXAPI api = WXAPIFactory.createWXAPI(getActivity(), appId);
-//
-//                    WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
-//                    req.userName = "gh_810becb0c8bc"; // 填小程序原始id
-//                    req.path = "pages/service/service";                  ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
-//                    req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
-//                    api.sendReq(req);
+                    }else {
+                        startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url", advertList.get(position).getUrl()));
+                    }
+                } else if (advertList.get(position).getRedirecttype() == 2) {
+                    String appId = "wx72ef58b1e2b5e1b6"; // 填应用AppId
+                    IWXAPI api = WXAPIFactory.createWXAPI(getActivity(), appId);
+                    WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+                    req.userName = "gh_810becb0c8bc"; // 填小程序原始id
+                    req.path = advertList.get(position).getUrl();                  ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+                    req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
+                    api.sendReq(req);
                 }else {
-                    startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url",advertList.get(position).getUrl()));
+
                 }
-//                startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url",bannerList.get(position).getUrl()));
-//                Toast.makeText(getActivity(), "点击了第" + (position + 1) + "张图片", Toast.LENGTH_SHORT).show();
             }
         });
+
+        banner.start();
+//        banner.setData(advertList, null);
+        // XBanner适配数据
+//        banner.setmAdapter(new XBanner.XBannerAdapter() {
+//            @Override
+//            public void loadBanner(XBanner banner, View view, int position) {
+//                Glide.with(getActivity()).load(advertList.get(position).getPicpath()).into((ImageView) view);
+//            }
+//        });
+////        banner.setPointsIsVisible(true);
+//        // 设置XBanner的页面切换特效
+//        banner.setPageTransformer(Transformer.Default);
+//        // 设置XBanner页面切换的时间，即动画时长
+//        banner.setPageChangeDuration(1000);
+//
+//        // XBanner中某一项的点击事件
+//
+//        banner.setOnItemClickListener(new XBanner.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(XBanner banner, int position) {
+//                if(TextUtils.isEmpty(advertList.get(position).getUrl())){
+//
+//                }else {
+//                    if (advertList.get(position).getRedirecttype() == 1) {
+//                        startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url", advertList.get(position).getUrl()));
+//                    } else if (advertList.get(position).getRedirecttype() == 2) {
+//                        String appId = "wx72ef58b1e2b5e1b6"; // 填应用AppId
+//                        IWXAPI api = WXAPIFactory.createWXAPI(getActivity(), appId);
+//                        WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+//                        req.userName = "gh_810becb0c8bc"; // 填小程序原始id
+//                        req.path = advertList.get(position).getUrl();                  ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+//                        req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
+//                        api.sendReq(req);
+//                    }else {
+//
+//                    }
+//                }
+////
+//            }
+//        });
     }
 
     private void getData(RefreshLayout refreshlayout){
@@ -496,6 +536,8 @@ public class ChooseStockFragment extends BaseFragment {
                             advert.setBsort(advertArray.getJSONObject(i).getInt("bsort"));
                             advert.setBtype(advertArray.getJSONObject(i).getInt("btype"));
                             advert.setStatus(advertArray.getJSONObject(i).getInt("status"));
+                            advert.setRedirecttype(advertArray.getJSONObject(i).getInt("redirecttype"));
+                            advert.setApptype(advertArray.getJSONObject(i).getString("apptype"));
                             advertList.add(advert);
                         }
 

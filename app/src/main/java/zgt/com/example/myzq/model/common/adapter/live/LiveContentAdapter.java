@@ -154,13 +154,12 @@ public class LiveContentAdapter extends MyBaseAdapter<LiveItems> {
 //                       runOnUiThread(new Runnable() {
 //                            @Override
 //                            public void run() {
-////
-                        context.startActivity(new Intent().setClass(context, LoginActivity.class));
+//
 //                              finish();
 //                            }
 //                        });
 
-                    }else if(a==2){
+                    }else{
                         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
                     }

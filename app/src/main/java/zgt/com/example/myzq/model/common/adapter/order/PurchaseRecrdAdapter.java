@@ -105,7 +105,7 @@ public class PurchaseRecrdAdapter extends  RecyclerView.Adapter<PurchaseRecrdAda
         if(live.getProducttype()==1){
             holder.Tv_teacher.setText("主讲老师："+live.getLecturer());
         }else {
-            holder.Tv_teacher.setText(live.getLecturer());
+            holder.Tv_teacher.setText("简介："+live.getLecturer());
         }
 //        if(live.getIsnewversion()==0){
 //            holder.Tv_teacher.setText("主讲老师："+live.getLecturer());

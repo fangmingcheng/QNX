@@ -37,6 +37,7 @@ public abstract class MyBaseAdapter<T> extends BaseAdapter {
     }
 
     public void addAll(List<T> list) {
+        dataList.clear();
         dataList.addAll(list);
         notifyDataSetChanged();
     }

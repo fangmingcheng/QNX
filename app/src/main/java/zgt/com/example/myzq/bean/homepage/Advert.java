@@ -8,6 +8,24 @@ public class Advert {
     private String picpath;//	广告图片地址
     private String url;//	广告链接地址
 
+    private int redirecttype;//跳转类型 1为h5网页，2为小程序，3为原生交互
+    private String apptype;//原生类型交互类型
+
+    public int getRedirecttype() {
+        return redirecttype;
+    }
+
+    public void setRedirecttype(int redirecttype) {
+        this.redirecttype = redirecttype;
+    }
+
+    public String getApptype() {
+        return apptype;
+    }
+
+    public void setApptype(String apptype) {
+        this.apptype = apptype;
+    }
 
     public String getUuid() {
         return uuid;

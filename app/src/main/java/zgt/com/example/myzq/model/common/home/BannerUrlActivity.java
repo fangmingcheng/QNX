@@ -3,10 +3,11 @@ package zgt.com.example.myzq.model.common.home;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -18,8 +19,8 @@ import zgt.com.example.myzq.utils.StatusBarUtil;
 public class BannerUrlActivity extends BaseActivity{
     @BindView(R.id.webView)
     WebView webView;
-    @BindView(R.id.Rl_progress)
-    RelativeLayout Rl_progress;
+    @BindView(R.id.pro)
+    ProgressBar pro;
 
     @BindView(R.id.Tv_title)
     TextView Tv_title;
@@ -75,27 +76,30 @@ public class BannerUrlActivity extends BaseActivity{
             public void onPageFinished(WebView view, String url) {
                 // TODO Auto-generated method stub
 //                    pro.setVisibility(View.GONE);
-                if(Rl_progress !=null) {
-                    Rl_progress.setVisibility(View.GONE);
-                }
+
                 super.onPageFinished(view, url);
 
             }
         });
 
-//        webView.setWebChromeClient(new WebChromeClient() {
-//            @Override
-//            public void onProgressChanged(WebView view, int newProgress) {
-//                if (newProgress == 100) {
-//                    // 网页加载完成  
-//                    Rl_progress.setVisibility(View.GONE);
-//                    webView.getSettings().setBlockNetworkImage(false);
-//                } else {
-//                    // 网页加载中  
-//
-//                }
-//            }
-//        });
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    // 网页加载完成  
+                    if(pro!=null){
+                        pro.setVisibility(View.GONE);
+                    }
+                } else {
+                    // 网页加载中  
+                    if(pro!=null){
+                        pro.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
+                        pro.setProgress(newProgress);//设置进度值
+                    }
+
+                }
+            }
+        });
     }
 
     @Override
@@ -133,13 +137,7 @@ public class BannerUrlActivity extends BaseActivity{
     void onClick(View view) {
         switch (view.getId()){
             case R.id.Iv_back:
-                if (webView.canGoBack()) {
-                    webView.goBack();//返回上个页面
-                    return;
-                } else {
-                    finish();
-                }
-                break;
+                finish();
         }
     }
 

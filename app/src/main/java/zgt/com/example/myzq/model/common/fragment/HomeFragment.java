@@ -34,8 +34,12 @@ import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.stx.xhb.xbanner.XBanner;
-import com.stx.xhb.xbanner.transformers.Transformer;
+import com.tencent.mm.opensdk.modelbiz.WXLaunchMiniProgram;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,6 +94,7 @@ import zgt.com.example.myzq.model.common.home.researchreport.ReseaRchreportListA
 import zgt.com.example.myzq.model.common.home.znxg.SelectStockActivity;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.model.common.personal_center.MessageActivity;
+import zgt.com.example.myzq.utils.GlideImageLoader;
 import zgt.com.example.myzq.utils.Log;
 import zgt.com.example.myzq.utils.SPUtil;
 import zgt.com.example.myzq.utils.ScrollViewUtil;
@@ -136,10 +141,10 @@ public class HomeFragment extends BaseFragment{
     ENoticeView noticeView;
 
     @BindView(R.id.banner)
-    XBanner banner1;
+    Banner banner1;
 
     @BindView(R.id.banner1)
-    XBanner banner2;
+    Banner banner2;
 
     @BindView(R.id.Fl_title)
     LinearLayout Fl_title;
@@ -247,6 +252,7 @@ public class HomeFragment extends BaseFragment{
 
     private  List<Course> classesList = new ArrayList<>();
     private List<String> list1=new ArrayList<>();
+    private List<String> list2=new ArrayList<>();
     private List<Notice> newsList=new ArrayList<>();
     private List<Teacher> teachersList=new ArrayList<>();
     private List<Course> teacherFileFrees=new ArrayList<>();
@@ -346,14 +352,6 @@ public class HomeFragment extends BaseFragment{
         initRecyclerview_hot_stock_title();
         addScrollViewListener();
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-////                currentpage=1;
-////                getData(refreshLayout,1);
-//                getData(refreshLayout);
-//            }
-//        }).start();
     }
 
     @Override
@@ -365,34 +363,25 @@ public class HomeFragment extends BaseFragment{
                 StatusBarUtil.setDarkMode(getActivity());//白色
             } else {
                 StatusBarUtil.setLightMode(getActivity());//黑色
-
             }
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-////                    currentpage=1;
-////                    getData(refreshLayout,1);
-                    getData(refreshLayout,0);
-//                }
-//            }).start();
+            getData(refreshLayout,0);
         }
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
 //        getData(refreshLayout,0);
-        banner1.startAutoPlay();
-        banner2.startAutoPlay();
+//        banner1.startAutoPlay();
+//        banner2.startAutoPlay();
 
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        banner1.stopAutoPlay();
-        banner2.stopAutoPlay();
+//        banner1.stopAutoPlay();
+//        banner2.stopAutoPlay();
     }
 
     @Override
@@ -491,7 +480,7 @@ public class HomeFragment extends BaseFragment{
 
                 getData(refreshlayout,1);
 //                adapter.refresh(newList);
-                refreshlayout.finishRefresh(2000/*,false*/);
+
                 //不传时间则立即停止刷新    传入false表示刷新失败
             }
         });
@@ -588,6 +577,8 @@ public class HomeFragment extends BaseFragment{
             public void OnItemClick(View view) {
                 int position = recyclerview_yanbao.getChildAdapterPosition(view);
                 startActivity(new Intent().setClass(getActivity(), ReseaRchreportDetailActivity.class).putExtra("uuid",reseaRchreportkList.get(position).getUuid()).putExtra("pid",pid));
+
+
             }
         });
 
@@ -666,13 +657,14 @@ public class HomeFragment extends BaseFragment{
                 startActivity(new Intent().setClass(getActivity(), H5Activity.class).putExtra("url", suspendList.get(0).getUrl()));
                 break;
             case R.id.Bt_ljck://
-                startActivity(new Intent().setClass(getActivity(), H5Activity.class).putExtra("url", SPUtil.getServerAddress()+"gc.do"));
+
+                startActivity(new Intent().setClass(getActivity(), H5Activity.class).putExtra("url", SPUtil.getServerAddress()+"gc.do?token="+SPUtil.getToken()+"&type=0"));
                 break;
             case R.id.Bt_ljck1://
-                startActivity(new Intent().setClass(getActivity(), H5Activity.class).putExtra("url", SPUtil.getServerAddress()+"gc.do"));
+                startActivity(new Intent().setClass(getActivity(), H5Activity.class).putExtra("url", SPUtil.getServerAddress()+"gc.do?token="+SPUtil.getToken()+"&type=0"));
                 break;
             case R.id.Bt_ljck2://
-                startActivity(new Intent().setClass(getActivity(), H5Activity.class).putExtra("url", SPUtil.getServerAddress()+"gc.do"));
+                startActivity(new Intent().setClass(getActivity(), H5Activity.class).putExtra("url", SPUtil.getServerAddress()+"gc.do?token="+SPUtil.getToken()+"&type=0"));
                 break;
             case R.id.Et_search://
                 startActivity(new Intent().setClass(getActivity(), H5Activity.class).putExtra("url","https://ze3oy5f3q.lightyy.com/#/search"));
@@ -765,69 +757,115 @@ public class HomeFragment extends BaseFragment{
             case R.id.Ll_jpkc://精品课程
                 startActivity(new Intent().setClass(getActivity(), BoutiqueActivity.class));
                 break;
+
         }
     }
 
     private void setBanner(){
-        banner1.removeAllViews();
-        banner1.setData(list1, titles);
-        // XBanner适配数据
-        banner1.setmAdapter(new XBanner.XBannerAdapter() {
+//        banner1.removeAllViews();
+        banner1.setImageLoader(new GlideImageLoader());
+        banner1.setIndicatorGravity(BannerConfig.CENTER);//圆点的位置
+        banner1.setImages(list1).//加载的图片
+                setBannerStyle(BannerConfig.CIRCLE_INDICATOR).
+                setDelayTime(5000).start();//图片循环滑动的时间2秒
+        banner1.setOnBannerListener(new OnBannerListener() {
             @Override
-            public void loadBanner(XBanner banner, View view, int position) {
-                Glide.with(getActivity()).load(list1.get(position)).into((ImageView) view);
-            }
-        });
-        banner1.setPointsIsVisible(true);
-        // 设置XBanner的页面切换特效
-        banner1.setPageTransformer(Transformer.Default);
-        // 设置XBanner页面切换的时间，即动画时长
-        banner1.setPageChangeDuration(1000);
+            public void OnBannerClick(int position) {
+                if (bannerList.get(position).getRedirecttype() == 1) {
+                    if(TextUtils.isEmpty(bannerList.get(position).getUrl())){
 
-        // XBanner中某一项的点击事件
-        banner1.setOnItemClickListener(new XBanner.OnItemClickListener() {
-            @Override
-            public void onItemClick(XBanner banner, int position) {
-                if(TextUtils.isEmpty(bannerList.get(position).getUrl())){
+                    }else {
+                        startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url", bannerList.get(position).getUrl()));
+                    }
 
+                } else if (bannerList.get(position).getRedirecttype() == 2) {
+                    String appId = "wx72ef58b1e2b5e1b6"; // 填应用AppId
+                    IWXAPI api = WXAPIFactory.createWXAPI(getActivity(), appId);
+                    WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+                    req.userName = "gh_810becb0c8bc"; // 填小程序原始id
+                    req.path = bannerList.get(position).getUrl();                  ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+                    req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
+                    api.sendReq(req);
                 }else {
-                    startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url",bannerList.get(position).getUrl()));
+
                 }
-//                startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url",bannerList.get(position).getUrl()));
-//                Toast.makeText(getActivity(), "点击了第" + (position + 1) + "张图片", Toast.LENGTH_SHORT).show();
             }
         });
+        banner1.start();
     }
 
     private void setadvertBanner(){
-        banner2.removeAllViews();
-        banner2.setData(advertList, null);
-        // XBanner适配数据
-        banner2.setmAdapter(new XBanner.XBannerAdapter() {
+        list2.clear();
+        for (int i=0;i<advertList.size();i++){
+            list2.add(advertList.get(i).getPicpath());
+        }
+        banner2.setImageLoader(new GlideImageLoader());
+        banner2.setIndicatorGravity(BannerConfig.CENTER);//圆点的位置
+        banner2.setImages(list2).//加载的图片
+                setBannerStyle(BannerConfig.CIRCLE_INDICATOR).
+                setDelayTime(5000).start();//图片循环滑动的时间2秒
+        banner2.setOnBannerListener(new OnBannerListener() {
             @Override
-            public void loadBanner(XBanner banner, View view, int position) {
-                Glide.with(getActivity()).load(advertList.get(position).getPicpath()).into((ImageView) view);
-            }
-        });
-        banner2.setPointsIsVisible(true);
-        // 设置XBanner的页面切换特效
-        banner2.setPageTransformer(Transformer.Default);
-        // 设置XBanner页面切换的时间，即动画时长
-        banner2.setPageChangeDuration(1000);
+            public void OnBannerClick(int position) {
+                if (advertList.get(position).getRedirecttype() == 1) {
+                    if(TextUtils.isEmpty(advertList.get(position).getUrl())){
 
-        // XBanner中某一项的点击事件
-        banner2.setOnItemClickListener(new XBanner.OnItemClickListener() {
-            @Override
-            public void onItemClick(XBanner banner, int position) {
-                if(TextUtils.isEmpty(advertList.get(position).getUrl())){
-
+                    }else {
+                        startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url", advertList.get(position).getUrl()));
+                    }
+                } else if (advertList.get(position).getRedirecttype() == 2) {
+                    String appId = "wx72ef58b1e2b5e1b6"; // 填应用AppId
+                    IWXAPI api = WXAPIFactory.createWXAPI(getActivity(), appId);
+                    WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+                    req.userName = "gh_810becb0c8bc"; // 填小程序原始id
+                    req.path = advertList.get(position).getUrl();                  ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+                    req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
+                    api.sendReq(req);
                 }else {
-                    startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url",advertList.get(position).getUrl()));
+
                 }
-//                startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url",bannerList.get(position).getUrl()));
-//                Toast.makeText(getActivity(), "点击了第" + (position + 1) + "张图片", Toast.LENGTH_SHORT).show();
             }
         });
+        banner2.start();
+
+//        banner2.setData(advertList, null);
+//        // XBanner适配数据
+//        banner2.setmAdapter(new XBanner.XBannerAdapter() {
+//            @Override
+//            public void loadBanner(XBanner banner, View view, int position) {
+//                Glide.with(getActivity()).load(advertList.get(position).getPicpath()).into((ImageView) view);
+//            }
+//        });
+//        banner2.setPointsIsVisible(true);
+//        // 设置XBanner的页面切换特效
+//        banner2.setPageTransformer(Transformer.Default);
+//        // 设置XBanner页面切换的时间，即动画时长
+//        banner2.setPageChangeDuration(1000);
+//
+//        // XBanner中某一项的点击事件
+//        banner2.setOnItemClickListener(new XBanner.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(XBanner banner, int position) {
+//                if(TextUtils.isEmpty(advertList.get(position).getUrl())){
+//
+//                }else {
+//                    if (advertList.get(position).getRedirecttype() == 1) {
+//                        startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url", advertList.get(position).getUrl()));
+//                    } else if (advertList.get(position).getRedirecttype() == 2) {
+//                        String appId = "wx72ef58b1e2b5e1b6"; // 填应用AppId
+//                        IWXAPI api = WXAPIFactory.createWXAPI(getActivity(), appId);
+//                        WXLaunchMiniProgram.Req req = new WXLaunchMiniProgram.Req();
+//                        req.userName = "gh_810becb0c8bc"; // 填小程序原始id
+//                        req.path = advertList.get(position).getUrl();                  ////拉起小程序页面的可带参路径，不填默认拉起小程序首页，对于小游戏，可以只传入 query 部分，来实现传参效果，如：传入 "?foo=bar"。
+//                        req.miniprogramType = WXLaunchMiniProgram.Req.MINIPTOGRAM_TYPE_RELEASE;// 可选打开 开发版，体验版和正式版
+//                        api.sendReq(req);
+//                    }
+//                }
+////                startActivity(new Intent().setClass(getActivity(), BannerUrlActivity.class).putExtra("url",bannerList.get(position).getUrl()));
+////                Toast.makeText(getActivity(), "点击了第" + (position + 1) + "张图片", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        banner2.startAutoPlay();
     }
 
     private void getpicture(int type){
@@ -874,17 +912,18 @@ public class HomeFragment extends BaseFragment{
             stringBuffer.append(string.substring(i,i+1)+" ");
         }
 
-//        if(suspendList.size()>0){
-//            Glide.with(this).load(suspendList.get(0).getPicpath()).into(imageView);
-//            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) imageView.getLayoutParams();
-//            params.height=suspendList.get(0).getHeight();
-//            params.width =suspendList.get(0).getWidth();
-//            imageView.setLayoutParams(params);
-//        }else {
-//            imageView.setVisibility(View.GONE);
-//        }
+        if(suspendList.size()>0){
+            Glide.with(this).load(suspendList.get(0).getPicpath()).into(imageView);
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) imageView.getLayoutParams();
+            params.height=suspendList.get(0).getHeight();
+            params.width =suspendList.get(0).getWidth();
+            imageView.setLayoutParams(params);
+        }else {
+            imageView.setVisibility(View.GONE);
+        }
 
         setPicture("历史诊断 "+stringBuffer+"次");
+
         if(diagnosisbNum==0){
             Ll_lszd.setVisibility(View.GONE);
         }else {
@@ -909,6 +948,13 @@ public class HomeFragment extends BaseFragment{
         }else {
             Ll_ybjx.setVisibility(View.VISIBLE);
         }
+
+        if(teacherFileFrees.size()==0){
+            Ll_mfhk.setVisibility(View.GONE);
+        }else {
+            Ll_mfhk.setVisibility(View.VISIBLE);
+        }
+
         if(teachersList.size()==0){
             Ll_skls.setVisibility(View.GONE);
         }else {
@@ -1151,6 +1197,8 @@ public class HomeFragment extends BaseFragment{
                             banners.setBsort(jsonArray.getJSONObject(i).getInt("bsort"));
                             banners.setBtype(jsonArray.getJSONObject(i).getInt("btype"));
                             banners.setStatus(jsonArray.getJSONObject(i).getInt("status"));
+                            banners.setRedirecttype(jsonArray.getJSONObject(i).getInt("redirecttype"));
+                            banners.setApptype(jsonArray.getJSONObject(i).getString("apptype"));
                             bannerList.add(banners);
                             ban=jsonArray.getJSONObject(i).getString("picpath");
                             list1.add(ban);
@@ -1166,6 +1214,8 @@ public class HomeFragment extends BaseFragment{
                             advert.setBsort(advertArray.getJSONObject(i).getInt("bsort"));
                             advert.setBtype(advertArray.getJSONObject(i).getInt("btype"));
                             advert.setStatus(advertArray.getJSONObject(i).getInt("status"));
+                            advert.setRedirecttype(advertArray.getJSONObject(i).getInt("redirecttype"));
+                            advert.setApptype(advertArray.getJSONObject(i).getString("apptype"));
                             advertList.add(advert);
                         }
 
@@ -1266,6 +1316,7 @@ public class HomeFragment extends BaseFragment{
                             reseaRchreportk.setCreatetime(array6.getJSONObject(n).getString("createtime"));
                             reseaRchreportk.setFtitle(array6.getJSONObject(n).getString("ftitle"));
                             reseaRchreportk.setIstop(array6.getJSONObject(n).getInt("istop"));
+
                             reseaRchreportk.setPicpath(array6.getJSONObject(n).getString("picpath"));
                             reseaRchreportk.setSource(array6.getJSONObject(n).getString("source"));
                             reseaRchreportk.setSummary(array6.getJSONObject(n).getString("summary"));
@@ -1340,8 +1391,8 @@ public class HomeFragment extends BaseFragment{
 //                                                dialog.dismiss();
 //                                            }
 //                                        }).create().show();
-                                startActivity(new Intent().setClass(getActivity(),LoginActivity.class));
-                                getActivity().finish();
+//                                startActivity(new Intent().setClass(getActivity(),LoginActivity.class));
+//                                getActivity().finish();
                             }
                         });
 

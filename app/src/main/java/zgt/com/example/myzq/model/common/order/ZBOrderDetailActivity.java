@@ -40,6 +40,7 @@ import zgt.com.example.myzq.model.common.custom_view.MyImageBackgroundView;
 import zgt.com.example.myzq.model.common.login.LoginActivity;
 import zgt.com.example.myzq.utils.SPUtil;
 import zgt.com.example.myzq.utils.SpaceItemDecoration;
+import zgt.com.example.myzq.utils.StatusBarUtil;
 import zgt.com.example.myzq.utils.ToastUtil;
 
 public class ZBOrderDetailActivity extends BaseActivity {
@@ -100,6 +101,7 @@ public class ZBOrderDetailActivity extends BaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        StatusBarUtil.statusBarLightMode(this);
         Bt_commit.setClickable(false);
         index = getIntent().getIntExtra("index",0);
         fileId=getIntent().getStringExtra("fileid");
@@ -119,7 +121,7 @@ public class ZBOrderDetailActivity extends BaseActivity {
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerview.setLayoutManager(layoutManager);
         //设置item间距，30dp
-        recyclerview.addItemDecoration(new SpaceItemDecoration(10));
+        recyclerview.addItemDecoration(new SpaceItemDecoration(20));
         adapter=new PriceAdapter(this,list);
         recyclerview.setAdapter(adapter);
         recyclerview.setNestedScrollingEnabled(false);//NestedScrollView嵌套RecyclerView卡顿解决办法：
@@ -130,7 +132,7 @@ public class ZBOrderDetailActivity extends BaseActivity {
                 int position = recyclerview.getChildAdapterPosition(view);
                 current=position;
                 adapter.setCurrent(current);
-                Bt_commit.setText("提交合同");
+                Bt_commit.setText("签署合同");
                 Bt_commit.setBackgroundColor(Color.parseColor("#ff4444"));
                 Bt_commit.setClickable(true);
                 adapter.notifyDataSetChanged();
@@ -197,7 +199,12 @@ public class ZBOrderDetailActivity extends BaseActivity {
 
     private void setAgreement(){
         Tv_title_order.setText(title);
-        Tv_teacher.setText(lecturer);
+        if("1".equals(type)){
+            Tv_teacher.setText("主讲老师："+lecturer);
+        }else if("3".equals(type)){
+            Tv_teacher.setText("简介："+lecturer);
+        }
+
         Iv_head.setImageURL(picpath);
         Iv_head.setType(1);
         StringBuilder sbBuilder = new StringBuilder();
@@ -300,9 +307,10 @@ public class ZBOrderDetailActivity extends BaseActivity {
                             price.setPricelimit(jsonArray.getJSONObject(i).getInt("pricelimit"));
                             price.setPricenum(jsonArray.getJSONObject(i).getInt("pricenum"));
                             price.setPricesort(jsonArray.getJSONObject(i).getInt("pricesort"));
-                            price.setPricestatus(jsonArray.getJSONObject(i).getInt("pricestatus"));
+//                            price.setPricestatus(jsonArray.getJSONObject(i).getInt("pricestatus"));
                             price.setPriceunit(jsonArray.getJSONObject(i).getInt("priceunit"));
                             price.setProductid(jsonArray.getJSONObject(i).getString("productid"));
+                            price.setPricename(jsonArray.getJSONObject(i).getString("pricename"));
                             price.setPtype(jsonArray.getJSONObject(i).getInt("ptype"));
                             price.setRealprice(jsonArray.getJSONObject(i).getInt("realprice"));
                             price.setUuid(jsonArray.getJSONObject(i).getString("uuid"));
